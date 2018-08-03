@@ -5,8 +5,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "express": "^4.16.2",
+    "mongoose": "^5.2.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.1"
   },
   "scripts": {
@@ -15,11 +17,14 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "nodemon lib/server.js --ignore src/",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "seeds": "node lib/seeds/index.js"
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
     "concurrently": "^3.5.1",
-    "nodemon": "^1.17.3"
+    "node-sass": "^4.9.2",
+    "nodemon": "^1.17.3",
+    "sass-loader": "^7.1.0"
   }
 }
