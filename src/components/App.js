@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios'
 import ProjectListing from './ProjectListing/ProjectListing';
+import ProjectDetail from './ProjectDetail/ProjectDetail';
 class App extends Component {
 
   state = {
@@ -32,6 +33,7 @@ class App extends Component {
           <Link className="header-link" to='/projects'>Projects</Link>
           <Route path='/' exact render={(props)=><ProjectListing {...props} projects={this.state.projects}  refreshProjects={() => this.getProjects()}/>}/>
           <Route path='/projects' exact render={(props)=><ProjectListing {...props} projects={this.state.projects}  refreshProjects={() => this.getProjects()}/>}/>
+          <Route path='/projects/:project_id' exact render={(props)=><ProjectDetail {...props}/>}/>
         </div>
       </Router>
     ); 

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ProjectPreview from './ProjectPreview/ProjectPreview';
-// import Search from '../Search/Search';
-// import axios from 'axios';
 import './ProjectListing.scss';
 
 class ProjectListing extends Component {
@@ -15,10 +13,7 @@ class ProjectListing extends Component {
     
     return projects.map(project => {
       return (
-      //   <Link to={`/projects/${project._id}`}>
-          <ProjectPreview project={project}/>
-      //   </Link>
-
+        <ProjectPreview project={project}/>
       );
     })
   }
