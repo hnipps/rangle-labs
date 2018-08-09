@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import ProjectPreview from './ProjectPreview/ProjectPreview';
 import './ProjectListing.scss';
 
@@ -13,7 +13,7 @@ class ProjectListing extends Component {
     
     return projects.map(project => {
       return (
-        <ProjectPreview project={project}/>
+        <ProjectPreview project={project} key={project._id}/>
       );
     })
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import AgentPreview from './AgentPreview/AgentPreview';
 import './AgentListing.scss';
 
@@ -10,7 +10,6 @@ class AgentListing extends Component {
   }
 
   renderAgents = (agents) => {
-    
     return agents.map(agent => {
       return (
         <AgentPreview agent={agent}/>

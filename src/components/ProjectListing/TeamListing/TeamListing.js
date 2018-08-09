@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './TeamListing.scss';
 
 const TeamListing = ({teamMembers}) => {
 
     const team = teamMembers.map(teamMember => {
       return (
-        <div className="project-team-member" key={teamMember._id}>{`${teamMember.firstName} ${teamMember.lastName}`}</div>
+        <Link className="header-link" to={`/agents/${teamMember._id}`} key={teamMember._id}>
+            <div className="project-team-member-image" >
+                <img src={teamMember.image} alt="{`${teamMember.firstName} ${teamMember.lastName}`}"/>
+            </div>
+        </Link>
       );
     });
 

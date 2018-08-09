@@ -10,7 +10,7 @@ class  AgentPreview extends Component {
       <div className="agent-box">
         <Link to={`/agents/${agent._id}`}>
             <div className="agent-image">
-                <img src={agent.image} />
+                <img alt={`${agent.firstName} ${agent.lastName}`} src={agent.image} />
             </div>
           <div className="agent-details">
             <h3>{`${agent.firstName} ${agent.lastName}`}</h3>

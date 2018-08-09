@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './AgentDetail.scss';
 import axios from 'axios';
-
 
 class AgentDetail extends Component {
     state = {
         agent: null
       };
-
-    componentDidMount() {
-    }
 
     getAgent = async (agent_id) => {
         const res = await axios.get(`/agents/${agent_id}`)
@@ -27,10 +23,9 @@ class AgentDetail extends Component {
     renderAgentTechnologies(technologies) {
         return technologies.map(technology => {
             return (
-                <div>{technology.name}</div>
+                <div className="technology-tag">{technology.name}</div>
             );
-
-        })
+        });
     }
 
     render () {
@@ -42,7 +37,7 @@ class AgentDetail extends Component {
             <div className="agent-detail-box">
                 <div className="detail-header">
                     <div className="agent-image">
-                        <img src={agent.image} />
+                        <img alt={`${agent.firstName} ${agent.lastName}`} src={agent.image} />
                     </div>
                     <div>
                         <h3>{`${agent.firstName} ${agent.lastName}`}</h3>
@@ -59,6 +54,9 @@ class AgentDetail extends Component {
                         {this.renderAgentTechnologies(agent.aspirationalTechnologies)}
                     </div>
 
+                    <div>
+                        <p>Currently on the bench:<span> {agent.currentFreeAgent ? "Yes" : "No"}</span></p>
+                    </div>
                 </div>
             </div>
         )
