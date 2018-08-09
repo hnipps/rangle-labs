@@ -1,12 +1,15 @@
+$box-width: 25%;
+$box-margin: 25px;
+
 .agent-box {
 
     border: 2px solid black;
     padding: 25px;
-    width: 25%;
-    max-width: 180px;
+    width: calc(#{$box-width} - #{$box-margin * 2});
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: $box-margin;
 
     
     .agent-image {

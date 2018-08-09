@@ -4,6 +4,7 @@ import axios from 'axios'
 import ProjectListing from './ProjectListing/ProjectListing';
 import ProjectDetail from './ProjectListing/ProjectDetail/ProjectDetail';
 import AgentListing from './AgentListing/AgentListing';
+import AgentDetail from './AgentListing/AgentDetail/AgentDetail';
 
 import './App.scss';
 
@@ -67,7 +68,7 @@ class App extends Component {
           <Route path='/projects' exact render={(props)=><ProjectListing {...props} projects={this.state.projects}  refreshProjects={() => this.getProjects()}/>}/>
           <Route path='/projects/:project_id' exact render={(props)=><ProjectDetail {...props}/>}/>
           <Route path='/agents' exact render={(props)=><AgentListing {...props} agents={this.state.agents}  refreshAgents={() => this.getAgents()}/>}/>
-          {/* <Route path='/agents/:agent_id' exact render={(props)=><AgentDetail {...props}/>}/> */}
+          <Route path='/agents/:agent_id' exact render={(props)=><AgentDetail {...props}/>}/>
         </div>
       </Router>
     ); 

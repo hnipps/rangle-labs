@@ -8,7 +8,7 @@ class  AgentPreview extends Component {
     const { agent } = this.props;
     return (
       <div className="agent-box">
-        {/* <Link to={`/agents/${agent._id}`}> */}
+        <Link to={`/agents/${agent._id}`}>
             <div className="agent-image">
                 <img src={agent.image} />
             </div>
@@ -16,7 +16,7 @@ class  AgentPreview extends Component {
             <h3>{`${agent.firstName} ${agent.lastName}`}</h3>
             <h4>{agent.role}</h4>
           </div>
-        {/* </Link> */}
+        </Link>
       </div>
     )
   }
