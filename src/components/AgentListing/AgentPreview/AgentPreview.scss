@@ -1,0 +1,30 @@
+.agent-box {
+
+    border: 2px solid black;
+    padding: 25px;
+    width: 25%;
+    max-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+    .agent-image {
+        width: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .agent-details {
+        text-align: center;
+
+        h4 {
+            margin: 0;
+        }
+    }
+}

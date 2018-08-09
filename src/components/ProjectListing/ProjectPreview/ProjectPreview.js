@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectPreview.scss';
-import ProjectStatus from '../../ProjectStatus/ProjectStatus';
-import DifficultyPips from '../../DifficultyPips/DifficultyPips';
-import TeamListing from '../../TeamListing/TeamListing';
+import ProjectStatus from '../ProjectStatus/ProjectStatus';
+import DifficultyPips from '../DifficultyPips/DifficultyPips';
+import TeamListing from '../TeamListing/TeamListing';
 class ProjectPreview extends Component {
 
   render () {
