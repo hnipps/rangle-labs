@@ -1,2 +1,6 @@
-@import './style-partials/normalize.scss';
-@import './style-partials/borderbox.scss';
+@import '../style-partials/normalize.scss';
+@import '../style-partials/borderbox.scss';
+
+.header-link {
+    display: block;
+}

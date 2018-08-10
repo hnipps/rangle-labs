@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import './ProjectDetail.scss';
 import axios from 'axios';
 import ProjectStatus from '../ProjectStatus/ProjectStatus';
 import DifficultyPips from '../DifficultyPips/DifficultyPips';
 import TeamListing from '../TeamListing/TeamListing';
+import TechListing from '../TechListing/TechListing';
 
 class ProjectDetail extends Component {
     state = {
@@ -22,14 +22,6 @@ class ProjectDetail extends Component {
         this.setState({ project });
     }
 
-    renderProjectTechnologies = (technologies) => {
-        return technologies.map(technology => {
-            return (
-                <div key={technology._id}>{technology.name}</div>
-            );
-        })
-    }
-
     render () {
         const { project } = this.state;
 
@@ -44,11 +36,14 @@ class ProjectDetail extends Component {
                     <p>{project.description}</p>
                     <div className="technologies">
                         <p>Technologies Used:</p>
-                        {this.renderProjectTechnologies(project.technologies)}
+                        {/* TECH TOOL LISTING */}
+                        <TechListing technologies={project.technologies} />
                     </div>
                     {/* PROJECT LEAD LISTING */}
+                    <p>Project Owner:</p>
                     <TeamListing teamMembers={project.projectLead} />
                     {/* TEAM LISTING*/}
+                    <p>Team:</p>
                     <TeamListing teamMembers={project.agents} />
                 </div>
             </div>

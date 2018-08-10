@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 import ProjectPreview from './ProjectPreview/ProjectPreview';
 import './ProjectListing.scss';
-
+import TechnologySidebar from '../Technology/TechnologySidebar/TechnologySidebar';
 class ProjectListing extends Component {
 
   async componentDidMount() {
@@ -10,6 +10,12 @@ class ProjectListing extends Component {
   }
 
   renderProjects = (projects) => {
+
+    if (!projects.length) {
+      return (
+        <p>Sorry, no projects match your criteria!</p>
+      );
+    }
     
     return projects.map(project => {
       return (
@@ -18,14 +24,24 @@ class ProjectListing extends Component {
     })
   }
 
+  compileProjectTechnologies = () => {
+
+    const allProjectTechnologies = [];
+
+    this.props.projects.forEach(project => {
+      allProjectTechnologies.push(...project.technologies);
+    });
+
+    return allProjectTechnologies.map(technology => technology._id);
+  }
+
   render () {
     return (
-      <div className="projects-root">
-        <h2>Projects</h2>
-        {/* <Search onSearchChange={(e) => this.props.onSearchChange(e)} placeholder="Search for an artist"/> */}
+      <div className="project-listing-root">
         <div className="projects-container">
           {this.renderProjects(this.props.projects)}
         </div>
+        <TechnologySidebar technologies={this.props.technologies} activeProjectTechnologies={this.compileProjectTechnologies()} techFilters={this.props.techFilters} handleTechFilter={(techId) => this.props.handleTechFilter(techId)}/>
       </div>
     )
   }
