@@ -4,12 +4,14 @@ import './ProjectPreview.scss';
 import ProjectStatus from '../ProjectStatus/ProjectStatus';
 import DifficultyPips from '../DifficultyPips/DifficultyPips';
 import TeamListing from '../TeamListing/TeamListing';
+import TechListing from '../TechListing/TechListing';
+
 class ProjectPreview extends Component {
 
   render () {
+    
     const { project } = this.props;
 
-    console.log(project);
     return (
       <div className="project-box">
         <div className="project-details">
@@ -21,7 +23,9 @@ class ProjectPreview extends Component {
           <Link to={`/projects/${project._id}`}>
             <p>{project.description}</p>
           </Link>
-
+  
+          {/* TECH TOOL LISTING */}
+          <TechListing technologies={project.technologies} />
           {/* PROJECT LEAD LISTING */}
           <TeamListing teamMembers={project.projectLead} />
           {/* TEAM LISTING*/}

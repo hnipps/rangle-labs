@@ -8,7 +8,7 @@ const TeamListing = ({teamMembers}) => {
       return (
         <Link className="header-link" to={`/agents/${teamMember._id}`} key={teamMember._id}>
             <div className="project-team-member-image" >
-                <img src={teamMember.image} alt="{`${teamMember.firstName} ${teamMember.lastName}`}"/>
+                <img src={teamMember.image} alt={`${teamMember.firstName} ${teamMember.lastName}`}/>
             </div>
         </Link>
       );
