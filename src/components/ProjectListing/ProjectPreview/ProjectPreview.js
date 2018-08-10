@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectPreview.scss';
-import ProjectStatus from '../../ProjectStatus/ProjectStatus';
-import DifficultyPips from '../../DifficultyPips/DifficultyPips';
-import TeamListing from '../../TeamListing/TeamListing';
+import ProjectStatus from '../ProjectStatus/ProjectStatus';
+import DifficultyPips from '../DifficultyPips/DifficultyPips';
+import TeamListing from '../TeamListing/TeamListing';
 class ProjectPreview extends Component {
 
   render () {
     const { project } = this.props;
+
+    console.log(project);
     return (
       <div className="project-box">
-        <Link to={`/projects/${project._id}`}>
-          <div className="project-details">
+        <div className="project-details">
+          <Link to={`/projects/${project._id}`}>
             <h3>{project.title}</h3>
-            <ProjectStatus status={project.status} />
-            <DifficultyPips difficulty={project.difficulty} />
+          </Link>
+          <ProjectStatus status={project.status} />
+          <DifficultyPips difficulty={project.difficulty} />
+          <Link to={`/projects/${project._id}`}>
             <p>{project.description}</p>
-            <TeamListing teamMembers={project.agents} />
-          </div>
-        </Link>
+          </Link>
+
+          {/* PROJECT LEAD LISTING */}
+          <TeamListing teamMembers={project.projectLead} />
+          {/* TEAM LISTING*/}
+          <TeamListing teamMembers={project.agents} />
+        </div>
       </div>
     )
   }

@@ -1,0 +1,33 @@
+$box-width: 25%;
+$box-margin: 25px;
+
+.agent-box {
+
+    border: 2px solid black;
+    padding: 25px;
+    width: calc(#{$box-width} - #{$box-margin * 2});
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: $box-margin;
+
+    
+    .agent-image {
+        width: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .agent-details {
+        text-align: center;
+
+        h4 {
+            margin: 0;
+        }
+    }
+}
