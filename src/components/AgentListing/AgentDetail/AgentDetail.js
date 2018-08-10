@@ -15,7 +15,6 @@ class AgentDetail extends Component {
 
     async componentDidMount() {
         const { agent_id } = this.props.match.params;
-        console.log(agent_id);
         const agent = await this.getAgent(agent_id);
         this.setState({ agent });
     }
