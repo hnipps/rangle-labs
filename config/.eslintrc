@@ -1,0 +1,9 @@
+{
+  "extends": ["strict"],
+  "rules": {
+    "array-element-newline": ["error", "always"],
+    "complexity": ["error", { "max": 10 }],
+    "filenames/match-exported": [2, "kebab"]
+  },
+  "plugins": ["filenames"]
+}
