@@ -1,0 +1,17 @@
+.tech-tool-listing {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+
+  .technology-list-item {
+    padding: 5px 8px;
+    background-color: #ffbd5b;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    p {
+      margin: 0;
+    }
+  }
+}
