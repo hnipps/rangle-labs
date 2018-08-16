@@ -21,9 +21,18 @@ class AgentDetail extends Component {
 
   renderAgentTechnologies(technologies) {
     return technologies.map(technology => {
-      return <div className="technology-tag">{technology.name}</div>;
+      return (
+        <div className="technology-tag" key={technology._id}>
+          {technology.name}
+        </div>
+      );
     });
   }
+
+  deleteAgent = async id => {
+    await axios.delete(`/agents/${id}`);
+    this.props.history.push("/agents");
+  };
 
   render() {
     const { agent } = this.state;
@@ -61,11 +70,17 @@ class AgentDetail extends Component {
             </p>
           </div>
         </div>
-        <Link to={`/edit-agent/${agent._id}`}>
-          <button>{`Edit Details for ${agent.firstName} ${
-            agent.lastName
-          }`}</button>
-        </Link>
+        <div className="button-container">
+          <Link to={`/edit-agent/${agent._id}`}>
+            <button>{`Edit Details for ${agent.firstName} ${
+              agent.lastName
+            }`}</button>
+          </Link>
+          <button
+            className="delete-agent-button"
+            onClick={() => this.deleteAgent(agent._id)}
+          >{`Delete ${agent.firstName} ${agent.lastName}`}</button>
+        </div>
       </div>
     );
   }

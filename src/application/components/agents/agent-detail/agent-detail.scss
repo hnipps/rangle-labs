@@ -1,19 +1,27 @@
 .agent-detail-box {
-    width: 70%;
-    max-width: 900px;
-    border: 2px solid red;
+  width: 70%;
+  max-width: 900px;
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+
+  .detail-header {
     display: flex;
-    flex-direction: column;
+  }
 
-    .detail-header {
-        display: flex;
+  .agent-image {
+    width: 150px;
+
+    img {
+      width: 100%;
     }
+  }
 
-    .agent-image {
-        width: 150px;
+  .button-container {
+    display: flex;
+  }
 
-        img {
-            width: 100%;
-        }
-    }
+  .delete-agent-button {
+    background-color: #ff6938;
+  }
 }
