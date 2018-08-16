@@ -70,15 +70,17 @@ class AgentDetail extends Component {
             </p>
           </div>
         </div>
-        <Link to={`/edit-agent/${agent._id}`}>
-          <button>{`Edit Details for ${agent.firstName} ${
-            agent.lastName
-          }`}</button>
-        </Link>
-        <button
-          className="delete-agent-buttton"
-          onClick={() => this.deleteAgent(agent._id)}
-        >{`Delete ${agent.firstName} ${agent.lastName}`}</button>
+        <div className="button-container">
+          <Link to={`/edit-agent/${agent._id}`}>
+            <button>{`Edit Details for ${agent.firstName} ${
+              agent.lastName
+            }`}</button>
+          </Link>
+          <button
+            className="delete-agent-button"
+            onClick={() => this.deleteAgent(agent._id)}
+          >{`Delete ${agent.firstName} ${agent.lastName}`}</button>
+        </div>
       </div>
     );
   }
