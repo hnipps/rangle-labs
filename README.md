@@ -12,7 +12,15 @@ This is a MERN stack (MongoDB, Express, React, Node) web app to keep track of al
 npm install
 ```
 
-3. This project uses seeds to supply dummy data so that you have something to work with while you're developing. You need to run a command in your terminal to populate the seed data in MongoDB. In the terminal, in the root of your project, run:
+3. Install MongoDB if you don't already have it (https://docs.mongodb.com/manual/administration/install-community/).
+
+4. In your terminal, cd into the project root folder and start MongoDB by running this command:
+
+```
+mongod
+```
+
+5. This project uses seeds to supply dummy data so that you have something to work with while you're developing. You need to run a command in your terminal to populate the seed data in MongoDB. In the terminal, in the root of your project, run:
 
 ```
 npm run seeds
