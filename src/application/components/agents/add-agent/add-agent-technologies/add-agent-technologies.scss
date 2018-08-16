@@ -1,0 +1,14 @@
+.add-agent-technologies-root {
+  display: flex;
+
+  .technology-item {
+    background-color: grey;
+    padding: 5px 8px;
+    margin-right: 15px;
+    cursor: pointer;
+
+    &.active {
+      background-color: gold;
+    }
+  }
+}

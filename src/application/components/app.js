@@ -5,6 +5,7 @@ import ProjectListing from "./projects/project-listing/project-listing";
 import ProjectDetail from "./projects/project-detail/project-detail";
 import AgentListing from "./agents/agent-listing/agent-listing";
 import AgentDetail from "./agents/agent-detail/agent-detail";
+import AddAgent from "./agents/add-agent/add-agent";
 import { doesArrayContainAllItems } from "../helpers";
 import "./app.scss";
 import "./normalize.scss";
@@ -115,6 +116,7 @@ class App extends Component {
     }));
   };
 
+  // make whichever filter was clicked active or inactive as necessary
   handleTechFilter = (techId, entityType) => {
     const filterTags = Array.from(this.state.filters[entityType].techTags);
 
@@ -218,9 +220,32 @@ class App extends Component {
             )}
           />
           <Route
+            path="/add-agent"
+            exact
+            render={props => (
+              <AddAgent
+                {...props}
+                technologies={this.state.technologies}
+                refreshAgents={() => this.getAgents()}
+              />
+            )}
+          />
+          <Route
             path="/agents/:agent_id"
             exact
             render={props => <AgentDetail {...props} />}
+          />
+          <Route
+            path="/edit-agent/:agent_id"
+            exact
+            render={props => (
+              <AddAgent
+                {...props}
+                edit={true}
+                technologies={this.state.technologies}
+                refreshAgents={() => this.getAgents()}
+              />
+            )}
           />
         </div>
       </Router>

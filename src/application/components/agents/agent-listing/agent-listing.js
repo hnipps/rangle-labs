@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import AgentPreview from "../agent-preview/agent-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
 import "./agent-listing.scss";
@@ -23,17 +23,22 @@ class AgentListing extends Component {
   render() {
     return (
       <div className="agent-listing-root">
-        <div className="agents-container">
-          {this.props.agents.map(agent => {
-            return <AgentPreview agent={agent} />;
-          })}
+        <Link className="header-link" to="/add-agent">
+          <div className="add-agent-button">Add an agent</div>
+        </Link>
+        <div className="agent-listing-main">
+          <div className="agents-container">
+            {this.props.agents.map(agent => {
+              return <AgentPreview agent={agent} />;
+            })}
+          </div>
+          <TechnologySidebar
+            technologies={this.props.technologies}
+            activeTechnologies={this.compileAgentTechnologies()}
+            techFilters={this.props.techFilters}
+            handleTechFilter={techId => this.props.handleTechFilter(techId)}
+          />
         </div>
-        <TechnologySidebar
-          technologies={this.props.technologies}
-          activeTechnologies={this.compileAgentTechnologies()}
-          techFilters={this.props.techFilters}
-          handleTechFilter={techId => this.props.handleTechFilter(techId)}
-        />
       </div>
     );
   }
