@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./agent-detail.scss";
 import axios from "axios";
 
@@ -57,10 +57,13 @@ class AgentDetail extends Component {
           <div>
             <p>
               Currently on the bench:
-              <span> {agent.currentFreeAgent ? "Yes" : "No"}</span>
+              <span>{agent.currentFreeAgent ? "Yes" : "No"}</span>
             </p>
           </div>
         </div>
+        <Link to={`/agents/edit-agent/${agent._id}`}>
+          <button>Edit this agent</button>
+        </Link>
       </div>
     );
   }

@@ -1,5 +1,7 @@
 .agent-listing-root {
-  display: flex;
+  .agent-listing-main {
+    display: flex;
+  }
 
   .agents-container {
     display: flex;
