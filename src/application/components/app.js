@@ -116,6 +116,7 @@ class App extends Component {
     }));
   };
 
+  // make whichever filter was clicked active or inactive as necessary
   handleTechFilter = (techId, entityType) => {
     const filterTags = Array.from(this.state.filters[entityType].techTags);
 
@@ -219,25 +220,30 @@ class App extends Component {
             )}
           />
           <Route
+            path="/add-agent"
+            exact
+            render={props => (
+              <AddAgent
+                {...props}
+                technologies={this.state.technologies}
+                refreshAgents={() => this.getAgents()}
+              />
+            )}
+          />
+          <Route
             path="/agents/:agent_id"
             exact
             render={props => <AgentDetail {...props} />}
           />
           <Route
-            path="/agents/add-agent"
-            exact
-            render={props => (
-              <AddAgent {...props} technologies={this.state.technologies} />
-            )}
-          />
-          <Route
-            path="/agents/edit-agent/:agent_id"
+            path="/edit-agent/:agent_id"
             exact
             render={props => (
               <AddAgent
                 {...props}
                 edit={true}
                 technologies={this.state.technologies}
+                refreshAgents={() => this.getAgents()}
               />
             )}
           />

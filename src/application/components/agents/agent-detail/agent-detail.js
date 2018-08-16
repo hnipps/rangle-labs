@@ -57,12 +57,14 @@ class AgentDetail extends Component {
           <div>
             <p>
               Currently on the bench:
-              <span>{agent.currentFreeAgent ? "Yes" : "No"}</span>
+              <span>{agent.currentFreeAgent ? " Yes" : " No"}</span>
             </p>
           </div>
         </div>
-        <Link to={`/agents/edit-agent/${agent._id}`}>
-          <button>Edit this agent</button>
+        <Link to={`/edit-agent/${agent._id}`}>
+          <button>{`Edit Details for ${agent.firstName} ${
+            agent.lastName
+          }`}</button>
         </Link>
       </div>
     );
