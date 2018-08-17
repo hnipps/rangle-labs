@@ -20,6 +20,8 @@ class AddProject extends Component {
 
   statusList = ["Active", "Hiatus", "Backlog"];
 
+  _radioInputs = [ false, false, false, false, false ];
+
   getProject = async project_id => {
     const res = await axios.get(`/projects/${project_id}`);
     return res.data;
@@ -59,8 +61,8 @@ class AddProject extends Component {
     }
 
     this.setState(prevState => ({
-      agent: {
-        ...prevState.agent,
+      project: {
+        ...prevState.project,
         [currentOrAspirational]: alteredTechnologies
       }
     }));
@@ -75,7 +77,7 @@ class AddProject extends Component {
 
     this.setState(prevState => ({
       project: {
-        ...prevState.agent,
+        ...prevState.project,
         [name]: value
       }
     }));
@@ -125,7 +127,7 @@ class AddProject extends Component {
     const { project } = this.state;
 
     // get the agent name for headings - if one exists
-    const projectAppellation = project.title ? project.title : "this agent";
+    const projectAppellation = project.title ? project.title : "this project";
 
     // determine which heading to show
     const heading = this.props.edit
@@ -155,33 +157,44 @@ class AddProject extends Component {
             value={project.description}
             onChange={this.onInput}
           /><br></br>
+          <label htmlFor="difficulty">Project difficulty</label>
           <input
             name="difficulty"
             type="radio"
+            ref={input => this._radioInputs[0] = input}
+            checked={this.state.project.difficulty === this._radioInputs[0].value}
             value={1}
             onChange={this.onInput}
           />1
           <input
             name="difficulty"
             type="radio"
+            ref={input => this._radioInputs[1] = input}
+            checked={this.state.project.difficulty === this._radioInputs[1].value}
             value={2}
             onChange={this.onInput}
           />2
           <input
             name="difficulty"
             type="radio"
+            ref={input => this._radioInputs[2] = input}
+            checked={this.state.project.difficulty === this._radioInputs[2].value}
             value={3}
             onChange={this.onInput}
           />3
           <input
             name="difficulty"
             type="radio"
+            ref={input => this._radioInputs[3] = input}
+            checked={this.state.project.difficulty === this._radioInputs[3].value}
             value={4}
             onChange={this.onInput}
           />4
           <input
             name="difficulty"
             type="radio"
+            ref={input => this._radioInputs[4] = input}
+            checked={this.state.project.difficulty === this._radioInputs[4].value}
             value={5}
             onChange={this.onInput}
           />5<br></br>
