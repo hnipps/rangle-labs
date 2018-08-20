@@ -36,9 +36,9 @@ class AddProject extends Component {
     }
   }
 
-  handleTechClick = (techId, currentOrAspirational) => {
+  handleTechClick = (techId) => {
     const previousTechnologies = Array.from(
-      this.state.agent[currentOrAspirational]
+      this.state.project.technologies
     );
 
     const matchingTech = previousTechnologies.filter(
@@ -63,7 +63,7 @@ class AddProject extends Component {
     this.setState(prevState => ({
       project: {
         ...prevState.project,
-        [currentOrAspirational]: alteredTechnologies
+        technologies: alteredTechnologies
       }
     }));
   };
@@ -209,14 +209,14 @@ class AddProject extends Component {
             })}
           </select>
 
-          {/* <p>{`Which technologies are used for ${projectAppellation}?`}</p>
+          <p>{`Which technologies are used for ${projectAppellation}?`}</p>
           <AddAgentTechnologies
             technologies={this.props.technologies}
             activeTechnologies={project.technologies}
             handleTechClick={techId =>
               this.handleTechClick(techId, "currentTechnologies")
             }
-          /> */}
+          />
         </form>
 
         <div className="button submit-button" onClick={this.handleSubmission}>
