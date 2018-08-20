@@ -78,4 +78,24 @@ router.delete("/:agent_id", async (req, res, next) => {
   }
 });
 
+router.get("/search/:search_term", async (req, res, next) => {
+  try {
+    const { search_term } = req.params
+    console.log(`Searching for: ${search_term}`);
+    
+    const docs = await Agent.find()
+      .populate("currentTechnologies")
+      .populate("aspirationalTechnologies");
+    const filteredDocs = docs.filter(agent => {
+        const matchFirstName = agent.firstName.match(search_term);
+        const matchLastName = agent.lastName.match(search_term);
+        return matchFirstName !== null || matchLastName !== null;
+      });
+    res.status(200).send(filteredDocs);
+  } catch (err) {
+    console.error("An error occurred while searching for a specific agent:", err);
+    next(err);
+  }
+})
+
 module.exports = router;
