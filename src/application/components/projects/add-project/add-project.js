@@ -157,7 +157,7 @@ class AddProject extends Component {
             value={project.description}
             onChange={this.onInput}
           /><br></br>
-          <label htmlFor="difficulty">Project difficulty</label>
+          <p>How difficult is this project?</p>
           <input
             name="difficulty"
             type="radio"
@@ -198,6 +198,7 @@ class AddProject extends Component {
             value={5}
             onChange={this.onInput}
           />5<br></br>
+          <p>What's the status of this project?</p>
           <select
             name="status"
             value={project.status}
