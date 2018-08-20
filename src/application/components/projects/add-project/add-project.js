@@ -4,6 +4,7 @@ import axios from "axios";
 // TODO: Move and rename AddAgentTechnologies, to make it more reusable
 import AddAgentTechnologies from "../../agents/add-agent/add-agent-technologies/add-agent-technologies";
 import "./add-project.scss";
+import AddProjectAgents from "./add-project-agents/add-project-agents";
 
 class AddProject extends Component {
   state = {
@@ -209,13 +210,20 @@ class AddProject extends Component {
             })}
           </select>
 
-          <p>{`Which technologies are used for ${projectAppellation}?`}</p>
+          <p>Which technologies are used for this project?</p>
           <AddAgentTechnologies
             technologies={this.props.technologies}
             activeTechnologies={project.technologies}
             handleTechClick={techId =>
               this.handleTechClick(techId, "currentTechnologies")
             }
+          />
+
+          <p>Which agents are on this project?</p>
+          <AddProjectAgents
+            listingType={"agents"}
+            onInput={this.onInput}
+            project={project}
           />
         </form>
 
