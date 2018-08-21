@@ -190,46 +190,21 @@ class AddProject extends Component {
             onChange={this.onInput}
           /><br></br>
           <p>How difficult is this project?</p>
-          <input
-            name="difficulty"
-            type="radio"
-            ref={input => this._radioInputs[0] = input}
-            checked={Number(this.state.project.difficulty) === Number(this._radioInputs[0].value)}
-            value={1}
-            onChange={this.onInput}
-          />1
-          <input
-            name="difficulty"
-            type="radio"
-            ref={input => this._radioInputs[1] = input}
-            checked={Number(this.state.project.difficulty) === Number(this._radioInputs[1].value)}
-            value={2}
-            onChange={this.onInput}
-          />2
-          <input
-            name="difficulty"
-            type="radio"
-            ref={input => this._radioInputs[2] = input}
-            checked={Number(this.state.project.difficulty) === Number(this._radioInputs[2].value)}
-            value={3}
-            onChange={this.onInput}
-          />3
-          <input
-            name="difficulty"
-            type="radio"
-            ref={input => this._radioInputs[3] = input}
-            checked={Number(this.state.project.difficulty) === Number(this._radioInputs[3].value)}
-            value={4}
-            onChange={this.onInput}
-          />4
-          <input
-            name="difficulty"
-            type="radio"
-            ref={input => this._radioInputs[4] = input}
-            checked={Number(this.state.project.difficulty) === Number(this._radioInputs[4].value)}
-            value={5}
-            onChange={this.onInput}
-          />5<br></br>
+          {this._radioInputs.map((item, i) => {
+            const radioValue = i + 1;
+            return (
+              <div key={`radioInput${i}`}>
+                <input
+                  name="difficulty"
+                  type="radio"
+                  ref={input => this._radioInputs[i] = input}
+                  checked={Number(this.state.project.difficulty) === Number(this._radioInputs[i].value)}
+                  value={radioValue}
+                  onChange={this.onInput}
+                />{radioValue}
+              </div>
+            );
+          })}
           <p>What's the status of this project?</p>
           <select
             name="status"
