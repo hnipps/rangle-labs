@@ -6,6 +6,7 @@ import AddAgentTechnologies from "../../agents/add-agent/add-agent-technologies/
 import "./add-project.scss";
 import AddProjectAgents from "./add-project-agents/add-project-agents";
 import TeamListing from "../../../../lib/components/team-listing/team-listing"
+import { projectRoles } from "../../../constants"
 
 class AddProject extends Component {
   state = {
@@ -125,52 +126,32 @@ class AddProject extends Component {
     this.props.history.push("/projects");
   };
 
-  addAgentToProject = teamMember => {
-    const newAgents = [...this.state.project.agents];
-    newAgents.push(teamMember)
-    this.setState(prevState => ({
-      project: {
-        ...prevState.project,
-        agents: newAgents
-      }
-    }));
-  };
-
-  removeAgentFromProject = event => {
-    event.preventDefault();
-    const agentIndex = event.target.value;
-    const newAgents = [...this.state.project.agents];
-    newAgents.splice(agentIndex, 1);
-    this.setState(prevState => ({
-      project: {
-        ...prevState.project,
-        agents: newAgents
-      }
-    }));
+  addPersonToProject = role => {
+    return teamMember => {
+      const newPeople = [...this.state.project[role]];
+      newPeople.push(teamMember)
+      this.setState(prevState => ({
+        project: {
+          ...prevState.project,
+          [role]: newPeople
+        }
+      }));
+    };
   }
 
-  addLeadToProject = teamMember => {
-    const newProjectLead = [...this.state.project.projectLead];
-    newProjectLead.push(teamMember)
-    this.setState(prevState => ({
-      project: {
-        ...prevState.project,
-        projectLead: newProjectLead
-      }
-    }));
-  };
-
-  removeLeadFromProject = event => {
-    event.preventDefault();
-    const agentIndex = event.target.value;
-    const newProjectLead = [...this.state.project.projectLead];
-    newProjectLead.splice(agentIndex, 1);
-    this.setState(prevState => ({
-      project: {
-        ...prevState.project,
-        projectLead: newProjectLead
-      }
-    }));
+  removePersonFromProject = role => {
+    return event => {
+      event.preventDefault();
+      const personIndex = event.target.value;
+      const newPeople = [...this.state.project[role]];
+      newPeople.splice(personIndex, 1);
+      this.setState(prevState => ({
+        project: {
+          ...prevState.project,
+          [role]: newPeople
+        }
+      }));
+    }
   }
 
   render() {
@@ -270,22 +251,22 @@ class AddProject extends Component {
 
           <p>Who's the project lead?</p>
           <AddProjectAgents
-            addAgentToProject={this.addLeadToProject}
+            addAgentToProject={this.addPersonToProject(projectRoles.projectLead)}
           /><br></br>
           <p>Current project lead:</p><br></br>  
           <TeamListing
             teamMembers={this.state.project.projectLead}
-            onRemoveClick={this.removeLeadFromProject}
+            onRemoveClick={this.removePersonFromProject(projectRoles.projectLead)}
           />
 
           <p>Which agents are on this project?</p>
           <AddProjectAgents
-            addAgentToProject={this.addAgentToProject}
+            addAgentToProject={this.addPersonToProject(projectRoles.agents)}
           /><br></br>
           <p>Current team members:</p><br></br>  
           <TeamListing
             teamMembers={this.state.project.agents}
-            onRemoveClick={this.removeAgentFromProject}
+            onRemoveClick={this.removePersonFromProject(projectRoles.agents)}
           />
         </form>
 
