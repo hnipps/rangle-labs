@@ -23,6 +23,11 @@ class ProjectDetail extends Component {
     this.setState({ project });
   }
 
+  deleteProject = async id => {
+    await axios.delete(`/projects/${id}`);
+    this.props.history.push("/projects");
+  };
+
   render() {
     const { project } = this.state;
 
@@ -51,6 +56,10 @@ class ProjectDetail extends Component {
           <Link to={`/edit-project/${project._id}`}>
             <button>{`Edit Details for ${project.title}`}</button>
           </Link>
+          <button
+            className="delete-project-button"
+            onClick={() => this.deleteProject(project._id)}
+          >{`Delete ${project.title}`}</button>
         </div>
       </div>
     );

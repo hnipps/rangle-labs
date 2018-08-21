@@ -60,4 +60,17 @@ router.patch("/:project_id", async (req, res, next) => {
   }
 });
 
+// Delete a project
+router.delete("/:project_id", async (req, res, next) => {
+  console.log("DELETING A PROJECT");
+  try {
+    const { project_id } = req.params;
+    const doc = await Project.findByIdAndRemove(project_id);
+    res.status(204).send(doc);
+  } catch (err) {
+    console.log("An error occurred while deleting a project:", err);
+    next(err);
+  }
+});
+
 module.exports = router;
