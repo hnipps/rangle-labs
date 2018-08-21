@@ -25,4 +25,27 @@ router.get('/:project_id', async (req, res, next) => {
   }
 });
 
+// Add a new project
+router.post("/", async (req, res) => {
+  const project = new Project({
+    title: req.body.title,
+    description: req.body.description,
+    difficulty: req.body.difficulty,
+    status: req.body.status,
+    technologies: req.body.technologies,
+    projectLead: req.body.projectLead,
+    agents: req.body.agents
+  });
+
+  project
+    .save()
+    .then(doc => {
+      res.status(200).send({ message: "success", payload: doc });
+    })
+    .catch(err => {
+      console.error("An error occurred while adding a new project:", err);
+      res.status(500).send({ message: err.message });
+    });
+});
+
 module.exports = router;
