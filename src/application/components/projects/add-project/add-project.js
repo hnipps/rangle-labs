@@ -250,11 +250,11 @@ class AddProject extends Component {
             }
           />
 
-          <p>Who's the project lead?</p>
+          <p>Who's the project owner?</p>
           <AddProjectAgents
             addAgentToProject={this.addPersonToProject(projectRoles.projectLead)}
           /><br></br>
-          <p>Current project lead:</p><br></br>  
+          <p>Current project owner:</p><br></br>  
           <TeamListing
             teamMembers={this.state.project.projectLead}
             onRemoveClick={this.removePersonFromProject(projectRoles.projectLead)}
