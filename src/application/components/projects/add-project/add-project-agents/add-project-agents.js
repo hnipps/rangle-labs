@@ -56,6 +56,20 @@ class AddProjectAgents extends Component {
     }));
   }
 
+  addAgentToTeam = event => {
+    event.preventDefault();
+    const teamMemberIndex = event.target.value;
+    const teamMember = (this.state.search.searchResult[teamMemberIndex]);
+    const newAgents = [...this.state.project.agents];
+    newAgents.push(teamMember)
+    this.setState(prevState => ({
+      project: {
+        ...prevState.project,
+        agents: newAgents
+      }
+    }));
+  };
+
   render() {
     return(
       <div>
@@ -66,7 +80,10 @@ class AddProjectAgents extends Component {
           value={this.state.search.searchValue}
           onChange={this.searchForAgent}
         />
-        <TeamListing teamMembers={this.state.search.searchResult} />
+        <TeamListing
+          teamMembers={this.state.search.searchResult}
+          onAddClick={this.addAgentToTeam}
+        />
       </div>
     );
   }

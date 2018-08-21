@@ -5,7 +5,16 @@ import "./team-listing.scss";
 class TeamListing extends Component {
 
   createTeamListing = teamMembers => {
-    const team = teamMembers.map(teamMember => {
+
+    const team = teamMembers.map((teamMember, i) => {
+      let addButton;
+      let removeButton;
+      if (this.props.onAddClick) {
+        addButton = <button value={i} onClick={this.props.onAddClick}>+</button>
+      }
+      if (this.props.onRemoveClick) {
+        removeButton = <button onClick={this.props.onRemoveClick}>+</button>
+      }
       return (
         <div>
           <Link
@@ -21,6 +30,8 @@ class TeamListing extends Component {
             </div>
           </Link>
           <p>{`${teamMember.firstName} ${teamMember.lastName}`}</p>
+          {addButton}
+          {removeButton}
         </div>
       );
     });
