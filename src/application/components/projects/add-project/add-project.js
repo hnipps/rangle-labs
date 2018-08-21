@@ -5,6 +5,7 @@ import axios from "axios";
 import AddAgentTechnologies from "../../agents/add-agent/add-agent-technologies/add-agent-technologies";
 import "./add-project.scss";
 import AddProjectAgents from "./add-project-agents/add-project-agents";
+import TeamListing from "../../../../lib/components/team-listing/team-listing"
 
 class AddProject extends Component {
   state = {
@@ -16,6 +17,10 @@ class AddProject extends Component {
       technologies: [],
       projectLead: [],
       agents: []
+    },
+    search: {
+      searchResult: [],
+      searchValue: "",
     }
   };
 
@@ -84,6 +89,21 @@ class AddProject extends Component {
     }));
   };
 
+  onSearchInput = event => {
+    const name = event.target.name;
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+
+    this.setState(prevState => ({
+      search: {
+        ...prevState.search,
+        [name]: value
+      },
+    }));
+  };
+
   addNewProject = async project => {
     try {
       const res = await axios.post("/projects", project);
@@ -123,6 +143,43 @@ class AddProject extends Component {
   cancelAction = () => {
     this.props.history.push("/projects");
   };
+
+  addAgentToProject = event => {
+    event.preventDefault();
+    const teamMemberIndex = event.target.value;
+    const teamMember = (this.state.search.searchResult[teamMemberIndex]);
+    const newAgents = [...this.state.project.agents];
+    newAgents.push(teamMember)
+    this.setState(prevState => ({
+      project: {
+        ...prevState.project,
+        agents: newAgents
+      }
+    }));
+  };
+
+  searchForAgent = async event => {
+    this.onSearchInput(event);
+    const searchTerm = event.target.value;
+
+    if (!searchTerm) {
+      this.setState(prevState => ({
+        search: {
+          ...prevState.search,
+          searchResult: [],
+        }
+      }));
+      return;
+    }
+    const res = await axios.get(`/agents/search/${searchTerm}`);
+    
+    this.setState(prevState => ({
+      search: {
+        ...prevState.search,
+        searchResult: res.data,
+      }
+    }));
+  }
 
   render() {
     const { project } = this.state;
@@ -223,7 +280,14 @@ class AddProject extends Component {
           <AddProjectAgents
             listingType={"agents"}
             onInput={this.onInput}
-            project={project}
+            project={this.state.project}
+            addAgentToProject={this.addAgentToProject}
+            search={this.state.search}
+            searchForAgent={this.searchForAgent}
+          /><br></br>
+          <p>Current team members:</p><br></br>  
+          <TeamListing
+            teamMembers={this.state.project.agents}
           />
         </form>
 
