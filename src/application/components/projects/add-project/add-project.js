@@ -149,6 +149,30 @@ class AddProject extends Component {
     }));
   }
 
+  addLeadToProject = teamMember => {
+    const newProjectLead = [...this.state.project.projectLead];
+    newProjectLead.push(teamMember)
+    this.setState(prevState => ({
+      project: {
+        ...prevState.project,
+        projectLead: newProjectLead
+      }
+    }));
+  };
+
+  removeLeadFromProject = event => {
+    event.preventDefault();
+    const agentIndex = event.target.value;
+    const newProjectLead = [...this.state.project.projectLead];
+    newProjectLead.splice(agentIndex, 1);
+    this.setState(prevState => ({
+      project: {
+        ...prevState.project,
+        projectLead: newProjectLead
+      }
+    }));
+  }
+
   render() {
     const { project } = this.state;
 
@@ -244,9 +268,18 @@ class AddProject extends Component {
             }
           />
 
+          <p>Who's the project lead?</p>
+          <AddProjectAgents
+            addAgentToProject={this.addLeadToProject}
+          /><br></br>
+          <p>Current project lead:</p><br></br>  
+          <TeamListing
+            teamMembers={this.state.project.projectLead}
+            onRemoveClick={this.removeLeadFromProject}
+          />
+
           <p>Which agents are on this project?</p>
           <AddProjectAgents
-            listingType={"agents"}
             addAgentToProject={this.addAgentToProject}
           /><br></br>
           <p>Current team members:</p><br></br>  
