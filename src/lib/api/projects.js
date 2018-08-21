@@ -48,4 +48,16 @@ router.post("/", async (req, res) => {
     });
 });
 
+// Update an existing project
+router.patch("/:project_id", async (req, res, next) => {
+  try {
+    const { project_id } = req.params;
+    const doc = await Project.findByIdAndUpdate(project_id, req.body);
+    res.status(200).send(doc);
+  } catch (err) {
+    console.error("An error occurred while updating an existing agent:", err);
+    next(err);
+  }
+});
+
 module.exports = router;

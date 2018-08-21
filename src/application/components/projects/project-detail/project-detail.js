@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ProjectStatus from "../../../../lib/components/project-status/project-status";
 import DifficultyPips from "../../../../lib/components/difficulty-pips/difficulty-pips";
@@ -45,6 +46,11 @@ class ProjectDetail extends Component {
           {/* TEAM LISTING*/}
           <p>Team:</p>
           <TeamListing teamMembers={project.agents} />
+        </div>
+        <div className="button-container">
+          <Link to={`/edit-project/${project._id}`}>
+            <button>{`Edit Details for ${project.title}`}</button>
+          </Link>
         </div>
       </div>
     );

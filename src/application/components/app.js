@@ -259,6 +259,18 @@ class App extends Component {
               />
             )}
           />
+          <Route
+            path="/edit-project/:project_id"
+            exact
+            render={props => (
+              <AddProject
+                {...props}
+                edit={true}
+                technologies={this.state.technologies}
+                refreshAgents={() => this.getProjects()}
+              />
+            )}
+          />
         </div>
       </Router>
     );
