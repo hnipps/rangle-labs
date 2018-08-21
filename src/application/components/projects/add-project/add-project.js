@@ -17,10 +17,6 @@ class AddProject extends Component {
       technologies: [],
       projectLead: [],
       agents: []
-    },
-    search: {
-      searchResult: [],
-      searchValue: "",
     }
   };
 
@@ -89,21 +85,6 @@ class AddProject extends Component {
     }));
   };
 
-  onSearchInput = event => {
-    const name = event.target.name;
-    const value =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
-
-    this.setState(prevState => ({
-      search: {
-        ...prevState.search,
-        [name]: value
-      },
-    }));
-  };
-
   addNewProject = async project => {
     try {
       const res = await axios.post("/projects", project);
@@ -144,10 +125,7 @@ class AddProject extends Component {
     this.props.history.push("/projects");
   };
 
-  addAgentToProject = event => {
-    event.preventDefault();
-    const teamMemberIndex = event.target.value;
-    const teamMember = (this.state.search.searchResult[teamMemberIndex]);
+  addAgentToProject = teamMember => {
     const newAgents = [...this.state.project.agents];
     newAgents.push(teamMember)
     this.setState(prevState => ({
@@ -157,29 +135,6 @@ class AddProject extends Component {
       }
     }));
   };
-
-  searchForAgent = async event => {
-    this.onSearchInput(event);
-    const searchTerm = event.target.value;
-
-    if (!searchTerm) {
-      this.setState(prevState => ({
-        search: {
-          ...prevState.search,
-          searchResult: [],
-        }
-      }));
-      return;
-    }
-    const res = await axios.get(`/agents/search/${searchTerm}`);
-    
-    this.setState(prevState => ({
-      search: {
-        ...prevState.search,
-        searchResult: res.data,
-      }
-    }));
-  }
 
   render() {
     const { project } = this.state;
@@ -282,8 +237,6 @@ class AddProject extends Component {
             onInput={this.onInput}
             project={this.state.project}
             addAgentToProject={this.addAgentToProject}
-            search={this.state.search}
-            searchForAgent={this.searchForAgent}
           /><br></br>
           <p>Current team members:</p><br></br>  
           <TeamListing
