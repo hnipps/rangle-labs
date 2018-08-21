@@ -234,8 +234,6 @@ class AddProject extends Component {
           <p>Which agents are on this project?</p>
           <AddProjectAgents
             listingType={"agents"}
-            onInput={this.onInput}
-            project={this.state.project}
             addAgentToProject={this.addAgentToProject}
           /><br></br>
           <p>Current team members:</p><br></br>  
