@@ -193,7 +193,7 @@ class AddProject extends Component {
             name="difficulty"
             type="radio"
             ref={input => this._radioInputs[0] = input}
-            checked={this.state.project.difficulty === this._radioInputs[0].value}
+            checked={this.state.project.difficulty === Number(this._radioInputs[0].value)}
             value={1}
             onChange={this.onInput}
           />1
@@ -201,7 +201,7 @@ class AddProject extends Component {
             name="difficulty"
             type="radio"
             ref={input => this._radioInputs[1] = input}
-            checked={this.state.project.difficulty === this._radioInputs[1].value}
+            checked={this.state.project.difficulty === Number(this._radioInputs[1].value)}
             value={2}
             onChange={this.onInput}
           />2
@@ -209,7 +209,7 @@ class AddProject extends Component {
             name="difficulty"
             type="radio"
             ref={input => this._radioInputs[2] = input}
-            checked={this.state.project.difficulty === this._radioInputs[2].value}
+            checked={this.state.project.difficulty === Number(this._radioInputs[2].value)}
             value={3}
             onChange={this.onInput}
           />3
@@ -217,7 +217,7 @@ class AddProject extends Component {
             name="difficulty"
             type="radio"
             ref={input => this._radioInputs[3] = input}
-            checked={this.state.project.difficulty === this._radioInputs[3].value}
+            checked={this.state.project.difficulty === Number(this._radioInputs[3].value)}
             value={4}
             onChange={this.onInput}
           />4
@@ -225,7 +225,7 @@ class AddProject extends Component {
             name="difficulty"
             type="radio"
             ref={input => this._radioInputs[4] = input}
-            checked={this.state.project.difficulty === this._radioInputs[4].value}
+            checked={this.state.project.difficulty === Number(this._radioInputs[4].value)}
             value={5}
             onChange={this.onInput}
           />5<br></br>
