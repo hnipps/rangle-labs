@@ -13,14 +13,13 @@ class TeamListing extends Component {
         addButton = <button value={i} onClick={this.props.onAddClick}>+</button>
       }
       if (this.props.onRemoveClick) {
-        removeButton = <button onClick={this.props.onRemoveClick}>+</button>
+        removeButton = <button value={i} onClick={this.props.onRemoveClick}>-</button>
       }
       return (
-        <div>
+        <div key={teamMember._id}>
           <Link
             className="header-link"
             to={`/agents/${teamMember._id}`}
-            key={teamMember._id}
           >
             <div className="project-team-member-image">
               <img

@@ -136,6 +136,19 @@ class AddProject extends Component {
     }));
   };
 
+  removeAgentFromProject = event => {
+    event.preventDefault();
+    const agentIndex = event.target.value;
+    const newAgents = [...this.state.project.agents];
+    newAgents.splice(agentIndex, 1);
+    this.setState(prevState => ({
+      project: {
+        ...prevState.project,
+        agents: newAgents
+      }
+    }));
+  }
+
   render() {
     const { project } = this.state;
 
@@ -217,8 +230,8 @@ class AddProject extends Component {
             value={project.status}
             onChange={this.onInput}
           >
-            {this.statusList.map(status => {
-              return <option value={status}>{status}</option>
+            {this.statusList.map((status, i) => {
+              return <option key={`status_${i}`} value={status}>{status}</option>
             })}
           </select>
 
@@ -239,6 +252,7 @@ class AddProject extends Component {
           <p>Current team members:</p><br></br>  
           <TeamListing
             teamMembers={this.state.project.agents}
+            onRemoveClick={this.removeAgentFromProject}
           />
         </form>
 
