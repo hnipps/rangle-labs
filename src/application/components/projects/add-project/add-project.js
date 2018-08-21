@@ -9,21 +9,22 @@ import TeamListing from "../../../../lib/components/team-listing/team-listing"
 import { projectRoles } from "../../../constants"
 
 class AddProject extends Component {
+  statusList = ["Active", "Hiatus", "Backlog"];
+
+  _radioInputs = [ false, false, false, false, false ];
+
   state = {
     project: {
       title: "",
       description: "",
       difficulty: 0,
-      status: "",
+      status: this.statusList[2],
       technologies: [],
       projectLead: [],
       agents: []
     }
   };
 
-  statusList = ["Active", "Hiatus", "Backlog"];
-
-  _radioInputs = [ false, false, false, false, false ];
 
   getProject = async project_id => {
     const res = await axios.get(`/projects/${project_id}`);
