@@ -33,10 +33,12 @@ class AgentListing extends Component {
             })}
           </div>
           <TechnologySidebar
+            history={this.props.history}
             technologies={this.props.technologies}
             activeTechnologies={this.compileAgentTechnologies()}
             techFilters={this.props.techFilters}
             handleTechFilter={techId => this.props.handleTechFilter(techId)}
+            parent={"agents"}
           />
         </div>
       </div>
