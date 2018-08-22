@@ -8,4 +8,9 @@ constants.colors = {
   backlogColor: '#6c41f7',
 };
 
+constants.projectRoles = {
+  agents: "agents",
+  projectLead: "projectLead",
+}
+
 module.exports = constants;

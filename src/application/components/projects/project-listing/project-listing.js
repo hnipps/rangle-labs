@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ProjectPreview from "../project-preview/project-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
 import "./project-listing.scss";
@@ -33,6 +33,9 @@ class ProjectListing extends Component {
   render() {
     return (
       <div className="project-listing-root">
+        <Link className="header-link" to="/add-project">
+          <div className="add-project-button">Add a project</div>
+        </Link>
         <div className="projects-container">
           {this.renderProjects(this.props.projects)}
         </div>

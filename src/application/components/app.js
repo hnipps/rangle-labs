@@ -6,6 +6,7 @@ import ProjectDetail from "./projects/project-detail/project-detail";
 import AgentListing from "./agents/agent-listing/agent-listing";
 import AgentDetail from "./agents/agent-detail/agent-detail";
 import AddAgent from "./agents/add-agent/add-agent";
+import AddProject from "./projects/add-project/add-project";
 import { doesArrayContainAllItems } from "../helpers";
 import "./app.scss";
 import "./normalize.scss";
@@ -244,6 +245,29 @@ class App extends Component {
                 edit={true}
                 technologies={this.state.technologies}
                 refreshAgents={() => this.getAgents()}
+              />
+            )}
+          />
+          <Route
+            path="/add-project"
+            exact
+            render={props => (
+              <AddProject
+                {...props}
+                technologies={this.state.technologies}
+                refreshAgents={() => this.getProjects()}
+              />
+            )}
+          />
+          <Route
+            path="/edit-project/:project_id"
+            exact
+            render={props => (
+              <AddProject
+                {...props}
+                edit={true}
+                technologies={this.state.technologies}
+                refreshAgents={() => this.getProjects()}
               />
             )}
           />

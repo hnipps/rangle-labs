@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ProjectStatus from "../../../../lib/components/project-status/project-status";
 import DifficultyPips from "../../../../lib/components/difficulty-pips/difficulty-pips";
@@ -21,6 +22,11 @@ class ProjectDetail extends Component {
     const project = await this.getProject(project_id);
     this.setState({ project });
   }
+
+  deleteProject = async id => {
+    await axios.delete(`/projects/${id}`);
+    this.props.history.push("/projects");
+  };
 
   render() {
     const { project } = this.state;
@@ -45,6 +51,15 @@ class ProjectDetail extends Component {
           {/* TEAM LISTING*/}
           <p>Team:</p>
           <TeamListing teamMembers={project.agents} />
+        </div>
+        <div className="button-container">
+          <Link to={`/edit-project/${project._id}`}>
+            <button>{`Edit Details for ${project.title}`}</button>
+          </Link>
+          <button
+            className="delete-project-button"
+            onClick={() => this.deleteProject(project._id)}
+          >{`Delete ${project.title}`}</button>
         </div>
       </div>
     );
