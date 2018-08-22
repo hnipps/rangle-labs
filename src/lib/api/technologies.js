@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// Add a new project
+// Add a new technology
 router.post("/", async (req, res) => {
   const technology = new Technology({
     name: req.body.name
@@ -28,6 +28,19 @@ router.post("/", async (req, res) => {
       console.error("An error occurred while adding a new technology:", err);
       res.status(500).send({ message: err.message });
     });
+});
+
+// Delete a technology
+router.delete("/:technology_id", async (req, res, next) => {
+  console.log("DELETING A TECHNOLOGY");
+  try {
+    const { technology_id } = req.params;
+    const doc = await Technology.findByIdAndRemove(technology_id);
+    res.status(204).send(doc);
+  } catch (err) {
+    console.log("An error occurred while deleting a technology:", err);
+    next(err);
+  }
 });
 
 module.exports = router;
