@@ -13,4 +13,21 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// Add a new project
+router.post("/", async (req, res) => {
+  const technology = new Technology({
+    name: req.body.name
+  });
+
+  technology
+    .save()
+    .then(doc => {
+      res.status(200).send({ message: "success", payload: doc });
+    })
+    .catch(err => {
+      console.error("An error occurred while adding a new technology:", err);
+      res.status(500).send({ message: err.message });
+    });
+});
+
 module.exports = router;
