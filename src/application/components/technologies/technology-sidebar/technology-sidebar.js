@@ -114,7 +114,7 @@ class TechnologySidebar extends Component {
       editButton = undefined;
       doneButton = <a className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-dark-red unselectable" style={{cursor: "pointer"}} onClick={this.acceptChanges}>Done</a>;
       addTechnologyInput = (
-        <div>
+        <div className="ml2">
           <input
             name="newTechnology"
             type="text"
@@ -131,7 +131,7 @@ class TechnologySidebar extends Component {
     }
 
     return (
-      <aside className="helvetica db mw5 mb3">
+      <aside className="helvetica db w-100 mb3">
         <div className="flex items-center">
           <h2 className="dib mv1 ml2">Tech</h2>
           {editButton}

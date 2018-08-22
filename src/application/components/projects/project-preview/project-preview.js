@@ -10,7 +10,7 @@ class ProjectPreview extends Component {
     const { project } = this.props;
 
     return (
-      <article className="helvetica mw5 center bg-white br3 pa3 mv3 ba b--black-10">
+      <article className="helvetica mw5 center bg-white br3 pa3 mb3 ba b--black-10">
       <div className="dtc v-mid mid-gray w-25 tl mb0">
         <ProjectStatus status={project.status} />
       </div>
