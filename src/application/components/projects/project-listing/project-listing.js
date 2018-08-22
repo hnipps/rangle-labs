@@ -40,6 +40,7 @@ class ProjectListing extends Component {
           {this.renderProjects(this.props.projects)}
         </div>
         <TechnologySidebar
+          history={this.props.history}
           technologies={this.props.technologies}
           activeTechnologies={this.compileProjectTechnologies()}
           techFilters={this.props.techFilters}
