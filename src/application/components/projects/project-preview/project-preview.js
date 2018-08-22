@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./project-preview.scss";
 import ProjectStatus from "../../../../lib/components/project-status/project-status";
 import DifficultyPips from "../../../../lib/components/difficulty-pips/difficulty-pips";
 import TeamListing from "../../../../lib/components/team-listing/team-listing";
@@ -11,14 +10,18 @@ class ProjectPreview extends Component {
     const { project } = this.props;
 
     return (
-      <div className="project-box">
-        <div className="project-details">
-          <Link to={`/projects/${project._id}`}>
-            <h3>{project.title}</h3>
+      <article className="helvetica mw5 center bg-white br3 pa3 mv3 ba b--black-10">
+      <div className="dtc v-mid mid-gray w-25 tl mb0">
+        <ProjectStatus status={project.status} />
+      </div>
+      <div className="dtc v-mid w-25 tr">
+        <DifficultyPips difficulty={project.difficulty} />
+      </div>
+        <div className="tc">
+          <Link className="no-underline dark-gray hover-blue" to={`/projects/${project._id}`}>
+            <h1 className="f3 mb2" >{project.title}</h1>
           </Link>
-          <ProjectStatus status={project.status} />
-          <DifficultyPips difficulty={project.difficulty} />
-          <Link to={`/projects/${project._id}`}>
+          <Link className="no-underline mid-gray" to={`/projects/${project._id}`}>
             <p>{project.description}</p>
           </Link>
 
@@ -29,7 +32,7 @@ class ProjectPreview extends Component {
           {/* TEAM LISTING*/}
           <TeamListing teamMembers={project.agents} />
         </div>
-      </div>
+      </article>
     );
   }
 }

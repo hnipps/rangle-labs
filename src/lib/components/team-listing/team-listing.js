@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./team-listing.scss";
 
 class TeamListing extends Component {
 
@@ -16,26 +15,26 @@ class TeamListing extends Component {
         removeButton = <button value={i} onClick={this.props.onRemoveClick}>-</button>
       }
       return (
-        <div key={teamMember._id}>
+        <li className="dib mr1 mb1" key={teamMember._id}>
           <Link
-            className="header-link"
+            className=""
             to={`/agents/${teamMember._id}`}
           >
-            <div className="project-team-member-image">
-              <img
+            <div>
+              <img className="mw3 br-100"
                 src={teamMember.image}
                 alt={`${teamMember.firstName} ${teamMember.lastName}`}
               />
             </div>
           </Link>
-          <p>{`${teamMember.firstName} ${teamMember.lastName}`}</p>
+          <h2 className="mv0 f7 mw3 center">{`${teamMember.firstName} ${teamMember.lastName}`}</h2>
           {addButton}
           {removeButton}
-        </div>
+        </li>
       );
     });
   
-    return <div className="project-team">{team}</div>;
+    return <ul className="list ph2 pv1 ma0">{team}</ul>;
   };
 
   render() {

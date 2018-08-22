@@ -1,16 +1,15 @@
 import React from "react";
-import "./tech-listing.scss";
 
 const TechListing = ({ technologies }) => {
   const techTools = technologies.map(technology => {
     return (
-      <div className="technology-list-item" key={technology._id}>
-        <p>{technology.name}</p>
-      </div>
+      <li className="dib mr1 mb1" key={technology._id}>
+        <p className="f7 f7-ns b db pa2 ma0 dark-gray ba b--black-20">{technology.name}</p>
+      </li>
     );
   });
 
-  return <div className="tech-tool-listing">{techTools}</div>;
+  return <ul className="list ph2 pv2">{techTools}</ul>;
 };
 
 export default TechListing;
