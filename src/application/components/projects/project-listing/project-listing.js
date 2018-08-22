@@ -45,6 +45,7 @@ class ProjectListing extends Component {
           activeTechnologies={this.compileProjectTechnologies()}
           techFilters={this.props.techFilters}
           handleTechFilter={techId => this.props.handleTechFilter(techId)}
+          parent={"projects"}
         />
       </div>
     );

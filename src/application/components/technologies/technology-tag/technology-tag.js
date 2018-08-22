@@ -8,9 +8,7 @@ class TechnologyTag extends Component {
   };
 
   deleteTechnology = (event) => {
-    console.log(event);
     event.preventDefault();
-    
     const technologyId = event.target.value;
     this.props.deleteTechnology(technologyId)
   }

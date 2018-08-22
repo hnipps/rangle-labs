@@ -69,7 +69,7 @@ class TechnologySidebar extends Component {
 
       if (res) {
         this.props.technologies.push(res.data.payload);
-        this.props.history.push("/projects");
+        this.props.history.push(this.props.parent);
       }
     } catch (err) {
       console.error("There was an error adding a new technology:", err);
@@ -84,7 +84,7 @@ class TechnologySidebar extends Component {
           return tech._id === technologyId;
         });
         this.props.technologies.splice(indexToRemove, 1);
-        this.props.history.push("/projects");
+        this.props.history.push(this.props.parent);
       }
     } catch (err) {
       console.error("There was an error deleting a new technology:", err);
