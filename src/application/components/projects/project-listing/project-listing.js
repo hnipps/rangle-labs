@@ -33,20 +33,27 @@ class ProjectListing extends Component {
   render() {
     return (
       <div className="project-listing-root">
-        <Link className="header-link" to="/add-project">
-          <div className="add-project-button">Add a project</div>
-        </Link>
-        <div className="projects-container">
+        <div className="db projects-container">
           {this.renderProjects(this.props.projects)}
         </div>
-        <TechnologySidebar
-          history={this.props.history}
-          technologies={this.props.technologies}
-          activeTechnologies={this.compileProjectTechnologies()}
-          techFilters={this.props.techFilters}
-          handleTechFilter={techId => this.props.handleTechFilter(techId)}
-          parent={"projects"}
-        />
+        <div>
+          <Link className="db header-link mv3" to="/add-project">
+            <div
+              className="helvetica f5 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-dark-red unselectable"
+              style={{cursor: "pointer"}}
+            >
+              Add a project
+            </div>
+          </Link>
+          <TechnologySidebar
+            history={this.props.history}
+            technologies={this.props.technologies}
+            activeTechnologies={this.compileProjectTechnologies()}
+            techFilters={this.props.techFilters}
+            handleTechFilter={techId => this.props.handleTechFilter(techId)}
+            parent={"projects"}
+          />
+        </div>
       </div>
     );
   }

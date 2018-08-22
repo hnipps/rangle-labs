@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import axios from "axios";
 
-import "./technology-sidebar.scss";
 import TechnologyTag from "../technology-tag/technology-tag";
 import { doesArrayContainItem } from "../../../helpers";
 
@@ -132,9 +131,9 @@ class TechnologySidebar extends Component {
     }
 
     return (
-      <aside className="helvetica mw5">
+      <aside className="helvetica db mw5 mb3">
         <div className="flex items-center">
-          <h2 className="dib mv1">Tech</h2>
+          <h2 className="dib mv1 ml2">Tech</h2>
           {editButton}
           {doneButton}
         </div>
