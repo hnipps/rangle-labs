@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./technology-tag.scss";
 
 class TechnologyTag extends Component {
   handleTagClick = () => {
@@ -14,23 +13,36 @@ class TechnologyTag extends Component {
   }
 
   render() {
-    const activeClass = this.props.isActiveFilter ? "active" : "";
-    const disabledClass = this.props.isDisabled ? "disabled" : "";
+    const activeClass = this.props.isActiveFilter ? "bg-dark-red white" : "";
+    let disabledClass;
+    let cursor;
+    if (this.props.isDisabled) {
+      disabledClass = "bg-light-gray";
+      cursor = "not-allowed"
+    } else {
+      disabledClass = "";
+      cursor = "pointer"
+    }
+    const tagStyle = {
+      cursor
+    }
 
     let removeButton;
     if (this.props.isBeingEdited) {
-      removeButton = <button style={{display:"inline", marginLeft:"0.5em"}} value={this.props.technology._id} onClick={this.deleteTechnology} >-</button>;
+      removeButton = < button className="f7 f7-ns b dib ma0 dark-gray ml2 b--none bg-transparent pa0 w1" value={this.props.technology._id} onClick={this.deleteTechnology} >x</button>;
     }
 
     return (
-      <div
+      <li
         key={`technology-tag-${this.props.technology.name}`}
-        className={`technology-tag ${activeClass} ${disabledClass}`}
+        className={`dib mr1 mb1`}
         onClick={this.handleTagClick}
       >
-        {this.props.technology.name}
-        {removeButton}
-      </div>
+        <div className={`f7 f7-ns b db pa2 ma0 dark-gray ba b--black-20 unselectable ${activeClass} ${disabledClass}`} style={tagStyle}>
+          {this.props.technology.name}
+          {removeButton}
+        </div>
+      </li>
     );
   }
 }

@@ -5,7 +5,7 @@ const DifficultyPips = ({ difficulty }) => {
 
   for (let i = 0; i < difficulty; i++) {
     const key = i;
-    const pip = <div className="h1 w1 bg-dark-red br-100 dib" key={key} />;
+    const pip = <div className="h1 w1 bg-dark-blue br-100 dib" key={key} />;
     pips.push(pip);
   }
 

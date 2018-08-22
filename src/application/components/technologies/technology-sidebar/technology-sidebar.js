@@ -34,8 +34,6 @@ class TechnologySidebar extends Component {
     }));
   };
 
-  discardChanges = this.acceptChanges;
-
   onInput = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -115,7 +113,7 @@ class TechnologySidebar extends Component {
     let addTechnologyInput;
     if (this.state.isBeingEdited) {
       editButton = undefined;
-      doneButton = <div onClick={this.acceptChanges}>Done</div>;
+      doneButton = <a className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-dark-red unselectable" style={{cursor: "pointer"}} onClick={this.acceptChanges}>Done</a>;
       addTechnologyInput = (
         <div>
           <input
@@ -126,23 +124,24 @@ class TechnologySidebar extends Component {
             onChange={this.onInput}
             onKeyUp={this.keyUpAddTechnology}
           />
-          <button value={this.state.newTechnology} onClick={this.addTechnology} >Add</button>
         </div>
       );
     } else {
-      editButton = <div onClick={this.editTechnologies}>Edit</div>;
+      editButton = <a className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-black unselectable" style={{cursor: "pointer"}} onClick={this.editTechnologies}>Edit</a>;
       doneButton = undefined;
     }
 
     return (
-      <aside className="technology-sidebar">
-        <h2>Tech</h2>
-        <div className="tag-container">
-          {this.renderTechnologyTags(technologies)}
+      <aside className="helvetica mw5">
+        <div className="flex items-center">
+          <h2 className="dib mv1">Tech</h2>
+          {editButton}
+          {doneButton}
         </div>
-        {editButton}
+        <ul className="list ph2 pv2 mv0">
+          {this.renderTechnologyTags(technologies)}
+        </ul>
         {addTechnologyInput}
-        {doneButton}
       </aside>
     );
   }
