@@ -76,6 +76,21 @@ class TechnologySidebar extends Component {
     }
   };
 
+  deleteTechnology = async technologyId => {
+    try {
+      const res = await axios.delete(`/technologies/${technologyId}`);
+      if (res) {
+        const indexToRemove = this.props.technologies.findIndex(tech => {
+          return tech._id === technologyId;
+        });
+        this.props.technologies.splice(indexToRemove, 1);
+        this.props.history.push("/projects");
+      }
+    } catch (err) {
+      console.error("There was an error deleting a new technology:", err);
+    }
+  }
+
   renderTechnologyTags = technologies => {
     return technologies.map(technology => {
       return (
@@ -86,6 +101,7 @@ class TechnologySidebar extends Component {
           isDisabled={this.determineIfTagIsDisabled(technology._id)}
           handleTechFilter={techId => this.props.handleTechFilter(techId)}
           isBeingEdited={this.state.isBeingEdited}
+          deleteTechnology={this.deleteTechnology}
         />
       );
     });
@@ -96,12 +112,10 @@ class TechnologySidebar extends Component {
 
     let editButton;
     let doneButton;
-    let cancelButton;
     let addTechnologyInput;
     if (this.state.isBeingEdited) {
       editButton = undefined;
       doneButton = <div onClick={this.acceptChanges}>Done</div>;
-      cancelButton = <div onClick={this.discardChanges}>Cancel</div>;
       addTechnologyInput = (
         <div>
           <input
@@ -118,7 +132,6 @@ class TechnologySidebar extends Component {
     } else {
       editButton = <div onClick={this.editTechnologies}>Edit</div>;
       doneButton = undefined;
-      cancelButton = undefined;
     }
 
     return (
@@ -130,7 +143,6 @@ class TechnologySidebar extends Component {
         {editButton}
         {addTechnologyInput}
         {doneButton}
-        {cancelButton}
       </aside>
     );
   }
