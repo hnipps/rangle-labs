@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import ProjectPreview from "../project-preview/project-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
+import CardContainer from "../../../../lib/components/card-container/card-container";
+import ContentContainer from "../../../../lib/components/content-container/content-container";
+import SidebarContainer from "../../../../lib/components/sidebar-container/sidebar-container";
+import ControlContainer from "../../../../lib/components/control-container/control-container";
+import ControlButton from "../../../../lib/components/control-button/control-button";
 
 class ProjectListing extends Component {
   async componentDidMount() {
@@ -31,11 +35,11 @@ class ProjectListing extends Component {
 
   render() {
     return (
-      <div className="ph2 ph4-ns flex">
-        <div className="db flex flex-wrap w-75">
+      <ContentContainer>
+        <CardContainer>
           {this.renderProjects(this.props.projects)}
-        </div>
-        <div className="w-25">
+        </CardContainer>
+        <SidebarContainer>
           <TechnologySidebar
             history={this.props.history}
             technologies={this.props.technologies}
@@ -44,13 +48,13 @@ class ProjectListing extends Component {
             handleTechFilter={techId => this.props.handleTechFilter(techId)}
             parent={"projects"}
           />
-          <div className="db header-link mv3">
-            <Link className="helvetica f5 b no-underline br-pill ph3 pv2 mb2 ml2 dib white bg-dark-red unselectable" style={{cursor: "pointer"}} to="/add-project">
+          <ControlContainer>
+            <ControlButton to="/add-project">
               Add Project
-            </Link>
-          </div>
-        </div>
-      </div>
+            </ControlButton>
+          </ControlContainer>
+        </SidebarContainer>
+      </ContentContainer>
     );
   }
 }
