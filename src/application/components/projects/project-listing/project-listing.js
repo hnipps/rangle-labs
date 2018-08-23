@@ -36,9 +36,6 @@ class ProjectListing extends Component {
   render() {
     return (
       <ContentContainer>
-        <CardContainer>
-          {this.renderProjects(this.props.projects)}
-        </CardContainer>
         <SidebarContainer>
           <TechnologySidebar
             history={this.props.history}
@@ -54,6 +51,9 @@ class ProjectListing extends Component {
             </ControlButton>
           </ControlContainer>
         </SidebarContainer>
+        <CardContainer>
+          {this.renderProjects(this.props.projects)}
+        </CardContainer>
       </ContentContainer>
     );
   }
