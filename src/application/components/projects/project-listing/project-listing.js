@@ -32,8 +32,8 @@ class ProjectListing extends Component {
 
   render() {
     return (
-      <div className="ph2 ph4-ns project-listing-root">
-        <div className="db projects-container">
+      <div className="ph2 ph4-ns flex">
+        <div className="db flex flex-wrap w-75">
           {this.renderProjects(this.props.projects)}
         </div>
         <div className="w-25">
