@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import ProjectPreview from "../project-preview/project-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
-import "./project-listing.scss";
 
 class ProjectListing extends Component {
   async componentDidMount() {
