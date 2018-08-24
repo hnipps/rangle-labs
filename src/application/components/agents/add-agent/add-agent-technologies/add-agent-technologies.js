@@ -20,7 +20,7 @@ class AddAgentTechnologies extends Component {
 
   render() {
     return (
-      <div name="addTechnologies">
+      <div name="addTechnologies" className="mt3">
         {this.props.technologies.map(technology => {
           return (
             <TechnologyTag
