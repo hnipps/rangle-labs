@@ -7,7 +7,7 @@ import ContentContainer from "../../../../lib/components/content-container/conte
 import CardContainer from "../../../../lib/components/card-container/card-container";
 import SidebarContainer from "../../../../lib/components/sidebar-container/sidebar-container";
 import ControlContainer from "../../../../lib/components/control-container/control-container";
-import ControlButton from "../../../../lib/components/control-button/control-button";
+import ControlButton from "../../../../lib/components/link-button/link-button";
 
 class AgentListing extends Component {
   async componentDidMount() {
