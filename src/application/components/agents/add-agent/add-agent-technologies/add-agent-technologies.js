@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
-import "./add-agent-technologies.scss";
-// import axios from "axios";
+
+import TechnologyTag from "../../../technologies/technology-tag/technology-tag";
 
 class AddAgentTechnologies extends Component {
   determineWhetherActive = techId => {
@@ -21,19 +20,15 @@ class AddAgentTechnologies extends Component {
 
   render() {
     return (
-      <div className="add-agent-technologies-root">
+      <div name="addTechnologies">
         {this.props.technologies.map(technology => {
-          const activeClass = this.determineWhetherActive(technology._id)
-            ? "active"
-            : "";
           return (
-            <div
-              className={`technology-item ${activeClass}`}
-              onClick={() => this.props.handleTechClick(technology._id)}
+            <TechnologyTag
+              technology={technology}
               key={technology._id}
-            >
-              {technology.name}
-            </div>
+              isActiveFilter={this.determineWhetherActive(technology._id)}
+              handleTechFilter={this.props.handleTechClick}
+            />
           );
         })}
       </div>
