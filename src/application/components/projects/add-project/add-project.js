@@ -3,7 +3,6 @@ import axios from "axios";
 
 // TODO: Move and rename AddAgentTechnologies, to make it more reusable
 import AddAgentTechnologies from "../../agents/add-agent/add-agent-technologies/add-agent-technologies";
-import "./add-project.scss";
 import AddProjectAgents from "./add-project-agents/add-project-agents";
 import TeamListing from "../../../../lib/components/team-listing/team-listing"
 import { projectRoles } from "../../../constants"
