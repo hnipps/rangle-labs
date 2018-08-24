@@ -39,7 +39,7 @@ class AgentListing extends Component {
           />
           <ControlContainer>
             <ControlButton to="/add-agent">
-              Add an agent
+              Add Agent
             </ControlButton>
           </ControlContainer>
         </SidebarContainer>
