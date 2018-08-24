@@ -4,7 +4,7 @@ import FormLabel from "../form-label/form-label";
 class FormInput extends Component {
   render() {
     return (
-      <div className="measure">
+      <div className="measure center mb3">
         <FormLabel htmlFor={ this.props.name }>{ this.props.label }</FormLabel>
         <input
           id={ this.props.id }
