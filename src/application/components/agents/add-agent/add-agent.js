@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import AddAgentTechnologies from "./add-agent-technologies/add-agent-technologies";
 import "./add-agent.scss";
+import FormWrapper from "../../../../lib/components/form/form-wrapper/form-wrapper";
+import FormInput from "../../../../lib/components/form/form-input/form-input";
+import AddTechnologies from "./add-technologies/add-technologies";
+import Button from "../../../../lib/components/button/button";
 
 class AddAgent extends Component {
   state = {
@@ -125,8 +128,8 @@ class AddAgent extends Component {
 
     // get the agent name for headings - if one exists
     const agentAppellation =
-      agent.firstName.length && agent.lastName.length
-        ? `${agent.firstName} ${agent.lastName}`
+      agent.firstName.length
+        ? `${agent.firstName}`
         : "this agent";
 
     // determine which heading to show
@@ -141,76 +144,82 @@ class AddAgent extends Component {
     const cancelButtonText = "Cancel Without Saving";
 
     return (
-      <div className="add-agent-root">
-        <p>{heading}</p>
-        <form>
-          <input
-            name="firstName"
-            type="text"
-            placeholder="first name"
-            value={agent.firstName}
-            onChange={this.onInput}
+      <FormWrapper>
+        <h1>{ heading }</h1>
+        <FormInput
+          id="firstName"
+          name="firstName"
+          aria-describedby="firstName-desc"
+          placeholder="What's their first name?"
+          value={agent.firstName}
+          onChange={this.onInput}
+          label="First Name"
+        />
+        <FormInput
+          id="lastName"
+          name="lastName"
+          aria-describedby="lastName-desc"
+          placeholder="What's their last name?"
+          value={agent.lastName}
+          onChange={this.onInput}
+          label="Last Name"
           />
-          <input
-            name="lastName"
-            type="text"
-            placeholder="last name"
-            value={agent.lastName}
-            onChange={this.onInput}
-          />
-          <input
-            name="role"
-            type="text"
-            placeholder="role"
-            value={agent.role}
-            onChange={this.onInput}
-          />
-          <input
-            name="image"
-            type="text"
-            placeholder="image"
-            value={agent.image}
-            onChange={this.onInput}
-          />
-          <p>{`Which technologies does ${agentAppellation} currently know?`}</p>
-          <AddAgentTechnologies
-            technologies={this.props.technologies}
-            activeTechnologies={agent.currentTechnologies}
-            handleTechClick={techId =>
-              this.handleTechClick(techId, "currentTechnologies")
-            }
-          />
+        <FormInput
+          id="role"
+          name="role"
+          aria-describedby="role-desc"
+          placeholder="What do they do?"
+          value={agent.role}
+          onChange={this.onInput}
+          label="Role"
+        />
+        <FormInput
+          id="image"
+          name="image"
+          placeholder="Enter a URL"
+          value={agent.image}
+          onChange={this.onInput}
+          label="Image"
+        />
+        <AddTechnologies
+          technologies={this.props.technologies}
+          activeTechnologies={agent.currentTechnologies}
+          handleTechClick={techId =>
+            this.handleTechClick(techId, "currentTechnologies")
+          }
+          label={`Which technologies does ${agentAppellation} currently know?`}
+        />
 
-          <p>{`Which technologies would ${agentAppellation} like to learn?`}</p>
-          <AddAgentTechnologies
-            technologies={this.props.technologies}
-            activeTechnologies={agent.aspirationalTechnologies}
-            handleTechClick={techId =>
-              this.handleTechClick(techId, "aspirationalTechnologies")
-            }
+        <AddTechnologies
+          technologies={this.props.technologies}
+          activeTechnologies={agent.aspirationalTechnologies}
+          handleTechClick={techId =>
+            this.handleTechClick(techId, "aspirationalTechnologies")
+          }
+          label={`Which technologies would ${agentAppellation} like to learn?`}
+        />
+
+        <div className="mb3">
+          <input
+            className="mr2"
+            type="checkbox"
+            id="currentFreeAgent"
+            name="currentFreeAgent"
+            checked={agent.currentFreeAgent}
+            onChange={this.onInput}
           />
+          <label htmlFor="currentFreeAgent" className="f5 b mb2 lh-copy">
+            {`Is ${agentAppellation} currently a free agent?`}
+          </label>
+        </div>
 
-          <div className="is-free-agent-container">
-            <label htmlFor="isFreeAgent">
-              {`Is ${agentAppellation} currently a free agent?`}
-            </label>
-            <input
-              type="checkbox"
-              id="isFreeAgent"
-              name="currentFreeAgent"
-              checked={agent.currentFreeAgent}
-              onChange={this.onInput}
-            />
-          </div>
-        </form>
-
-        <div className="button submit-button" onClick={this.handleSubmission}>
+        <Button onClick={this.handleSubmission} color="green">
           {submitButtonText}
-        </div>
-        <div className="button cancel-button" onClick={this.cancelAction}>
+        </Button>
+        <Button onClick={this.cancelAction} color="red">
           {cancelButtonText}
-        </div>
-      </div>
+        </Button>
+      </FormWrapper>
     );
   }
 }
