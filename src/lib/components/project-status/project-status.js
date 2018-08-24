@@ -19,9 +19,9 @@ const ProjectStatus = ({ status }) => {
   }
 
   return (
-    <div className="project-status-container">
-      <div className="project-status" style={{ backgroundColor: color }} />
-      <p className="project-status">{status}</p>
+    <div className="f5 fw4 gray mt0 flex items-center">
+      <div className="h1 w1 br-100 dib mr1" style={{ backgroundColor: color }} />
+      <p className="dib mv1">{status}</p>
     </div>
   );
 };

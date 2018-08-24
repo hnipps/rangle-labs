@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import axios from "axios";
 
-import "./technology-sidebar.scss";
 import TechnologyTag from "../technology-tag/technology-tag";
 import { doesArrayContainItem } from "../../../helpers";
 
@@ -33,8 +32,6 @@ class TechnologySidebar extends Component {
       isBeingEdited: false,
     }));
   };
-
-  discardChanges = this.acceptChanges;
 
   onInput = event => {
     const name = event.target.name;
@@ -115,9 +112,9 @@ class TechnologySidebar extends Component {
     let addTechnologyInput;
     if (this.state.isBeingEdited) {
       editButton = undefined;
-      doneButton = <div onClick={this.acceptChanges}>Done</div>;
+      doneButton = <a className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-dark-red unselectable" style={{cursor: "pointer"}} onClick={this.acceptChanges}>Done</a>;
       addTechnologyInput = (
-        <div>
+        <div className="ml2">
           <input
             name="newTechnology"
             type="text"
@@ -126,23 +123,24 @@ class TechnologySidebar extends Component {
             onChange={this.onInput}
             onKeyUp={this.keyUpAddTechnology}
           />
-          <button value={this.state.newTechnology} onClick={this.addTechnology} >Add</button>
         </div>
       );
     } else {
-      editButton = <div onClick={this.editTechnologies}>Edit</div>;
+      editButton = <a className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-black unselectable" style={{cursor: "pointer"}} onClick={this.editTechnologies}>Edit</a>;
       doneButton = undefined;
     }
 
     return (
-      <aside className="technology-sidebar">
-        <h2>Tech</h2>
-        <div className="tag-container">
-          {this.renderTechnologyTags(technologies)}
+      <aside className="helvetica db w-100 mb3">
+        <div className="flex items-center">
+          <h2 className="dib mv1 ml2">Tech</h2>
+          {editButton}
+          {doneButton}
         </div>
-        {editButton}
+        <ul className="list ph2 pv2 mv0">
+          {this.renderTechnologyTags(technologies)}
+        </ul>
         {addTechnologyInput}
-        {doneButton}
       </aside>
     );
   }

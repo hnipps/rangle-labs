@@ -154,13 +154,18 @@ class App extends Component {
     return (
       <Router>
         <div className="app">
-          {/* LINKS */}
-          <Link className="header-link" to="/projects">
-            Projects
-          </Link>
-          <Link className="header-link" to="/agents">
-            Agents
-          </Link>
+        <nav className="helvetica pa3 pa4-ns">
+            <Link className="link dim black b f6 f5-ns dib mr3" to="/projects">
+              Rangle Labs
+            </Link>
+            {/* LINKS */}
+            <Link className="link dim gray f6 f5-ns dib mr3" to="/projects">
+              Projects
+            </Link>
+            <Link className="link dim gray f6 f5-ns dib mr3" to="/agents">
+              Agents
+            </Link>
+          </nav>
 
           {/* ROUTES */}
           {/* how to reroute '/' to the same place as '/projects' without duplicating the ProjectListing component call? */}
