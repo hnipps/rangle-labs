@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import ProjectStatus from "../../../../lib/components/project-status/project-status";
+import ProjectStatus from "../../../../lib/components/status/project-status/project-status";
 import DifficultyPips from "../../../../lib/components/difficulty-pips/difficulty-pips";
 import TeamListing from "../../../../lib/components/team-listing/team-listing";
 import TechListing from "../../../../lib/components/tech-listing/tech-listing";
@@ -15,7 +15,7 @@ class ProjectPreview extends Component {
     return (
       <Card>
         <div className="dtc v-mid mid-gray w-25 tl mb0">
-          <ProjectStatus status={project.status} />
+          <ProjectStatus status={project.status}></ProjectStatus>
         </div>
         <div className="dtc v-mid w-25 tr">
           <DifficultyPips difficulty={project.difficulty} />

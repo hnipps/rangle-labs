@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ProjectStatus from "../../../../lib/components/project-status/project-status";
+import ProjectStatus from "../../../../lib/components/status/project-status/project-status";
 import DifficultyPips from "../../../../lib/components/difficulty-pips/difficulty-pips";
 import TeamListing from "../../../../lib/components/team-listing/team-listing";
 import TechListing from "../../../../lib/components/tech-listing/tech-listing";
