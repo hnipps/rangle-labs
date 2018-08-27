@@ -10,6 +10,7 @@ import CenterContentWrapper from "../../../../lib/components/form/center-content
 import DetailCard from "../../../../lib/components/detail-card/detail-card";
 import LinkButton from "../../../../lib/components/link-button/link-button";
 import Button from "../../../../lib/components/button/button";
+import CardHeader from "../../../../lib/components/card/card-header/card-header";
 
 class ProjectDetail extends Component {
   state = {
@@ -41,12 +42,14 @@ class ProjectDetail extends Component {
       <ContentContainer>
         <CenterContentWrapper>
           <DetailCard>
-            <div className="dtc v-mid mid-gray w-25 tl mb0">
-              <ProjectStatus status={project.status} size="L" />
-            </div>
-            <div className="dtc v-mid w-25 tr">
-              <DifficultyPips difficulty={project.difficulty} size="L" />
-            </div>
+            <CardHeader>
+              <div className="dtc v-mid mid-gray mb0">
+                <ProjectStatus status={project.status} size="L" />
+              </div>
+              <div className="dtc v-mid">
+                <DifficultyPips difficulty={project.difficulty} size="L" />
+              </div>
+            </CardHeader>
             <h1>{project.title}</h1>
             <p>{project.description}</p>
             <p>Technologies Used:</p>
@@ -58,7 +61,6 @@ class ProjectDetail extends Component {
             {/* TEAM LISTING*/}
             <p>Team:</p>
             <TeamListing teamMembers={project.agents} />
-
             <LinkButton to={`/edit-project/${project._id}`} color="green">
               {`Edit Details for ${project.title}`}
             </LinkButton>

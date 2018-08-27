@@ -7,6 +7,7 @@ import TechListing from "../../../../lib/components/tech-listing/tech-listing";
 import Card from "../../../../lib/components/card/card";
 import CardTitle from "../../../../lib/components/card/card-title/card-title";
 import CardContent from "../../../../lib/components/card/card-content/card-content";
+import CardHeader from "../../../../lib/components/card/card-header/card-header";
 
 class ProjectPreview extends Component {
   render() {
@@ -14,15 +15,18 @@ class ProjectPreview extends Component {
 
     return (
       <Card>
-        <div className="dtc v-mid mid-gray w-25 tl mb0">
-          <ProjectStatus status={project.status}></ProjectStatus>
-        </div>
-        <div className="dtc v-mid w-25 tr">
-          <DifficultyPips difficulty={project.difficulty} />
-        </div>
+        <CardHeader>
+          <div className="dtc v-mid mid-gray mb0">
+            <ProjectStatus status={project.status} />
+          </div>
+            <DifficultyPips difficulty={project.difficulty} />
+        </CardHeader>
         <CardContent>
           <CardTitle to={`/projects/${project._id}`}>{project.title}</CardTitle>
-          <Link className="no-underline mid-gray" to={`/projects/${project._id}`}>
+          <Link
+            className="no-underline mid-gray"
+            to={`/projects/${project._id}`}
+          >
             <p>{project.description}</p>
           </Link>
 
