@@ -46,9 +46,7 @@ class ProjectDetail extends Component {
               <div className="dtc v-mid mid-gray mb0">
                 <ProjectStatus status={project.status} size="L" />
               </div>
-              <div className="dtc v-mid">
-                <DifficultyPips difficulty={project.difficulty} size="L" />
-              </div>
+              <DifficultyPips difficulty={project.difficulty} size="L" />
             </CardHeader>
             <h1>{project.title}</h1>
             <p>{project.description}</p>

@@ -19,7 +19,7 @@ class ProjectPreview extends Component {
           <div className="dtc v-mid mid-gray mb0">
             <ProjectStatus status={project.status} />
           </div>
-            <DifficultyPips difficulty={project.difficulty} />
+          <DifficultyPips difficulty={project.difficulty} />
         </CardHeader>
         <CardContent>
           <CardTitle to={`/projects/${project._id}`}>{project.title}</CardTitle>

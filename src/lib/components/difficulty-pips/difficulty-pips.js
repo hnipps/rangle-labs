@@ -7,16 +7,22 @@ const DifficultyPips = ({ difficulty, size }) => {
   if (size === "L") {
     sizeClasses = "h2 w2";
   } else {
-    sizeClasses = "h1 w1"
+    sizeClasses = "h1 w1";
   }
 
   for (let i = 0; i < difficulty; i++) {
     const key = i;
-    const pip = <div className={`${sizeClasses} bg-dark-blue br-100 dib`} key={key} />;
+    const pip = (
+      <div className={`${sizeClasses} bg-dark-blue br-100 dib`} key={key} />
+    );
     pips.push(pip);
   }
 
-  return <div>{pips}</div>;
+  return (
+    <div className="dtc v-mid">
+      <div>{pips}</div>
+    </div>
+  );
 };
 
 export default DifficultyPips;
