@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./agent-detail.scss";
 import axios from "axios";
 import TechListing from "../../../../lib/components/tech-listing/tech-listing";
@@ -7,6 +6,7 @@ import ContentContainer from "../../../../lib/components/content-container/conte
 import CenterContentWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper";
 import Button from "../../../../lib/components/button/button";
 import LinkButton from "../../../../lib/components/link-button/link-button";
+import AgentStatus from "../../../../lib/components/status/agent-status/agent-status";
 
 class AgentDetail extends Component {
   state = {
@@ -44,51 +44,31 @@ class AgentDetail extends Component {
 
     if (!this.state.agent) return <div className="loading">Loading</div>;
 
+    const status = agent.currentFreeAgent ? "Free Agent" : "Staffed to Project";
+
     return (
       <ContentContainer>
         <CenterContentWrapper>
-        <div className="">
-          <div className="">
+          <div className="mw6 center ba b--black-10 br3 pa3">
+            <AgentStatus status={status} size="L" ></AgentStatus>
             <img
               className="br-100 h5 w5 dib ba b--black-05 pa2"
               alt={`${agent.firstName} ${agent.lastName}`}
               src={agent.image}
             />
-          </div>
-          <div>
             <h1>{`${agent.firstName} ${agent.lastName}`}</h1>
-            <h2 className="mid-gray" >{agent.role}</h2>
-          </div>
-        </div>
-        <div className="">
-          <div className="">
-            <p>Current skills</p>
+            <h2 className="mid-gray">{agent.role}</h2>
+            <p>Current skills:</p>
             <TechListing technologies={agent.currentTechnologies} />
-          </div>
-          <div className="">
-            <p>Wants to learn</p>
+            <p>Wants to learn:</p>
             <TechListing technologies={agent.aspirationalTechnologies} />
+            <LinkButton to={`/edit-agent/${agent._id}`} color="green">
+              {`Edit Details for ${agent.firstName} ${agent.lastName}`}
+            </LinkButton>
+            <Button onClick={() => this.deleteAgent(agent._id)} color="red">
+              {`Delete ${agent.firstName} ${agent.lastName}`}
+            </Button>
           </div>
-
-          <div>
-            <p>
-              Currently on the bench:
-              <span>{agent.currentFreeAgent ? " Yes" : " No"}</span>
-            </p>
-          </div>
-        </div>
-        <LinkButton
-          to={`/edit-agent/${agent._id}`}
-          color="green"
-        >
-          { `Edit Details for ${agent.firstName} ${ agent.lastName }` }
-        </LinkButton>
-        <Button
-          onClick={() => this.deleteAgent(agent._id)}
-          color="red"
-        >
-          {`Delete ${agent.firstName} ${agent.lastName}`}
-        </Button>
         </CenterContentWrapper>
       </ContentContainer>
     );
