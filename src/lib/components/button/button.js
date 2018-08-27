@@ -5,7 +5,7 @@ class Button extends Component {
     return (
       <button
         value={ this.props.value }
-        className={`bn f4 b no-underline br-pill ph3 pv1 mb2 dib white bg-${ this.props.color } unselectable ma1`}
+        className={`bn f5 b no-underline br-pill ph3 pv2 mb2 ml2 dib white bg-${ this.props.color } unselectable`}
         style={{ cursor: "pointer" }}
         onClick={ this.props.onClick }
       >
