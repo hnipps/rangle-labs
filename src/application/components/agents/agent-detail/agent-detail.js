@@ -52,7 +52,7 @@ class AgentDetail extends Component {
   render() {
     const { agent } = this.state;
 
-    if (!this.state.agent) return <div className="loading">Loading</div>;
+    if (!this.state.agent) return <h2 className="helvetica center tc moon-gray" >Loading...</h2>;
 
     const status = agent.currentFreeAgent ? "Free Agent" : "Staffed to Project";
 

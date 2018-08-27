@@ -36,7 +36,7 @@ class ProjectDetail extends Component {
   render() {
     const { project } = this.state;
 
-    if (!this.state.project) return <div className="loading">Loading</div>;
+    if (!this.state.project) return <h2 className="helvetica center tc moon-gray" >Loading...</h2>;
 
     return (
       <ContentContainer>

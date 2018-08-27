@@ -24,6 +24,16 @@ class AgentListing extends Component {
     return allAgentTechnologies.map(technology => technology._id);
   };
 
+  renderAgents = agents => {
+    if (!agents.length) {
+      return <h2 className="center tc moon-gray" >Sorry, no agents match your criteria!</h2>;
+    }
+
+    return agents.map(agent => {
+      return <AgentPreview agent={agent} key={agent._id} />;
+    });
+  };
+
   render() {
     return (
       <ContentContainer>
@@ -43,9 +53,7 @@ class AgentListing extends Component {
           </ControlContainer>
         </SidebarContainer>
         <CardContainer>
-          {this.props.agents.map(agent => {
-            return <AgentPreview agent={agent} key={agent._id} />;
-          })}
+          {this.renderAgents(this.props.agents)}
         </CardContainer>
       </ContentContainer>
     );
