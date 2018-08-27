@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import AgentPreview from "../agent-preview/agent-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
 import "./agent-listing.scss";
@@ -7,7 +6,7 @@ import ContentContainer from "../../../../lib/components/content-container/conte
 import CardContainer from "../../../../lib/components/card-container/card-container";
 import SidebarContainer from "../../../../lib/components/sidebar-container/sidebar-container";
 import ControlContainer from "../../../../lib/components/control-container/control-container";
-import ControlButton from "../../../../lib/components/control-button/control-button";
+import LinkButton from "../../../../lib/components/link-button/link-button";
 
 class AgentListing extends Component {
   async componentDidMount() {
@@ -25,6 +24,16 @@ class AgentListing extends Component {
     return allAgentTechnologies.map(technology => technology._id);
   };
 
+  renderAgents = agents => {
+    if (!agents.length) {
+      return <h2 className="center tc moon-gray" >Sorry, no agents match your criteria!</h2>;
+    }
+
+    return agents.map(agent => {
+      return <AgentPreview agent={agent} key={agent._id} />;
+    });
+  };
+
   render() {
     return (
       <ContentContainer>
@@ -38,15 +47,13 @@ class AgentListing extends Component {
             parent={"agents"}
           />
           <ControlContainer>
-            <ControlButton to="/add-agent">
-              Add an agent
-            </ControlButton>
+            <LinkButton to="/add-agent" color="dark-red" >
+              Add Agent
+            </LinkButton>
           </ControlContainer>
         </SidebarContainer>
         <CardContainer>
-          {this.props.agents.map(agent => {
-            return <AgentPreview agent={agent} key={agent._id} />;
-          })}
+          {this.renderAgents(this.props.agents)}
         </CardContainer>
       </ContentContainer>
     );

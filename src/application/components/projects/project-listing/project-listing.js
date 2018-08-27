@@ -5,7 +5,7 @@ import CardContainer from "../../../../lib/components/card-container/card-contai
 import ContentContainer from "../../../../lib/components/content-container/content-container";
 import SidebarContainer from "../../../../lib/components/sidebar-container/sidebar-container";
 import ControlContainer from "../../../../lib/components/control-container/control-container";
-import ControlButton from "../../../../lib/components/control-button/control-button";
+import LinkButton from "../../../../lib/components/link-button/link-button";
 
 class ProjectListing extends Component {
   async componentDidMount() {
@@ -15,7 +15,7 @@ class ProjectListing extends Component {
 
   renderProjects = projects => {
     if (!projects.length) {
-      return <p>Sorry, no projects match your criteria!</p>;
+      return <h2 className="center tc moon-gray" >Sorry, no projects match your criteria!</h2>;
     }
 
     return projects.map(project => {
@@ -46,9 +46,9 @@ class ProjectListing extends Component {
             parent={"projects"}
           />
           <ControlContainer>
-            <ControlButton to="/add-project">
+            <LinkButton to="/add-project" color="dark-red">
               Add Project
-            </ControlButton>
+            </LinkButton>
           </ControlContainer>
         </SidebarContainer>
         <CardContainer>

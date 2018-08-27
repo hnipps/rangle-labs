@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./agent-detail.scss";
 import axios from "axios";
+import TechListing from "../../../../lib/components/tech-listing/tech-listing";
+import ContentContainer from "../../../../lib/components/content-container/content-container";
+import CenterContentWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper";
+import Button from "../../../../lib/components/button/button";
+import LinkButton from "../../../../lib/components/link-button/link-button";
+import AgentStatus from "../../../../lib/components/status/agent-status/agent-status";
+import DetailCard from "../../../../lib/components/detail-card/detail-card";
+import DetailCardImage from "../../../../lib/components/detail-card/detail-card-image/detail-card-image";
+import DetailCardSubtitle from "../../../../lib/components/detail-card/detail-card-subtitle/detail-card-subtitle";
 
 class AgentDetail extends Component {
   state = {
@@ -30,58 +38,54 @@ class AgentDetail extends Component {
   }
 
   deleteAgent = async id => {
-    await axios.delete(`/agents/${id}`);
-    this.props.history.push("/agents");
+    try {
+      const res = await axios.delete(`/agents/${id}`);
+
+      if (res) {
+        this.props.history.push("/agents");
+      }
+    } catch (err) {
+      console.error("There was an error deleting an agent", err);
+    }
   };
 
   render() {
     const { agent } = this.state;
 
-    if (!this.state.agent) return <div className="loading">Loading</div>;
+    if (!this.state.agent) return <h2 className="helvetica center tc moon-gray" >Loading...</h2>;
+
+    const status = agent.currentFreeAgent ? "Free Agent" : "Staffed to Project";
 
     return (
-      <div className="agent-detail-box">
-        <div className="detail-header">
-          <div className="agent-image">
-            <img
+      <ContentContainer>
+        <CenterContentWrapper>
+          <DetailCard>
+            <AgentStatus status={status} size="L" />
+            <DetailCardImage
               alt={`${agent.firstName} ${agent.lastName}`}
               src={agent.image}
             />
-          </div>
-          <div>
-            <h3>{`${agent.firstName} ${agent.lastName}`}</h3>
-            <h4>{agent.role}</h4>
-          </div>
-        </div>
-        <div className="agent-details">
-          <div className="current-technologies">
-            <p>Current skills</p>
-            {this.renderAgentTechnologies(agent.currentTechnologies)}
-          </div>
-          <div className="aspirational-technologies">
-            <p>Wants to learn</p>
-            {this.renderAgentTechnologies(agent.aspirationalTechnologies)}
-          </div>
-
-          <div>
-            <p>
-              Currently on the bench:
-              <span>{agent.currentFreeAgent ? " Yes" : " No"}</span>
-            </p>
-          </div>
-        </div>
-        <div className="button-container">
-          <Link to={`/edit-agent/${agent._id}`}>
-            <button>{`Edit Details for ${agent.firstName} ${
-              agent.lastName
-            }`}</button>
-          </Link>
-          <button
-            className="delete-agent-button"
-            onClick={() => this.deleteAgent(agent._id)}
-          >{`Delete ${agent.firstName} ${agent.lastName}`}</button>
-        </div>
-      </div>
+            <h1>{`${agent.firstName} ${agent.lastName}`}</h1>
+            <DetailCardSubtitle>{agent.role}</DetailCardSubtitle>
+            <p>Current skills:</p>
+            <TechListing technologies={agent.currentTechnologies} />
+            <p>Wants to learn:</p>
+            <TechListing technologies={agent.aspirationalTechnologies} />
+            <LinkButton to={`/edit-agent/${agent._id}`} color="green">
+              {`Edit Details for ${agent.firstName} ${agent.lastName}`}
+            </LinkButton>
+            <Button
+              onClick={event => {
+                event.preventDefault();
+                this.deleteAgent(agent._id);
+              }}
+              color="red"
+            >
+              {`Delete ${agent.firstName} ${agent.lastName}`}
+            </Button>
+          </DetailCard>
+        </CenterContentWrapper>
+      </ContentContainer>
     );
   }
 }

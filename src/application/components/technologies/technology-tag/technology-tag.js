@@ -38,7 +38,7 @@ class TechnologyTag extends Component {
         className={`dib mr1 mb1`}
         onClick={this.handleTagClick}
       >
-        <div className={`f7 f7-ns b db pa2 ma0 dark-gray ba b--black-20 unselectable ${activeClass} ${disabledClass}`} style={tagStyle}>
+        <div className={`f7 f5-ns b db pa2 ma0 mid-gray ba b--black-20 unselectable ${activeClass} ${disabledClass}`} style={tagStyle}>
           {this.props.technology.name}
           {removeButton}
         </div>

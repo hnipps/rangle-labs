@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 import TeamListing from "../../../../../lib/components/team-listing/team-listing";
+import FormInput from '../../../../../lib/components/form/form-input/form-input';
 
 class AddProjectAgents extends Component {
 
@@ -66,9 +67,8 @@ class AddProjectAgents extends Component {
   render() {
     return(
       <div>
-        <input
+        <FormInput
           name="searchValue"
-          type="text"
           placeholder="Start typing a name..."
           value={this.state.search.searchValue}
           onChange={this.searchForAgent}
@@ -76,6 +76,7 @@ class AddProjectAgents extends Component {
         <TeamListing
           teamMembers={this.state.search.searchResult}
           onAddClick={this.addAgentToProject}
+          placeholder="Search results will appear here... 🕵️‍♀️"
         />
       </div>
     );
