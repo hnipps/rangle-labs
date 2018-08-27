@@ -106,7 +106,7 @@ class AddProject extends Component {
       const res = await axios.patch(`/projects/${project_id}`, project);
 
       if (res) {
-        this.props.history.push("/projects");
+        this.props.history.push(`/projects/${project_id}`);
       }
     } catch (err) {
       console.error("There was an error editing an existing project", err);
@@ -126,7 +126,8 @@ class AddProject extends Component {
 
   cancelAction = event => {
     event.preventDefault();
-    this.props.history.push("/projects");
+    const { project_id } = this.props.match.params;
+    this.props.history.push(`/projects/${project_id}`);
   };
 
   addPersonToProject = role => {

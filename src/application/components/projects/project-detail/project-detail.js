@@ -64,7 +64,10 @@ class ProjectDetail extends Component {
             </LinkButton>
             <Button
               className="delete-project-button"
-              onClick={() => this.deleteProject(project._id)}
+              onClick={event => {
+                event.preventDefault();
+                this.deleteProject(project._id);
+              }}
               color="dark-red"
             >{`Delete ${project.title}`}</Button>
           </DetailCard>
