@@ -6,6 +6,11 @@ import DifficultyPips from "../../../../lib/components/difficulty-pips/difficult
 import TeamListing from "../../../../lib/components/team-listing/team-listing";
 import TechListing from "../../../../lib/components/tech-listing/tech-listing";
 import "./project-detail.scss";
+import ContentContainer from "../../../../lib/components/content-container/content-container";
+import CenterContentWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper";
+import DetailCard from "../../../../lib/components/detail-card/detail-card";
+import LinkButton from "../../../../lib/components/link-button/link-button";
+import Button from "../../../../lib/components/button/button";
 
 class ProjectDetail extends Component {
   state = {
@@ -34,34 +39,38 @@ class ProjectDetail extends Component {
     if (!this.state.project) return <div className="loading">Loading</div>;
 
     return (
-      <div className="project-box">
-        <div className="project-details">
-          <h3>{project.title}</h3>
-          <ProjectStatus status={project.status} />
-          <DifficultyPips difficulty={project.difficulty} />
-          <p>{project.description}</p>
-          <div className="technologies">
+      <ContentContainer>
+        <CenterContentWrapper>
+          <DetailCard>
+            <div className="dtc v-mid mid-gray w-25 tl mb0">
+              <ProjectStatus status={project.status} size="L" />
+            </div>
+            <div className="dtc v-mid w-25 tr">
+              <DifficultyPips difficulty={project.difficulty} size="L" />
+            </div>
+            <h1>{project.title}</h1>
+            <p>{project.description}</p>
             <p>Technologies Used:</p>
             {/* TECH TOOL LISTING */}
             <TechListing technologies={project.technologies} />
-          </div>
-          {/* PROJECT LEAD LISTING */}
-          <p>Project Owner:</p>
-          <TeamListing teamMembers={project.projectLead} />
-          {/* TEAM LISTING*/}
-          <p>Team:</p>
-          <TeamListing teamMembers={project.agents} />
-        </div>
-        <div className="button-container">
-          <Link to={`/edit-project/${project._id}`}>
-            <button>{`Edit Details for ${project.title}`}</button>
-          </Link>
-          <button
-            className="delete-project-button"
-            onClick={() => this.deleteProject(project._id)}
-          >{`Delete ${project.title}`}</button>
-        </div>
-      </div>
+            {/* PROJECT LEAD LISTING */}
+            <p>Project Owner:</p>
+            <TeamListing teamMembers={project.projectLead} />
+            {/* TEAM LISTING*/}
+            <p>Team:</p>
+            <TeamListing teamMembers={project.agents} />
+
+            <LinkButton to={`/edit-project/${project._id}`} color="green">
+              {`Edit Details for ${project.title}`}
+            </LinkButton>
+            <Button
+              className="delete-project-button"
+              onClick={() => this.deleteProject(project._id)}
+              color="dark-red"
+            >{`Delete ${project.title}`}</Button>
+          </DetailCard>
+        </CenterContentWrapper>
+      </ContentContainer>
     );
   }
 }
