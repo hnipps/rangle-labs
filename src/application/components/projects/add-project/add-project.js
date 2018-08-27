@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 // TODO: Move and rename AddAgentTechnologies, to make it more reusable
-import AddTechnologies from "../../agents/add-agent/add-technologies/add-technologies";
+import AddTechnologies from "../../../../lib/components/form/add-technologies/add-technologies.js";
 import AddProjectAgents from "./add-project-agents/add-project-agents";
 import TeamListing from "../../../../lib/components/team-listing/team-listing";
 import { projectRoles } from "../../../constants";

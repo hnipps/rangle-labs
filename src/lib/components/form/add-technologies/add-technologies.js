@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import TechnologyTag from "../../../technologies/technology-tag/technology-tag";
-import FormLabel from "../../../../../lib/components/form/form-label/form-label";
+import TechnologyTag from "../../../../application/components/technologies/technology-tag/technology-tag";
+import FormLabel from "../form-label/form-label";
 
 class AddTechnologies extends Component {
   determineWhetherActive = techId => {

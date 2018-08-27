@@ -4,8 +4,9 @@ import axios from "axios";
 import "./add-agent.scss";
 import FormWrapper from "../../../../lib/components/form/form-wrapper/form-wrapper";
 import FormInput from "../../../../lib/components/form/form-input/form-input";
-import AddTechnologies from "./add-technologies/add-technologies";
+
 import Button from "../../../../lib/components/button/button";
+import AddTechnologies from "../../../../lib/components/form/add-technologies/add-technologies";
 
 class AddAgent extends Component {
   state = {
