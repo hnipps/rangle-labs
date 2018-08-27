@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import constants from "../../../../application/constants";
 import Status from '../status';
 
