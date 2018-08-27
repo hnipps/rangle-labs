@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import ProjectStatus from "../../../../lib/components/status/project-status/project-status";
 import DifficultyPips from "../../../../lib/components/difficulty-pips/difficulty-pips";

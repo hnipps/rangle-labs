@@ -87,8 +87,8 @@ class AddAgent extends Component {
       const res = await axios.post("/agents", agent);
 
       if (res) {
-        // this.props.refreshAgents(); - is it necessary to do this here?
-        this.props.history.push("/agents");
+        const agent = res.data.payload;
+        this.props.history.push(`/agents/${agent._id}`);
       }
     } catch (err) {
       console.error("There was an error adding a new agent:", err);
@@ -102,15 +102,15 @@ class AddAgent extends Component {
       const res = await axios.patch(`/agents/${agent_id}`, agent);
 
       if (res) {
-        // this.props.refreshAgents(); - is it necessary to do this here?
-        this.props.history.push("/agents");
+        this.props.history.push(`/agents/${agent_id}`);
       }
     } catch (err) {
       console.error("There was an error editing an existing agent", err);
     }
   };
 
-  handleSubmission = () => {
+  handleSubmission = (event) => {
+    event.preventDefault();
     const agent = this.state.agent;
 
     if (this.props.edit) {
@@ -120,8 +120,10 @@ class AddAgent extends Component {
     }
   };
 
-  cancelAction = () => {
-    this.props.history.push("/agents");
+  cancelAction = (event) => {
+    event.preventDefault();
+    const agent = this.state.agent;
+    this.props.history.push(`/agents/${agent._id}`);
   };
 
   render() {

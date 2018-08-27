@@ -38,8 +38,15 @@ class AgentDetail extends Component {
   }
 
   deleteAgent = async id => {
-    await axios.delete(`/agents/${id}`);
-    this.props.history.push("/agents");
+    try {
+      const res = await axios.delete(`/agents/${id}`);
+
+      if (res) {
+        this.props.history.push("/agents");
+      }
+    } catch (err) {
+      console.error("There was an error deleting an agent", err);
+    }
   };
 
   render() {
@@ -67,7 +74,13 @@ class AgentDetail extends Component {
             <LinkButton to={`/edit-agent/${agent._id}`} color="green">
               {`Edit Details for ${agent.firstName} ${agent.lastName}`}
             </LinkButton>
-            <Button onClick={() => this.deleteAgent(agent._id)} color="red">
+            <Button
+              onClick={event => {
+                event.preventDefault();
+                this.deleteAgent(agent._id);
+              }}
+              color="red"
+            >
               {`Delete ${agent.firstName} ${agent.lastName}`}
             </Button>
           </DetailCard>

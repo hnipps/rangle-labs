@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import AgentPreview from "../agent-preview/agent-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
 import "./agent-listing.scss";
