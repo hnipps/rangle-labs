@@ -7,6 +7,7 @@ import CenterContentWrapper from "../../../../lib/components/form/center-content
 import Button from "../../../../lib/components/button/button";
 import LinkButton from "../../../../lib/components/link-button/link-button";
 import AgentStatus from "../../../../lib/components/status/agent-status/agent-status";
+import DetailCard from "../../../../lib/components/detail-card/detail-card";
 
 class AgentDetail extends Component {
   state = {
@@ -49,8 +50,8 @@ class AgentDetail extends Component {
     return (
       <ContentContainer>
         <CenterContentWrapper>
-          <div className="mw6 center ba b--black-10 br3 pa3">
-            <AgentStatus status={status} size="L" ></AgentStatus>
+          <DetailCard>
+            <AgentStatus status={status} size="L" />
             <img
               className="br-100 h5 w5 dib ba b--black-05 pa2"
               alt={`${agent.firstName} ${agent.lastName}`}
@@ -68,7 +69,7 @@ class AgentDetail extends Component {
             <Button onClick={() => this.deleteAgent(agent._id)} color="red">
               {`Delete ${agent.firstName} ${agent.lastName}`}
             </Button>
-          </div>
+          </DetailCard>
         </CenterContentWrapper>
       </ContentContainer>
     );
