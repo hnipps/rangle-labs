@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import "./add-agent.scss";
-import FormWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper";
 import FormInput from "../../../../lib/components/form/form-input/form-input";
 
 import Button from "../../../../lib/components/button/button";
 import AddTechnologies from "../../../../lib/components/form/add-technologies/add-technologies";
+import CenterContentWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper";
 
 class AddAgent extends Component {
   state = {
@@ -145,7 +145,7 @@ class AddAgent extends Component {
     const cancelButtonText = "Cancel Without Saving";
 
     return (
-      <FormWrapper>
+      <CenterContentWrapper>
         <h1>{ heading }</h1>
         <FormInput
           id="firstName"
@@ -220,7 +220,7 @@ class AddAgent extends Component {
         <Button onClick={this.cancelAction} color="red">
           {cancelButtonText}
         </Button>
-      </FormWrapper>
+      </CenterContentWrapper>
     );
   }
 }

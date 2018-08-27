@@ -7,7 +7,7 @@ import ContentContainer from "../../../../lib/components/content-container/conte
 import CardContainer from "../../../../lib/components/card-container/card-container";
 import SidebarContainer from "../../../../lib/components/sidebar-container/sidebar-container";
 import ControlContainer from "../../../../lib/components/control-container/control-container";
-import ControlButton from "../../../../lib/components/link-button/link-button";
+import LinkButton from "../../../../lib/components/link-button/link-button";
 
 class AgentListing extends Component {
   async componentDidMount() {
@@ -38,9 +38,9 @@ class AgentListing extends Component {
             parent={"agents"}
           />
           <ControlContainer>
-            <ControlButton to="/add-agent">
+            <LinkButton to="/add-agent" color="dark-red" >
               Add Agent
-            </ControlButton>
+            </LinkButton>
           </ControlContainer>
         </SidebarContainer>
         <CardContainer>

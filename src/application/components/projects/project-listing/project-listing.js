@@ -46,7 +46,7 @@ class ProjectListing extends Component {
             parent={"projects"}
           />
           <ControlContainer>
-            <LinkButton to="/add-project">
+            <LinkButton to="/add-project" color="dark-red">
               Add Project
             </LinkButton>
           </ControlContainer>
