@@ -15,7 +15,7 @@ class ProjectListing extends Component {
 
   renderProjects = projects => {
     if (!projects.length) {
-      return <p>Sorry, no projects match your criteria!</p>;
+      return <h2 className="center tc moon-gray" >Sorry, no projects match your criteria!</h2>;
     }
 
     return projects.map(project => {
