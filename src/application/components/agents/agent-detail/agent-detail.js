@@ -8,6 +8,8 @@ import Button from "../../../../lib/components/button/button";
 import LinkButton from "../../../../lib/components/link-button/link-button";
 import AgentStatus from "../../../../lib/components/status/agent-status/agent-status";
 import DetailCard from "../../../../lib/components/detail-card/detail-card";
+import DetailCardImage from "../../../../lib/components/detail-card/detail-card-image/detail-card-image";
+import DetailCardSubtitle from "../../../../lib/components/detail-card/detail-card-subtitle/detail-card-subtitle";
 
 class AgentDetail extends Component {
   state = {
@@ -52,13 +54,12 @@ class AgentDetail extends Component {
         <CenterContentWrapper>
           <DetailCard>
             <AgentStatus status={status} size="L" />
-            <img
-              className="br-100 h5 w5 dib ba b--black-05 pa2"
+            <DetailCardImage
               alt={`${agent.firstName} ${agent.lastName}`}
               src={agent.image}
             />
             <h1>{`${agent.firstName} ${agent.lastName}`}</h1>
-            <h2 className="mid-gray">{agent.role}</h2>
+            <DetailCardSubtitle>{agent.role}</DetailCardSubtitle>
             <p>Current skills:</p>
             <TechListing technologies={agent.currentTechnologies} />
             <p>Wants to learn:</p>
