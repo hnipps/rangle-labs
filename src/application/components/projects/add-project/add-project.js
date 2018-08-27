@@ -9,7 +9,7 @@ import { projectRoles } from "../../../constants";
 import FormLabel from "../../../../lib/components/form/form-label/form-label";
 import FormInput from "../../../../lib/components/form/form-input/form-input";
 import Button from "../../../../lib/components/button/button";
-import FormWrapper from "../../../../lib/components/form/form-wrapper/form-wrapper";
+import CenterContentWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper";
 
 class AddProject extends Component {
   statusList = ["Active", "Hiatus", "Backlog"];
@@ -175,7 +175,7 @@ class AddProject extends Component {
     const cancelButtonText = "Cancel Without Saving";
 
     return (
-      <FormWrapper>
+      <CenterContentWrapper>
         <h1>{heading}</h1>
         <FormInput
           id="title"
@@ -295,7 +295,7 @@ class AddProject extends Component {
         <Button onClick={this.cancelAction} color="red">
           {cancelButtonText}
         </Button>
-      </FormWrapper>
+      </CenterContentWrapper>
     );
   }
 }

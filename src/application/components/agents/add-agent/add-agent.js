@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import "./add-agent.scss";
-import FormWrapper from "../../../../lib/components/form/form-wrapper/form-wrapper";
+import FormWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper";
 import FormInput from "../../../../lib/components/form/form-input/form-input";
 
 import Button from "../../../../lib/components/button/button";

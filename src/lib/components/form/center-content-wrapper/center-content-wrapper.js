@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class FormWrapper extends Component {
+class CenterContentWrapper extends Component {
   render() {
     return (
       <div className="helvetica tc">
@@ -12,4 +12,4 @@ class FormWrapper extends Component {
   }
 }
 
-export default FormWrapper;
+export default CenterContentWrapper;
