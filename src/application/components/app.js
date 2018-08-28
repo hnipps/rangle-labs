@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import ProjectListing from "./projects/project-listing/project-listing";
 import ProjectDetail from "./projects/project-detail/project-detail";
@@ -11,6 +11,7 @@ import { doesArrayContainAllItems } from "../helpers";
 import "./app.scss";
 import "./normalize.scss";
 import "./borderbox.scss";
+import Login from "./login/login";
 
 class App extends Component {
   state = {
@@ -151,6 +152,8 @@ class App extends Component {
   };
 
   render() {
+    // TODO: Remember this variable is here! You can;t access anything if this is false!
+    const loggedIn = false;
     return (
       <Router>
         <div className="app">
@@ -173,34 +176,42 @@ class App extends Component {
             path="/"
             exact
             render={props => (
-              <ProjectListing
-                {...props}
-                projects={this.assembleProjectListing()}
-                technologies={this.state.technologies}
-                techFilters={this.state.filters.projects.techTags}
-                refreshProjects={() => this.getProjects()}
-                handleTechFilter={techId =>
-                  this.handleTechFilter(techId, "projects")
-                }
-                resetTechFilters={() => this.resetTechFilters()}
-              />
+              loggedIn ? (
+                <ProjectListing
+                  {...props}
+                  projects={this.assembleProjectListing()}
+                  technologies={this.state.technologies}
+                  techFilters={this.state.filters.projects.techTags}
+                  refreshProjects={() => this.getProjects()}
+                  handleTechFilter={techId =>
+                    this.handleTechFilter(techId, "projects")
+                  }
+                  resetTechFilters={() => this.resetTechFilters()}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )
             )}
           />
           <Route
             path="/projects"
             exact
             render={props => (
-              <ProjectListing
-                {...props}
-                projects={this.assembleProjectListing()}
-                technologies={this.state.technologies}
-                techFilters={this.state.filters.projects.techTags}
-                refreshProjects={() => this.getProjects()}
-                handleTechFilter={techId =>
-                  this.handleTechFilter(techId, "projects")
-                }
-                resetTechFilters={() => this.resetTechFilters("projects")}
-              />
+              loggedIn ? (
+                <ProjectListing
+                  {...props}
+                  projects={this.assembleProjectListing()}
+                  technologies={this.state.technologies}
+                  techFilters={this.state.filters.projects.techTags}
+                  refreshProjects={() => this.getProjects()}
+                  handleTechFilter={techId =>
+                    this.handleTechFilter(techId, "projects")
+                  }
+                  resetTechFilters={() => this.resetTechFilters("projects")}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )
             )}
           />
           <Route
@@ -212,28 +223,36 @@ class App extends Component {
             path="/agents"
             exact
             render={props => (
-              <AgentListing
-                {...props}
-                agents={this.assembleAgentListing()}
-                refreshAgents={() => this.getAgents()}
-                technologies={this.state.technologies}
-                techFilters={this.state.filters.agents.techTags}
-                handleTechFilter={techId =>
-                  this.handleTechFilter(techId, "agents")
-                }
-                resetTechFilters={() => this.resetTechFilters("agents")}
-              />
+              loggedIn ? (
+                <AgentListing
+                  {...props}
+                  agents={this.assembleAgentListing()}
+                  refreshAgents={() => this.getAgents()}
+                  technologies={this.state.technologies}
+                  techFilters={this.state.filters.agents.techTags}
+                  handleTechFilter={techId =>
+                    this.handleTechFilter(techId, "agents")
+                  }
+                  resetTechFilters={() => this.resetTechFilters("agents")}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )
             )}
           />
           <Route
             path="/add-agent"
             exact
             render={props => (
-              <AddAgent
-                {...props}
-                technologies={this.state.technologies}
-                refreshAgents={() => this.getAgents()}
-              />
+              loggedIn ? (
+                <AddAgent
+                  {...props}
+                  technologies={this.state.technologies}
+                  refreshAgents={() => this.getAgents()}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )
             )}
           />
           <Route
@@ -245,36 +264,53 @@ class App extends Component {
             path="/edit-agent/:agent_id"
             exact
             render={props => (
-              <AddAgent
-                {...props}
-                edit={true}
-                technologies={this.state.technologies}
-                refreshAgents={() => this.getAgents()}
-              />
+              loggedIn ? (
+                <AddAgent
+                  {...props}
+                  edit={true}
+                  technologies={this.state.technologies}
+                  refreshAgents={() => this.getAgents()}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )
             )}
           />
           <Route
             path="/add-project"
             exact
             render={props => (
-              <AddProject
-                {...props}
-                technologies={this.state.technologies}
-                refreshAgents={() => this.getProjects()}
-              />
+              loggedIn ? (
+                <AddProject
+                  {...props}
+                  technologies={this.state.technologies}
+                  refreshAgents={() => this.getProjects()}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )
             )}
           />
           <Route
             path="/edit-project/:project_id"
             exact
             render={props => (
-              <AddProject
-                {...props}
-                edit={true}
-                technologies={this.state.technologies}
-                refreshAgents={() => this.getProjects()}
-              />
+              loggedIn ? (
+                <AddProject
+                  {...props}
+                  edit={true}
+                  technologies={this.state.technologies}
+                  refreshAgents={() => this.getProjects()}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )
             )}
+          />
+          <Route
+            path="/login"
+            exact
+            render={props => <Login {...props} />}
           />
         </div>
       </Router>
