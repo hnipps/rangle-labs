@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import axios from "axios";
 import ProjectListing from "./projects/project-listing/project-listing";
 import ProjectDetail from "./projects/project-detail/project-detail";
@@ -25,6 +30,10 @@ class App extends Component {
       agents: {
         techTags: []
       }
+    },
+    user: {
+      id: "",
+      accessToken: ""
     }
   };
 
@@ -151,13 +160,23 @@ class App extends Component {
     }));
   };
 
+  updateUser = user => {
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        id: user.id,
+        accessToken: user.accessToken
+      }
+    }));
+  };
+
   render() {
     // TODO: Remember this variable is here! You can;t access anything if this is false!
-    const loggedIn = false;
+    const loggedIn = window.sessionStorage.getItem("jwt") ? true : false;
     return (
       <Router>
         <div className="app">
-        <nav className="helvetica pa3 pa4-ns">
+          <nav className="helvetica pa3 pa4-ns">
             <Link className="link dim black b f6 f5-ns dib mr3" to="/projects">
               Rangle Labs
             </Link>
@@ -171,32 +190,17 @@ class App extends Component {
           </nav>
 
           {/* ROUTES */}
-          {/* how to reroute '/' to the same place as '/projects' without duplicating the ProjectListing component call? */}
           <Route
             path="/"
             exact
-            render={props => (
-              loggedIn ? (
-                <ProjectListing
-                  {...props}
-                  projects={this.assembleProjectListing()}
-                  technologies={this.state.technologies}
-                  techFilters={this.state.filters.projects.techTags}
-                  refreshProjects={() => this.getProjects()}
-                  handleTechFilter={techId =>
-                    this.handleTechFilter(techId, "projects")
-                  }
-                  resetTechFilters={() => this.resetTechFilters()}
-                />
-              ) : (
-                <Redirect to="/login" />
-              )
-            )}
+            render={() =>
+              loggedIn ? <Redirect to="/projects" /> : <Redirect to="/login" />
+            }
           />
           <Route
             path="/projects"
             exact
-            render={props => (
+            render={props =>
               loggedIn ? (
                 <ProjectListing
                   {...props}
@@ -212,7 +216,7 @@ class App extends Component {
               ) : (
                 <Redirect to="/login" />
               )
-            )}
+            }
           />
           <Route
             path="/projects/:project_id"
@@ -222,7 +226,7 @@ class App extends Component {
           <Route
             path="/agents"
             exact
-            render={props => (
+            render={props =>
               loggedIn ? (
                 <AgentListing
                   {...props}
@@ -238,12 +242,12 @@ class App extends Component {
               ) : (
                 <Redirect to="/login" />
               )
-            )}
+            }
           />
           <Route
             path="/add-agent"
             exact
-            render={props => (
+            render={props =>
               loggedIn ? (
                 <AddAgent
                   {...props}
@@ -253,7 +257,7 @@ class App extends Component {
               ) : (
                 <Redirect to="/login" />
               )
-            )}
+            }
           />
           <Route
             path="/agents/:agent_id"
@@ -263,7 +267,7 @@ class App extends Component {
           <Route
             path="/edit-agent/:agent_id"
             exact
-            render={props => (
+            render={props =>
               loggedIn ? (
                 <AddAgent
                   {...props}
@@ -274,12 +278,12 @@ class App extends Component {
               ) : (
                 <Redirect to="/login" />
               )
-            )}
+            }
           />
           <Route
             path="/add-project"
             exact
-            render={props => (
+            render={props =>
               loggedIn ? (
                 <AddProject
                   {...props}
@@ -289,12 +293,12 @@ class App extends Component {
               ) : (
                 <Redirect to="/login" />
               )
-            )}
+            }
           />
           <Route
             path="/edit-project/:project_id"
             exact
-            render={props => (
+            render={props =>
               loggedIn ? (
                 <AddProject
                   {...props}
@@ -305,12 +309,12 @@ class App extends Component {
               ) : (
                 <Redirect to="/login" />
               )
-            )}
+            }
           />
           <Route
             path="/login"
             exact
-            render={props => <Login {...props} />}
+            render={props => <Login {...props} updateUser={this.updateUser} />}
           />
         </div>
       </Router>
