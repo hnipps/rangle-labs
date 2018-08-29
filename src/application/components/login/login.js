@@ -25,7 +25,22 @@ class Login extends Component {
             </span>
           </h1>
           <a href="http://localhost:8080/users/auth/google">
-            Sign In with Google
+            <img
+              src= "./assets/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png"
+              alt="Sign in with Google"
+              onMouseOver={e =>
+                (e.currentTarget.src =
+                  "./assets/google_signin_buttons/web/1x/btn_google_signin_dark_focus_web.png")
+              }
+              onMouseOut={e =>
+                (e.currentTarget.src =
+                  "./assets/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png")
+              }
+              onMouseDown={e =>
+                (e.currentTarget.src =
+                  "./assets/google_signin_buttons/web/1x/btn_google_signin_dark_pressed_web.png")
+              }
+            />
           </a>
         </div>
       </ContentContainer>
