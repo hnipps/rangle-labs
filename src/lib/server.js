@@ -5,7 +5,10 @@ const uri = "mongodb://localhost:27017/rangle-labs";
 const bodyParser = require("body-parser");
 const PORT = 8080;
 
+const passport = require("passport");
+
 const app = express();
+app.use(passport.initialize());
 app.use(bodyParser.json()); // necessary to parse the body of axios requests
 
 app.use("/users", require("./api/users"));
