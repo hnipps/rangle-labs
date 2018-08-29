@@ -13,6 +13,10 @@ const userSchema = new Schema({
     admin: {
         type: Boolean,
         required: false
+    },
+    googleId: {
+        type: String,
+        required: true
     }
 });
 

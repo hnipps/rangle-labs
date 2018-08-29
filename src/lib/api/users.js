@@ -1,9 +1,11 @@
-const express = require('express');
+const express = require("express");
 const Router = express.Router;
 const router = Router();
-const User = require('../models/User');
+const User = require("../models/User");
 
-router.get('/', async (req, res, next) => {
+const passport = require("passport");
+
+router.get("/", async (req, res, next) => {
   try {
     const docs = await User.find();
     res.status(200).send(docs);
@@ -12,5 +14,25 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+
+// GET /auth/google
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  The first step in Google authentication will involve
+//   redirecting the user to google.com.  After authorization, Google
+//   will redirect the user back to this application at /auth/google/callback
+router.get("/auth/google", [
+  passport.authenticate("google", {
+    scope: ["https://www.googleapis.com/auth/userinfo.profile"]
+  })
+]);
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    const user = req._passport.session.user;
+    res.redirect(`http://localhost:3000/login?accessToken=${user.accessToken}&user=${user._id}`);
+  }
+);
 
 module.exports = router;
