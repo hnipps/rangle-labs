@@ -172,7 +172,7 @@ class App extends Component {
 
   render() {
     // TODO: Remember this variable is here! You can;t access anything if this is false!
-    const loggedIn = window.sessionStorage.getItem("jwt") ? true : false;
+    const loggedIn = window.sessionStorage.getItem("jwt") === this.state.user.accessToken ? true : false;
     return (
       <Router>
         <div className="app">
