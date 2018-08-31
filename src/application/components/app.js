@@ -19,23 +19,31 @@ import "./borderbox.scss";
 import Login from "./login/login";
 
 class App extends Component {
-  state = {
-    projects: [],
-    agents: [],
-    technologies: [],
-    filters: {
-      projects: {
-        techTags: []
-      },
-      agents: {
-        techTags: []
-      }
-    },
-    user: {
-      id: "",
-      accessToken: ""
+  constructor(props) {
+    super(props);
+
+    if (window.sessionStorage.state) {
+      const sessionState = JSON.parse(window.sessionStorage.state);
+      this.state = sessionState;
+    } else {
+      this.state = {
+        projects: [],
+        agents: [],
+        technologies: [],
+        filters: {
+          projects: {
+            techTags: []
+          },
+          agents: {
+            techTags: []
+          }
+        },
+        user: {
+          loggedIn: false
+        }
+      };
     }
-  };
+  }
 
   // get projects from database
   getProjects = async () => {
@@ -71,10 +79,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    // get all the data from the database
-    this.getProjects();
     this.getTechnologies();
-    this.getAgents();
   }
 
   // determine which agents should be displayed based on filters
@@ -160,18 +165,23 @@ class App extends Component {
     }));
   };
 
-  updateUser = user => {
-    this.setState(prevState => ({
-      user: {
-        ...prevState.user,
-        id: user.id,
-        accessToken: user.accessToken
-      }
-    }));
+  logUserIn = history => {
+    this.setState(prevState => {
+      const newState = {
+        ...prevState,
+        user: {
+          ...prevState.user,
+          loggedIn: true
+        }
+      };
+      window.sessionStorage.state = JSON.stringify(newState);
+      return newState;
+    });
+    history.push("/");
   };
 
   render() {
-    const loggedIn = window.sessionStorage.getItem("jwt") ? true : false;
+    const loggedIn = this.state.user.loggedIn;
     return (
       <Router>
         <div className="app">
@@ -220,7 +230,9 @@ class App extends Component {
           <Route
             path="/projects/:project_id"
             exact
-            render={props => <ProjectDetail {...props} />}
+            render={props =>
+              loggedIn ? <ProjectDetail {...props} /> : <Redirect to="/login" />
+            }
           />
           <Route
             path="/agents"
@@ -261,7 +273,9 @@ class App extends Component {
           <Route
             path="/agents/:agent_id"
             exact
-            render={props => <AgentDetail {...props} />}
+            render={props =>
+              loggedIn ? <AgentDetail {...props} /> : <Redirect to="/login" />
+            }
           />
           <Route
             path="/edit-agent/:agent_id"
@@ -313,7 +327,13 @@ class App extends Component {
           <Route
             path="/login"
             exact
-            render={props => <Login {...props} updateUser={this.updateUser} />}
+            render={props => (
+              <Login
+                {...props}
+                logUserIn={this.logUserIn}
+                loggedIn={loggedIn}
+              />
+            )}
           />
         </div>
       </Router>
