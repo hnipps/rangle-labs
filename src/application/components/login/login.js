@@ -5,12 +5,16 @@ import queryString from "query-string";
 import ContentContainer from "../../../lib/components/content-container/content-container";
 
 class Login extends Component {
+  componentWillUpdate() {
+    if (this.props.loggedIn) {
+      return this.props.history.push("/");
+    }
+  }
+
   componentWillMount() {
     var query = queryString.parse(this.props.location.search);
-    if (query.accessToken && query.user) {
-      window.sessionStorage.setItem("jwt", query.accessToken);
-      this.props.updateUser({ id: query.user, accessToken: query.accessToken });
-      this.props.history.push("/");
+    if (query.loggedIn) {
+      this.props.logUserIn(this.props.history);
     }
   }
 
@@ -26,7 +30,7 @@ class Login extends Component {
           </h1>
           <a href="http://localhost:8080/users/auth/google">
             <img
-              src= "./assets/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png"
+              src="./assets/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png"
               alt="Sign in with Google"
               onMouseOver={e =>
                 (e.currentTarget.src =

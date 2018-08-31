@@ -32,8 +32,7 @@ class App extends Component {
       }
     },
     user: {
-      id: "",
-      accessToken: ""
+      loggedIn: false
     }
   };
 
@@ -71,10 +70,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    // get all the data from the database
-    this.getProjects();
     this.getTechnologies();
-    this.getAgents();
   }
 
   // determine which agents should be displayed based on filters
@@ -160,18 +156,22 @@ class App extends Component {
     }));
   };
 
-  updateUser = user => {
+  logUserIn = history => {
     this.setState(prevState => ({
       user: {
         ...prevState.user,
-        id: user.id,
-        accessToken: user.accessToken
+        loggedIn: true
       }
     }));
+    if (this.state.user.loggedIn) {
+      history.push("/");
+    } else {
+      history.push("/login");
+    }
   };
 
   render() {
-    const loggedIn = window.sessionStorage.getItem("jwt") ? true : false;
+    const loggedIn = this.state.user.loggedIn;
     return (
       <Router>
         <div className="app">
@@ -220,7 +220,9 @@ class App extends Component {
           <Route
             path="/projects/:project_id"
             exact
-            render={props => <ProjectDetail {...props} />}
+            render={props =>
+              loggedIn ? <ProjectDetail {...props} /> : <Redirect to="/login" />
+            }
           />
           <Route
             path="/agents"
@@ -261,7 +263,9 @@ class App extends Component {
           <Route
             path="/agents/:agent_id"
             exact
-            render={props => <AgentDetail {...props} />}
+            render={props =>
+              loggedIn ? <AgentDetail {...props} /> : <Redirect to="/login" />
+            }
           />
           <Route
             path="/edit-agent/:agent_id"
@@ -313,7 +317,13 @@ class App extends Component {
           <Route
             path="/login"
             exact
-            render={props => <Login {...props} updateUser={this.updateUser} />}
+            render={props => (
+              <Login
+                {...props}
+                logUserIn={this.logUserIn}
+                loggedIn={loggedIn}
+              />
+            )}
           />
         </div>
       </Router>

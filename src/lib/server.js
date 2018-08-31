@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const mongoose = require("mongoose");
 const path = require("path");
 const uri = "mongodb://localhost:27017/rangle-labs";
@@ -10,17 +11,24 @@ require("dotenv").config();
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
+passport.serializeUser((user, done) => {
+  done(null, user.id);
 });
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
 });
-
 
 const app = express();
+app.use(session({
+  secret: "rangle",
+  resave: false,
+  saveUninitialized: false
+}))
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyParser.json()); // necessary to parse the body of axios requests
 
 // Use the GoogleStrategy within Passport.
@@ -46,21 +54,25 @@ passport.use(
         },
         { upsert: true, new: true },
         (error, user) => {
-          const newUser = {
-            ...user._doc,
-            accessToken
-          }
-          return done(error, newUser);
+          return done(error, user);
         }
       );
     }
   )
 );
 
+const authRequired = (req, res, next) => {
+  if (!req.user) {
+    res.status(401);
+    return res.end();
+  }
+  next()
+}
+
 app.use("/users", require("./api/users"));
-app.use("/agents", require("./api/agents"));
-app.use("/projects", require("./api/projects"));
-app.use("/technologies", require("./api/technologies"));
+app.use("/agents", authRequired, require("./api/agents"));
+app.use("/projects", authRequired, require("./api/projects"));
+app.use("/technologies", authRequired, require("./api/technologies"));
 
 const statusCodes = {
   internalServer: 500,
