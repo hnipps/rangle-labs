@@ -19,22 +19,31 @@ import "./borderbox.scss";
 import Login from "./login/login";
 
 class App extends Component {
-  state = {
-    projects: [],
-    agents: [],
-    technologies: [],
-    filters: {
-      projects: {
-        techTags: []
-      },
-      agents: {
-        techTags: []
-      }
-    },
-    user: {
-      loggedIn: false
+  constructor(props) {
+    super(props);
+
+    if (window.sessionStorage.state) {
+      const sessionState = JSON.parse(window.sessionStorage.state);
+      this.state = sessionState;
+    } else {
+      this.state = {
+        projects: [],
+        agents: [],
+        technologies: [],
+        filters: {
+          projects: {
+            techTags: []
+          },
+          agents: {
+            techTags: []
+          }
+        },
+        user: {
+          loggedIn: false
+        }
+      };
     }
-  };
+  }
 
   // get projects from database
   getProjects = async () => {
@@ -157,17 +166,18 @@ class App extends Component {
   };
 
   logUserIn = history => {
-    this.setState(prevState => ({
-      user: {
-        ...prevState.user,
-        loggedIn: true
-      }
-    }));
-    if (this.state.user.loggedIn) {
-      history.push("/");
-    } else {
-      history.push("/login");
-    }
+    this.setState(prevState => {
+      const newState = {
+        ...prevState,
+        user: {
+          ...prevState.user,
+          loggedIn: true
+        }
+      };
+      window.sessionStorage.state = JSON.stringify(newState);
+      return newState;
+    });
+    history.push("/");
   };
 
   render() {
