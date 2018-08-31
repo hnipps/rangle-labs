@@ -12,9 +12,14 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    var query = queryString.parse(this.props.location.search);
+    const query = queryString.parse(this.props.location.search);
     if (query.loggedIn) {
-      this.props.logUserIn(this.props.history);
+      this.props.logUserIn();
+      if (query.firstTimeLogin) {
+        this.props.history.push(`/edit-agent/${query.agentId}`);
+        return;
+      }
+      this.props.history.push("/");
     }
   }
 

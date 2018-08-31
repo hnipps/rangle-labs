@@ -165,7 +165,7 @@ class App extends Component {
     }));
   };
 
-  logUserIn = history => {
+  logUserIn = () => {
     this.setState(prevState => {
       const newState = {
         ...prevState,
@@ -177,7 +177,6 @@ class App extends Component {
       window.sessionStorage.state = JSON.stringify(newState);
       return newState;
     });
-    history.push("/");
   };
 
   render() {
