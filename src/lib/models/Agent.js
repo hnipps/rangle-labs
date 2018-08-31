@@ -30,6 +30,10 @@ const agentSchema = new Schema({
         type: Boolean,
         required: false,
     },
+    userId: {
+        type: String,
+        required: false
+    }
 });
 
 module.exports = mongoose.model('Agent', agentSchema);
