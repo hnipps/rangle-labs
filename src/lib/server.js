@@ -40,7 +40,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.API_SERVER_URL}/users/auth/google/callback`
+      callbackURL: `${process.env.REACT_APP_API_SERVER_URL}/users/auth/google/callback`
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOneAndUpdate(
