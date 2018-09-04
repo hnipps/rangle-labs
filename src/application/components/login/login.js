@@ -35,7 +35,7 @@ class Login extends Component {
               👮‍♂️
             </span>
           </h1>
-          <a href={`${process.env.REACT_APP_API_SERVER_URL}/users/auth/google`}>
+          <a href={`http://${process.env.REACT_APP_API_SERVER_URL}/users/auth/google`}>
             <img
               src="./assets/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png"
               alt="Sign in with Google"
