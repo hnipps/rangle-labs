@@ -22,11 +22,13 @@ passport.deserializeUser((id, done) => {
 });
 
 const app = express();
-app.use(session({
-  secret: "rangle",
-  resave: false,
-  saveUninitialized: false
-}))
+app.use(
+  session({
+    secret: "rangle",
+    resave: false,
+    saveUninitialized: false
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json()); // necessary to parse the body of axios requests
@@ -40,7 +42,9 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.REACT_APP_API_SERVER_URL}/users/auth/google/callback`
+      callbackURL: `${
+        process.env.REACT_APP_API_SERVER_URL
+      }/users/auth/google/callback`
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOneAndUpdate(
@@ -66,8 +70,8 @@ const authRequired = (req, res, next) => {
     res.status(401);
     return res.end();
   }
-  next()
-}
+  next();
+};
 
 app.use("/users", require("./api/users"));
 app.use("/agents", authRequired, require("./api/agents"));
