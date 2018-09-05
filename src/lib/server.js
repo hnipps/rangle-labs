@@ -1,12 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const path = require("path");
-const uri = "mongodb://localhost:27017/rangle-labs";
+const uri = `${process.env.MONGODB_URL}`;
 const bodyParser = require("body-parser");
 const PORT = 8080;
 const User = require("./models/User");
-require("dotenv").config();
 
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
@@ -40,7 +40,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/users/auth/google/callback"
+      callbackURL: `${process.env.REACT_APP_API_SERVER_URL}/users/auth/google/callback`
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOneAndUpdate(

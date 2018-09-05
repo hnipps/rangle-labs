@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const Router = express.Router;
 const router = Router();
@@ -29,13 +30,13 @@ const findOrCreateAgentByUser = (user, res, next) => {
             next(err);
           }
           if (agentByName) {
-            res.redirect(`http://localhost:3000/login?loggedIn=true&firstTimeLogin=true&agentId=${agentByName._id}`);
+            res.redirect(`${process.env.CLIENT_URL}/login?loggedIn=true&firstTimeLogin=true&agentId=${agentByName._id}`);
           }
         }
       );
     }
     if (agentByUserId) {
-      res.redirect(`http://localhost:3000/login?loggedIn=true`);
+      res.redirect(`${process.env.CLIENT_URL}/login?loggedIn=true`);
       return;
     }
   });
