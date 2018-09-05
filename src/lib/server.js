@@ -47,6 +47,11 @@ passport.use(
       }/users/auth/google/callback`
     },
     (accessToken, refreshToken, profile, done) => {
+      const domain = profile._json.domain;
+      if (domain !== "rangle.io") {
+        return done(`This domain is not authorized: ${domain}`);
+      }
+
       User.findOneAndUpdate(
         {
           googleId: profile.id

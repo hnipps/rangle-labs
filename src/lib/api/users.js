@@ -65,7 +65,7 @@ router.get("/", async (req, res, next) => {
 //   will redirect the user back to this application at /auth/google/callback
 router.get("/auth/google", [
   passport.authenticate("google", {
-    scope: ["https://www.googleapis.com/auth/userinfo.profile"],
+    scope: ["https://www.googleapis.com/auth/userinfo.profile", "email"],
     hostedDomain: "rangle.io"
   })
 ]);
