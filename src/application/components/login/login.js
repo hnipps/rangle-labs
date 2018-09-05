@@ -24,8 +24,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log(process.env);
-    
     return (
       <ContentContainer>
         <div className="helvetica center tc mw6">
