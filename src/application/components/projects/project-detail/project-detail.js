@@ -63,7 +63,7 @@ class ProjectDetail extends Component {
             <img
               className="h2"
               src="../assets/github/GitHub-Mark-64px.png"
-              alt="Github"
+              alt="GitHub"
             />
           </a>
         </div>

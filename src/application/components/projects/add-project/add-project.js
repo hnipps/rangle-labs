@@ -267,10 +267,10 @@ class AddProject extends Component {
           id="githubUrl"
           name="githubUrl"
           aria-describedby="githubUrl-desc"
-          placeholder="Does this project have a Github repository?"
+          placeholder="Does this project have a GitHub repository?"
           value={project.githubUrl}
           onChange={this.onInput}
-          label="Github URL"
+          label="GitHub URL"
         />
 
         <AddTechnologies
