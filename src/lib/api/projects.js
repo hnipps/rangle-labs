@@ -34,7 +34,9 @@ router.post("/", async (req, res) => {
     status: req.body.status,
     technologies: req.body.technologies,
     projectLead: req.body.projectLead,
-    agents: req.body.agents
+    agents: req.body.agents,
+    trelloBoardUrl: req.body.trelloBoardUrl,
+    githubUrl: req.body.githubUrl
   });
 
   project
