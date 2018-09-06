@@ -10,7 +10,7 @@ const projects = require('./projects');
 const technologies = require('./technologies');
 
 const mongoose = require('mongoose');
-const uri = process.env.MONGODB_URL;
+const uri = `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URL}`;
 
 const truncateDatabase = async () => {
   // here we delete all our data so that we can start afresh
