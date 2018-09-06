@@ -13,8 +13,10 @@ const findOrCreateAgentByUser = (user, res, next) => {
       console.error("Error finding agent by ID: ", err);
     }
     if (!agentByUserId) {
+      const firstName = user.firstName.trim();
+      const lastName = user.lastName.trim();
       Agent.findOneAndUpdate(
-        { firstName: user.firstName, lastName: user.lastName },
+        { firstName, lastName },
         {
           userId: user._id,
           firstName: user.firstName,
