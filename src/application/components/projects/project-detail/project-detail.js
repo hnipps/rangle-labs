@@ -36,7 +36,23 @@ class ProjectDetail extends Component {
   render() {
     const { project } = this.state;
 
-    if (!this.state.project) return <h2 className="helvetica center tc moon-gray" >Loading...</h2>;
+    if (!this.state.project)
+      return <h2 className="helvetica center tc moon-gray">Loading...</h2>;
+
+    let trelloBoardLink;
+    if (project.trelloBoardUrl) {
+      trelloBoardLink = (
+        <div className="mb3">
+          <a href={project.trelloBoardUrl}>
+            <img
+              className="h2"
+              src="../assets/trello/trello-mark-blue.png"
+              alt="Trello"
+            />
+          </a>
+        </div>
+      );
+    }
 
     return (
       <ContentContainer>
@@ -46,6 +62,7 @@ class ProjectDetail extends Component {
               <div className="dtc v-mid mid-gray mb0">
                 <ProjectStatus status={project.status} size="L" />
               </div>
+              {trelloBoardLink}
               <DifficultyPips difficulty={project.difficulty} size="L" />
             </CardHeader>
             <h1>{project.title}</h1>

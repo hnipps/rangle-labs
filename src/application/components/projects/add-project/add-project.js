@@ -24,7 +24,9 @@ class AddProject extends Component {
       status: this.statusList[2],
       technologies: [],
       projectLead: [],
-      agents: []
+      agents: [],
+      trelloBoardUrl: "",
+      githubUrl: ""
     }
   };
 
@@ -250,6 +252,16 @@ class AddProject extends Component {
             })}
           </select>
         </div>
+
+        <FormInput
+          id="trelloBoardUrl"
+          name="trelloBoardUrl"
+          aria-describedby="trelloBoardUrl-desc"
+          placeholder="Where can you find the Trello board?"
+          value={project.trelloBoardUrl}
+          onChange={this.onInput}
+          label="Trello Board URL"
+        />
 
         <AddTechnologies
           technologies={this.props.technologies}
