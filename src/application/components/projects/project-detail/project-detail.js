@@ -54,6 +54,22 @@ class ProjectDetail extends Component {
       );
     }
 
+    let githubUrl;
+    if (project.githubUrl) {
+      // GitHub-Mark-64px
+      githubUrl = (
+        <div className="mb3">
+          <a href={project.githubUrl}>
+            <img
+              className="h2"
+              src="../assets/github/GitHub-Mark-64px.png"
+              alt="GitHub"
+            />
+          </a>
+        </div>
+      );
+    }
+
     return (
       <ContentContainer>
         <CenterContentWrapper>
@@ -63,6 +79,7 @@ class ProjectDetail extends Component {
                 <ProjectStatus status={project.status} size="L" />
               </div>
               {trelloBoardLink}
+              {githubUrl}
               <DifficultyPips difficulty={project.difficulty} size="L" />
             </CardHeader>
             <h1>{project.title}</h1>

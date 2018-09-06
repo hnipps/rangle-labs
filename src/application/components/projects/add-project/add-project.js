@@ -263,6 +263,16 @@ class AddProject extends Component {
           label="Trello Board URL"
         />
 
+        <FormInput
+          id="githubUrl"
+          name="githubUrl"
+          aria-describedby="githubUrl-desc"
+          placeholder="Does this project have a GitHub repository?"
+          value={project.githubUrl}
+          onChange={this.onInput}
+          label="GitHub URL"
+        />
+
         <AddTechnologies
           technologies={this.props.technologies}
           activeTechnologies={project.technologies}
