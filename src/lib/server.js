@@ -3,13 +3,19 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const path = require("path");
-const uri = `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URL}`;
 const bodyParser = require("body-parser");
 const PORT = 8080;
 const User = require("./models/User");
 
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+
+let uri;
+if (process.env.MONGODB_USERNAME && process.env.MONGODB_PASSWORD) {
+    uri = `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URL}`;
+} else {
+    uri = `mongodb://${process.env.MONGODB_URL}`;
+}
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
