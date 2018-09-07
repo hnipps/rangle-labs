@@ -20,11 +20,15 @@ npm install
 mongod
 ```
 
-5. This project uses seeds to supply dummy data so that you have something to work with while you're developing. You need to run a command in your terminal to populate the seed data in MongoDB. In the terminal, in the root of your project, run:
+5. Rename `.env-sample` to `.env`
+
+6. This project uses seeds to supply dummy data so that you have something to work with while you're developing. You need to run a command in your terminal to populate the seed data in MongoDB. In the terminal, in the root of your project, run:
 
 ```
 npm run seeds
 ```
+
+7. In order to login, you'll need to add a Google Auth2.0 Client Id and Secret to `.env`. Speak to the project owner to get hold of these.
 
 Okay, now you should be all set up and ready to go!
 
