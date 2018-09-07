@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./agent-preview.scss";
-import TechnologyTag from "../../technologies/technology-tag/technology-tag";
 import Card from "../../../../lib/components/card/card";
 import CardTitle from "../../../../lib/components/card/card-title/card-title";
 import CardContent from "../../../../lib/components/card/card-content/card-content";
@@ -11,18 +10,40 @@ class AgentPreview extends Component {
     const { agent } = this.props;
 
     const technologies = agent.currentTechnologies.map(tech => {
-      return (
-        <TechnologyTag
-          technology={tech}
-          key={tech._id}
-          isActiveFilter={false}
-          isDisabled={false}
-          handleTechFilter={techId => {
-            return;
-          }}
-        />
-      );
+      switch (tech.name) {
+        case "Angular":
+          return (
+            <img
+              className="h2"
+              src="../assets/angular/angular.png"
+              alt="Angular logo"
+            />
+          );
+
+        case "React":
+          return (
+            <img
+              className="h2"
+              src="../assets/react/react-logo.png"
+              alt="ReactJS logo"
+            />
+          );
+
+        default:
+          return null;
+      }
     });
+
+    let technologyBar;
+    if (
+      agent.currentTechnologies.find(tech => {
+        return tech.name === "Angular" || tech.name === "React";
+      }) !== undefined
+    ) {
+      technologyBar = (
+        <div className="dib nt4 flex justify-end w4 center">{technologies}</div>
+      );
+    }
 
     return (
       <Card>
@@ -33,12 +54,12 @@ class AgentPreview extends Component {
               alt={`${agent.firstName} ${agent.lastName}`}
               src={agent.image}
             />
+            {technologyBar}
           </Link>
           <CardTitle to={`/agents/${agent._id}`}>
             {`${agent.firstName} ${agent.lastName}`}
           </CardTitle>
           <p>{agent.role}</p>
-          {technologies}
         </CardContent>
       </Card>
     );
