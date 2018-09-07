@@ -4,6 +4,8 @@ import "./agent-preview.scss";
 import Card from "../../../../lib/components/card/card";
 import CardTitle from "../../../../lib/components/card/card-title/card-title";
 import CardContent from "../../../../lib/components/card/card-content/card-content";
+import CardHeader from "../../../../lib/components/card/card-header/card-header";
+import AgentStatus from "../../../../lib/components/status/agent-status/agent-status";
 
 class AgentPreview extends Component {
   render() {
@@ -45,8 +47,18 @@ class AgentPreview extends Component {
       );
     }
 
+    let agentStatus;
+    if (agent.currentFreeAgent) {
+      agentStatus = "Free Agent"
+    } else {
+      agentStatus = "Staffed to Project"
+    }
+
     return (
       <Card>
+        <CardHeader>
+          <AgentStatus status={agentStatus} ></AgentStatus>
+        </CardHeader>
         <CardContent>
           <Link className="no-underline" to={`/agents/${agent._id}`}>
             <img
