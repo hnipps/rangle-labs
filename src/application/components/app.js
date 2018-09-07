@@ -179,6 +179,15 @@ class App extends Component {
     });
   };
 
+  countAgentsWithTech = (techId, agents) => {
+    const agentsWithTech = agents.filter(agent => {
+      return agent.currentTechnologies.some(tech => {
+        return tech._id === techId;
+      })
+    });
+    return agentsWithTech.length;
+  }
+
   render() {
     const loggedIn = this.state.user.loggedIn;
     return (
@@ -248,6 +257,7 @@ class App extends Component {
                     this.handleTechFilter(techId, "agents")
                   }
                   resetTechFilters={() => this.resetTechFilters("agents")}
+                  countAgentsWithTech={this.countAgentsWithTech}
                 />
               ) : (
                 <Redirect to="/login" />

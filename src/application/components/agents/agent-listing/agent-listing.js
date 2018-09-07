@@ -45,6 +45,8 @@ class AgentListing extends Component {
             techFilters={this.props.techFilters}
             handleTechFilter={techId => this.props.handleTechFilter(techId)}
             parent={"agents"}
+            countAgentsWithTech={this.props.countAgentsWithTech}
+            agents={this.props.agents}
           />
           <ControlContainer>
             <LinkButton to="/add-agent" color="dark-red" >

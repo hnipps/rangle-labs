@@ -29,7 +29,7 @@ class TechnologySidebar extends Component {
   acceptChanges = () => {
     this.setState(prevState => ({
       ...prevState,
-      isBeingEdited: false,
+      isBeingEdited: false
     }));
   };
 
@@ -43,22 +43,22 @@ class TechnologySidebar extends Component {
     }));
   };
 
-  addTechnology = (event) => {
+  addTechnology = event => {
     event.preventDefault();
     const newTechnologyName = event.target.value;
     this.setState(prevState => ({
       ...prevState,
-      newTechnology: "",
+      newTechnology: ""
     }));
-    this.addNewTechnology({name: newTechnologyName});
-  }
+    this.addNewTechnology({ name: newTechnologyName });
+  };
 
-  keyUpAddTechnology = (event) => {
+  keyUpAddTechnology = event => {
     event.preventDefault();
     if (event.keyCode === 13) {
       this.addTechnology(event);
     }
-  }
+  };
 
   addNewTechnology = async technology => {
     try {
@@ -86,10 +86,18 @@ class TechnologySidebar extends Component {
     } catch (err) {
       console.error("There was an error deleting a new technology:", err);
     }
-  }
+  };
 
   renderTechnologyTags = technologies => {
     return technologies.map(technology => {
+      let agentCount;
+      if (this.props.countAgentsWithTech) {
+        agentCount = this.props.countAgentsWithTech(
+          technology._id,
+          this.props.agents
+        );
+      }
+
       return (
         <TechnologyTag
           technology={technology}
@@ -99,6 +107,7 @@ class TechnologySidebar extends Component {
           handleTechFilter={techId => this.props.handleTechFilter(techId)}
           isBeingEdited={this.state.isBeingEdited}
           deleteTechnology={this.deleteTechnology}
+          agentCount={agentCount}
         />
       );
     });
@@ -112,7 +121,15 @@ class TechnologySidebar extends Component {
     let addTechnologyInput;
     if (this.state.isBeingEdited) {
       editButton = undefined;
-      doneButton = <a className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-dark-red unselectable" style={{cursor: "pointer"}} onClick={this.acceptChanges}>Done</a>;
+      doneButton = (
+        <a
+          className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-dark-red unselectable"
+          style={{ cursor: "pointer" }}
+          onClick={this.acceptChanges}
+        >
+          Done
+        </a>
+      );
       addTechnologyInput = (
         <div className="ml2">
           <input
@@ -126,7 +143,15 @@ class TechnologySidebar extends Component {
         </div>
       );
     } else {
-      editButton = <a className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-black unselectable" style={{cursor: "pointer"}} onClick={this.editTechnologies}>Edit</a>;
+      editButton = (
+        <a
+          className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-black unselectable"
+          style={{ cursor: "pointer" }}
+          onClick={this.editTechnologies}
+        >
+          Edit
+        </a>
+      );
       doneButton = undefined;
     }
 
