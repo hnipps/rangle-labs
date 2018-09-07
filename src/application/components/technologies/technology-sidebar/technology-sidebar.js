@@ -89,15 +89,20 @@ class TechnologySidebar extends Component {
   };
 
   renderTechnologyTags = technologies => {
-    return technologies.map(technology => {
+    const techWithCount = technologies.map(technology => {
       let agentCount;
       if (this.props.countAgentsWithTech) {
         agentCount = this.props.countAgentsWithTech(
           technology._id,
           this.props.agents
         );
+        return { ...technology, agentCount };
       }
-
+    });
+    const sortedTechnologies = techWithCount.sort((a, b) => {
+      return a.agentCount < b.agentCount;
+    });
+    return sortedTechnologies.map(technology => {
       return (
         <TechnologyTag
           technology={technology}
@@ -107,7 +112,7 @@ class TechnologySidebar extends Component {
           handleTechFilter={techId => this.props.handleTechFilter(techId)}
           isBeingEdited={this.state.isBeingEdited}
           deleteTechnology={this.deleteTechnology}
-          agentCount={agentCount}
+          agentCount={technology.agentCount}
         />
       );
     });
