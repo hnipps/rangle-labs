@@ -45,7 +45,6 @@ class TechnologySidebar extends Component {
   };
 
   addTechnology = event => {
-    event.preventDefault();
     const newTechnologyName = event.target.value;
     this.setState(prevState => ({
       ...prevState,
@@ -55,7 +54,6 @@ class TechnologySidebar extends Component {
   };
 
   keyUpAddTechnology = event => {
-    event.preventDefault();
     if (event.keyCode === 13) {
       this.addTechnology(event);
     }
@@ -143,7 +141,6 @@ class TechnologySidebar extends Component {
   };
 
   expandTechList = event => {
-    event.preventDefault();
     this.setState(prevState => ({
       ...prevState,
       hideLowerPriorityTech: false
@@ -151,7 +148,6 @@ class TechnologySidebar extends Component {
   };
 
   contractTechList = event => {
-    event.preventDefault();
     this.setState(prevState => ({
       ...prevState,
       hideLowerPriorityTech: true
