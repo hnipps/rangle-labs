@@ -120,23 +120,38 @@ class TechnologySidebar extends Component {
   };
 
   sortTechnologies = technologies => {
-    const priorityTech = ["Angular", "React", "Node", "Docker", "Redux"];
-    technologies.sort((a, b) => {
+    // This array is in reverse-order, with the most importatn technologies listed last
+    const priorityTech = ["Redux", "Node", "Docker", "React", "Angular"];
+    const techPriorityMap = technologies.map((tech, index) => {
       const priorityIndexA =
-        priorityTech.findIndex(tech => {
-          return tech === a.name;
+        priorityTech.findIndex(priorityTech => {
+          return priorityTech === tech.name;
         }) + 1;
-      const priorityIndexB =
-        priorityTech.findIndex(tech => {
-          return tech === b.name;
-        }) + 1;
-      if (priorityIndexA > 0 && priorityIndexB > 0) {
-        return priorityIndexA - priorityIndexB;
-      } else if (priorityIndexA === 0 || priorityIndexB === 0) {
-        return priorityIndexB - priorityIndexA;
+
+      const originalIndexA = index;
+
+      if (priorityIndexA > 0) {
+        return {
+          name: tech.name,
+          priority: priorityIndexA * -10
+        };
       } else {
-        return 1;
+        return {
+          name: tech.name,
+          priority: originalIndexA
+        };
       }
+    });
+
+    technologies.sort((a, b) => {
+      const techWithPriorityA = techPriorityMap.find(tech => {
+        return tech.name === a.name;
+      });
+      const techWithPriorityB = techPriorityMap.find(tech => {
+        return tech.name === b.name;
+      });
+      const result = techWithPriorityA.priority - techWithPriorityB.priority;
+      return result;
     });
   };
 
