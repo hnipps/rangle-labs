@@ -97,16 +97,16 @@ class ProjectDetail extends Component {
             <LinkButton to={`/edit-project/${project._id}`} color="green">
               {`Edit Details for ${project.title}`}
             </LinkButton>
-            <ConfirmationButton onClick={event => {
-              event.preventDefault();
-              this.deleteProject(project._id);
-            }}>
-            <Button
-            className="delete-project-button"
-            
-            color="dark-red"
-          >{`Delete ${project.title}`}</Button>
-          </ConfirmationButton>
+            <ConfirmationButton
+              onClick={event => {
+                event.preventDefault();
+                this.deleteProject(project._id);
+              }}
+            >
+              <Button className="delete-project-button" color="dark-red">
+                {`Delete ${project.title}`}
+              </Button>
+            </ConfirmationButton>
           </DetailCard>
         </CenterContentWrapper>
       </ContentContainer>

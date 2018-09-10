@@ -53,7 +53,8 @@ class AgentDetail extends Component {
   render() {
     const { agent } = this.state;
 
-    if (!this.state.agent) return <h2 className="helvetica center tc moon-gray" >Loading...</h2>;
+    if (!this.state.agent)
+      return <h2 className="helvetica center tc moon-gray">Loading...</h2>;
 
     const status = agent.currentFreeAgent ? "Free Agent" : "Staffed to Project";
 
@@ -75,15 +76,15 @@ class AgentDetail extends Component {
             <LinkButton to={`/edit-agent/${agent._id}`} color="green">
               {`Edit Details for ${agent.firstName} ${agent.lastName}`}
             </LinkButton>
-            <ConfirmationButton onClick={event => {
-                  event.preventDefault();
-                  this.deleteAgent(agent._id);
-                }}>
-              <Button
-                color="red"
-              >
+            <ConfirmationButton
+              onClick={event => {
+                event.preventDefault();
+                this.deleteAgent(agent._id);
+              }}
+            >
+              <Button color="red">
                 {`Delete ${agent.firstName} ${agent.lastName}`}
-            </Button>
+              </Button>
             </ConfirmationButton>
           </DetailCard>
         </CenterContentWrapper>
