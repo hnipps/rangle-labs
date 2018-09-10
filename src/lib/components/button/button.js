@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 
 class Button extends Component {
-  onClickConfirmation = event => {
-    if(this.props.confirm) {
-      if (window.confirm('Are you sure?')) {
-        this.props.onClick(event);
-    } 
-  } else {
-      this.props.onClick(event);
-    }
-  }
+ 
   render() {
     return (
       <button
@@ -17,7 +9,7 @@ class Button extends Component {
         value={ this.props.value }
         className={`bn f5 b no-underline br-pill ph3 pv2 mb2 ml2 dib white bg-${ this.props.color } unselectable`}
         style={{ cursor: "pointer" }}
-        onClick={this.onClickConfirmation}
+        onClick={this.props.onClick}
       >
         { this.props.children }
       </button>
