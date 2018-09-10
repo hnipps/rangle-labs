@@ -8,7 +8,8 @@ import { doesArrayContainItem } from "../../../helpers";
 class TechnologySidebar extends Component {
   state = {
     isBeingEdited: false,
-    newTechnology: ""
+    newTechnology: "",
+    hideLowerPriorityTech: true
   };
 
   determineIfTagIsActiveFilter = tagId => {
@@ -90,7 +91,13 @@ class TechnologySidebar extends Component {
 
   renderTechnologyTags = technologies => {
     this.sortTechnologies(technologies);
-    return technologies.map(technology => {
+    let techToDisplay;
+    if (this.state.hideLowerPriorityTech) {
+      techToDisplay = technologies.slice(0, 5);
+    } else {
+      techToDisplay = technologies;
+    }
+    return techToDisplay.map(technology => {
       let agentCount;
       if (this.props.countAgentsWithTech) {
         agentCount = this.props.countAgentsWithTech(
@@ -135,6 +142,22 @@ class TechnologySidebar extends Component {
     });
   };
 
+  expandTechList = event => {
+    event.preventDefault();
+    this.setState(prevState => ({
+      ...prevState,
+      hideLowerPriorityTech: false
+    }));
+  };
+
+  contractTechList = event => {
+    event.preventDefault();
+    this.setState(prevState => ({
+      ...prevState,
+      hideLowerPriorityTech: true
+    }));
+  };
+
   render() {
     const { technologies } = this.props;
 
@@ -177,6 +200,21 @@ class TechnologySidebar extends Component {
       doneButton = undefined;
     }
 
+    let expandTechButton;
+    if (this.state.hideLowerPriorityTech) {
+      expandTechButton = (
+        <li className="dib mr1 mb1">
+          <button onClick={this.expandTechList}>More</button>
+        </li>
+      );
+    } else {
+      expandTechButton = (
+        <li className="dib mr1 mb1">
+          <button onClick={this.contractTechList}>Less</button>
+        </li>
+      );
+    }
+
     return (
       <aside className="helvetica db w-100 mb3">
         <div className="flex items-center">
@@ -186,6 +224,7 @@ class TechnologySidebar extends Component {
         </div>
         <ul className="list ph2 pv2 mv0">
           {this.renderTechnologyTags(technologies)}
+          {expandTechButton}
         </ul>
         {addTechnologyInput}
       </aside>
