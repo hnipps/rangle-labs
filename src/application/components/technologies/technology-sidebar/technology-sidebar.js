@@ -200,20 +200,25 @@ class TechnologySidebar extends Component {
       doneButton = undefined;
     }
 
-    let expandTechButton;
+    let expandCloseButtonText;
+    let onClickMethod;
     if (this.state.hideLowerPriorityTech) {
-      expandTechButton = (
-        <li className="dib mr1 mb1">
-          <button onClick={this.expandTechList}>More</button>
-        </li>
-      );
+      expandCloseButtonText = "more";
+      onClickMethod = this.expandTechList;
     } else {
-      expandTechButton = (
-        <li className="dib mr1 mb1">
-          <button onClick={this.contractTechList}>Less</button>
-        </li>
-      );
+      expandCloseButtonText = "less";
+      onClickMethod = this.contractTechList;
     }
+    const expandTechButton = (
+      <li className="dib mr1 mb1">
+        <button
+          className="bg-light-gray bn mid-gray f6"
+          onClick={onClickMethod}
+        >
+          {expandCloseButtonText}
+        </button>
+      </li>
+    );
 
     return (
       <aside className="helvetica db w-100 mb3">
