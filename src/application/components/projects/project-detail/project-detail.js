@@ -11,6 +11,7 @@ import DetailCard from "../../../../lib/components/detail-card/detail-card";
 import LinkButton from "../../../../lib/components/link-button/link-button";
 import Button from "../../../../lib/components/button/button";
 import CardHeader from "../../../../lib/components/card/card-header/card-header";
+import ConfirmationButton from "../../../../lib/components/confirmation-button/confirmation-button";
 
 class ProjectDetail extends Component {
   state = {
@@ -96,15 +97,16 @@ class ProjectDetail extends Component {
             <LinkButton to={`/edit-project/${project._id}`} color="green">
               {`Edit Details for ${project.title}`}
             </LinkButton>
+            <ConfirmationButton onClick={event => {
+              event.preventDefault();
+              this.deleteProject(project._id);
+            }}>
             <Button
-              className="delete-project-button"
-              onClick={event => {
-                event.preventDefault();
-                this.deleteProject(project._id);
-              }}
-              color="dark-red"
-              confirm
-            >{`Delete ${project.title}`}</Button>
+            className="delete-project-button"
+            
+            color="dark-red"
+          >{`Delete ${project.title}`}</Button>
+          </ConfirmationButton>
           </DetailCard>
         </CenterContentWrapper>
       </ContentContainer>
