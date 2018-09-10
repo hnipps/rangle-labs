@@ -80,6 +80,7 @@ class AgentDetail extends Component {
                 this.deleteAgent(agent._id);
               }}
               color="red"
+              confirm
             >
               {`Delete ${agent.firstName} ${agent.lastName}`}
             </Button>

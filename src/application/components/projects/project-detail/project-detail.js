@@ -103,6 +103,7 @@ class ProjectDetail extends Component {
                 this.deleteProject(project._id);
               }}
               color="dark-red"
+              confirm
             >{`Delete ${project.title}`}</Button>
           </DetailCard>
         </CenterContentWrapper>
