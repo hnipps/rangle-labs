@@ -89,6 +89,24 @@ class TechnologySidebar extends Component {
   };
 
   renderTechnologyTags = technologies => {
+    const priorityTech = ["Angular", "React", "Node", "Docker", "Redux"];
+    technologies.sort((a, b) => {
+      const priorityIndexA =
+        priorityTech.findIndex(tech => {
+          return tech === a.name;
+        }) + 1;
+      const priorityIndexB =
+        priorityTech.findIndex(tech => {
+          return tech === b.name;
+        }) + 1;
+      if (priorityIndexA > 0 && priorityIndexB > 0) {
+        return priorityIndexA - priorityIndexB;
+      } else if (priorityIndexA === 0 || priorityIndexB === 0) {
+        return priorityIndexB - priorityIndexA;
+      } else {
+        return 1;
+      }
+    });
     return technologies.map(technology => {
       let agentCount;
       if (this.props.countAgentsWithTech) {
