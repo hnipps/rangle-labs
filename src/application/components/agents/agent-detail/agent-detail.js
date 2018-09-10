@@ -10,6 +10,7 @@ import AgentStatus from "../../../../lib/components/status/agent-status/agent-st
 import DetailCard from "../../../../lib/components/detail-card/detail-card";
 import DetailCardImage from "../../../../lib/components/detail-card/detail-card-image/detail-card-image";
 import DetailCardSubtitle from "../../../../lib/components/detail-card/detail-card-subtitle/detail-card-subtitle";
+import ConfirmationButton from "../../../../lib/components/confirmation-button/confirmation-button";
 
 class AgentDetail extends Component {
   state = {
@@ -52,7 +53,8 @@ class AgentDetail extends Component {
   render() {
     const { agent } = this.state;
 
-    if (!this.state.agent) return <h2 className="helvetica center tc moon-gray" >Loading...</h2>;
+    if (!this.state.agent)
+      return <h2 className="helvetica center tc moon-gray">Loading...</h2>;
 
     const status = agent.currentFreeAgent ? "Free Agent" : "Staffed to Project";
 
@@ -74,15 +76,16 @@ class AgentDetail extends Component {
             <LinkButton to={`/edit-agent/${agent._id}`} color="green">
               {`Edit Details for ${agent.firstName} ${agent.lastName}`}
             </LinkButton>
-            <Button
+            <ConfirmationButton
               onClick={event => {
                 event.preventDefault();
                 this.deleteAgent(agent._id);
               }}
-              color="red"
             >
-              {`Delete ${agent.firstName} ${agent.lastName}`}
-            </Button>
+              <Button color="red">
+                {`Delete ${agent.firstName} ${agent.lastName}`}
+              </Button>
+            </ConfirmationButton>
           </DetailCard>
         </CenterContentWrapper>
       </ContentContainer>
