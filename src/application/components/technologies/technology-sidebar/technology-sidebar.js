@@ -208,6 +208,7 @@ class TechnologySidebar extends Component {
     const expandTechButton = (
       <li className="dib mr1 mb1">
         <button
+          type="button"
           className="bg-light-gray bn mid-gray f6"
           onClick={onClickMethod}
         >
