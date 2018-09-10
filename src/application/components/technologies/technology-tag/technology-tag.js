@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ConfirmationButton from "../../../../lib/components/confirmation-button/confirmation-button";
 
 class TechnologyTag extends Component {
   handleTagClick = () => {
@@ -30,13 +31,14 @@ class TechnologyTag extends Component {
     let removeButton;
     if (this.props.isBeingEdited) {
       removeButton = (
+        <ConfirmationButton onClick={this.deleteTechnology} >
         <button
           className="f7 f7-ns b dib ma0 dark-gray ml2 b--none bg-transparent pa0 w1"
           value={this.props.technology._id}
-          onClick={this.deleteTechnology}
         >
           x
         </button>
+        </ConfirmationButton>
       );
     }
 
