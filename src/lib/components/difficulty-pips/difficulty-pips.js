@@ -14,7 +14,7 @@ const DifficultyPips = ({ difficulty, size }) => {
   for (let i = 0; i < difficulty; i++) {
     const key = i;
     const pip = (
-      <div className={`${sizeClasses} bg-dark-blue br-100 dib`} key={key} />
+      <div className={`${sizeClasses} v-mid bg-dark-blue br-100 dib`} key={key} />
     );
     pips.push(pip);
   }
@@ -22,14 +22,14 @@ const DifficultyPips = ({ difficulty, size }) => {
   for (let i = difficulty; i < maxpips; i++) {
     const key = i;
     const pip = (
-      <div className={`${sizeClasses} bg-light-blue br-100 dib`} key={key} />
+      <div className={`${sizeClasses} v-mid bg-light-blue br-100 dib`} key={key} />
     );
     pips.push(pip);
   }
 
   return (
     <div className="dtc v-mid">
-      <div>{pips}</div>
+      {pips}
     </div>
   );
 };
