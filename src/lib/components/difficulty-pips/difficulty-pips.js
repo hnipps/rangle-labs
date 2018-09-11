@@ -2,6 +2,7 @@ import React from "react";
 
 const DifficultyPips = ({ difficulty, size }) => {
   const pips = [];
+  const maxpips = 5;
   let sizeClasses;
 
   if (size === "L") {
@@ -14,6 +15,14 @@ const DifficultyPips = ({ difficulty, size }) => {
     const key = i;
     const pip = (
       <div className={`${sizeClasses} bg-dark-blue br-100 dib`} key={key} />
+    );
+    pips.push(pip);
+  }
+
+  for (let i = difficulty; i < maxpips; i++) {
+    const key = i;
+    const pip = (
+      <div className={`${sizeClasses} bg-light-blue br-100 dib`} key={key} />
     );
     pips.push(pip);
   }
