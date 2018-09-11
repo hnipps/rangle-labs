@@ -35,6 +35,7 @@ class App extends Component {
             techTags: []
           },
           agents: {
+            active: false,
             techTags: []
           }
         },
@@ -84,17 +85,23 @@ class App extends Component {
 
   // determine which agents should be displayed based on filters
   assembleAgentListing = () => {
-    const allAgents = Array.from(this.state.agents);
     let currentlyDisplayedAgents = Array.from(this.state.agents);
 
     // filter agents by tech filter tags if there are any active ones
     if (this.state.filters.agents.techTags.length) {
-      currentlyDisplayedAgents = allAgents.filter(agent => {
+      currentlyDisplayedAgents = currentlyDisplayedAgents.filter(agent => {
         const agentTechIds = agent.currentTechnologies.map(tech => tech._id);
         return doesArrayContainAllItems(
           agentTechIds,
           this.state.filters.agents.techTags
         );
+      });
+    }
+
+    // filter agents if they are active
+    if (this.state.filters.agents.active) {
+      currentlyDisplayedAgents = currentlyDisplayedAgents.filter(agent => {
+        return agent.currentFreeAgent;
       });
     }
 
@@ -165,6 +172,23 @@ class App extends Component {
     }));
   };
 
+  toggleActiveAgentFilter = () => {
+    this.setState(prevState => {
+      const newState = {
+        ...prevState,
+        filters: {
+          ...prevState.filters,
+          agents: {
+            ...prevState.filters.agents,
+            active: !this.state.filters.agents.active
+          }
+        }
+      };
+
+      return newState;
+    });
+  };
+
   logUserIn = () => {
     this.setState(prevState => {
       const newState = {
@@ -183,10 +207,10 @@ class App extends Component {
     const agentsWithTech = agents.filter(agent => {
       return agent.currentTechnologies.some(tech => {
         return tech._id === techId;
-      })
+      });
     });
     return agentsWithTech.length;
-  }
+  };
 
   render() {
     const loggedIn = this.state.user.loggedIn;
@@ -256,6 +280,7 @@ class App extends Component {
                   handleTechFilter={techId =>
                     this.handleTechFilter(techId, "agents")
                   }
+                  toggleActiveAgentFilter={this.toggleActiveAgentFilter}
                   resetTechFilters={() => this.resetTechFilters("agents")}
                   countAgentsWithTech={this.countAgentsWithTech}
                 />
