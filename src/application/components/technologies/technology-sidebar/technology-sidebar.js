@@ -8,7 +8,8 @@ import { doesArrayContainItem } from "../../../helpers";
 class TechnologySidebar extends Component {
   state = {
     isBeingEdited: false,
-    newTechnology: ""
+    newTechnology: "",
+    hideLowerPriorityTech: true
   };
 
   determineIfTagIsActiveFilter = tagId => {
@@ -44,7 +45,6 @@ class TechnologySidebar extends Component {
   };
 
   addTechnology = event => {
-    event.preventDefault();
     const newTechnologyName = event.target.value;
     this.setState(prevState => ({
       ...prevState,
@@ -54,7 +54,6 @@ class TechnologySidebar extends Component {
   };
 
   keyUpAddTechnology = event => {
-    event.preventDefault();
     if (event.keyCode === 13) {
       this.addTechnology(event);
     }
@@ -89,7 +88,14 @@ class TechnologySidebar extends Component {
   };
 
   renderTechnologyTags = technologies => {
-    return technologies.map(technology => {
+    this.sortTechnologies(technologies);
+    let techToDisplay;
+    if (this.state.hideLowerPriorityTech) {
+      techToDisplay = technologies.slice(0, 5);
+    } else {
+      techToDisplay = technologies;
+    }
+    return techToDisplay.map(technology => {
       let agentCount;
       if (this.props.countAgentsWithTech) {
         agentCount = this.props.countAgentsWithTech(
@@ -111,6 +117,56 @@ class TechnologySidebar extends Component {
         />
       );
     });
+  };
+
+  sortTechnologies = technologies => {
+    // This array is in reverse-order, with the most importatn technologies listed last
+    const priorityTech = ["Redux", "Node", "Docker", "React", "Angular"];
+    const techPriorityMap = technologies.map((tech, index) => {
+      const priorityIndexA =
+        priorityTech.findIndex(priorityTech => {
+          return priorityTech === tech.name;
+        }) + 1;
+
+      const originalIndexA = index;
+
+      if (priorityIndexA > 0) {
+        return {
+          name: tech.name,
+          priority: priorityIndexA * -10
+        };
+      } else {
+        return {
+          name: tech.name,
+          priority: originalIndexA
+        };
+      }
+    });
+
+    technologies.sort((a, b) => {
+      const techWithPriorityA = techPriorityMap.find(tech => {
+        return tech.name === a.name;
+      });
+      const techWithPriorityB = techPriorityMap.find(tech => {
+        return tech.name === b.name;
+      });
+      const result = techWithPriorityA.priority - techWithPriorityB.priority;
+      return result;
+    });
+  };
+
+  expandTechList = event => {
+    this.setState(prevState => ({
+      ...prevState,
+      hideLowerPriorityTech: false
+    }));
+  };
+
+  contractTechList = event => {
+    this.setState(prevState => ({
+      ...prevState,
+      hideLowerPriorityTech: true
+    }));
   };
 
   render() {
@@ -155,6 +211,27 @@ class TechnologySidebar extends Component {
       doneButton = undefined;
     }
 
+    let expandCloseButtonText;
+    let onClickMethod;
+    if (this.state.hideLowerPriorityTech) {
+      expandCloseButtonText = "more";
+      onClickMethod = this.expandTechList;
+    } else {
+      expandCloseButtonText = "less";
+      onClickMethod = this.contractTechList;
+    }
+    const expandTechButton = (
+      <li className="dib mr1 mb1">
+        <button
+          type="button"
+          className="bg-light-gray bn mid-gray f6"
+          onClick={onClickMethod}
+        >
+          {expandCloseButtonText}
+        </button>
+      </li>
+    );
+
     return (
       <aside className="helvetica db w-100 mb3">
         <div className="flex items-center">
@@ -164,6 +241,7 @@ class TechnologySidebar extends Component {
         </div>
         <ul className="list ph2 pv2 mv0">
           {this.renderTechnologyTags(technologies)}
+          {expandTechButton}
         </ul>
         {addTechnologyInput}
       </aside>
