@@ -218,14 +218,21 @@ class App extends Component {
       <Router>
         <div className="app">
           <nav className="helvetica pa3 pa4-ns">
-            <Link className="link dim black b f6 f5-ns dib mr3" to="/projects">
+          <Link className="link dim black b f6 f5-ns dib mr3 v-mid" to="/projects">
+            <img
+              className="w2 h2"
+              alt='Rangle Labs'
+              src='/assets/labs_logo/rangle-labs-icon.png'
+            />
+          </Link>
+            <Link className="link dim black b f6 f5-ns dib mr3 v-mid" to="/projects">
               Rangle Labs
             </Link>
             {/* LINKS */}
-            <Link className="link dim gray f6 f5-ns dib mr3" to="/projects">
+            <Link className="link dim gray f6 f5-ns dib mr3 v-mid" to="/projects">
               Projects
             </Link>
-            <Link className="link dim gray f6 f5-ns dib mr3" to="/agents">
+            <Link className="link dim gray f6 f5-ns dib mr3 v-mid" to="/agents">
               Agents
             </Link>
           </nav>
