@@ -1,39 +1,25 @@
-# iOS CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/ios-migrating-from-1-2/ for more details
-#
 version: 2
 jobs:
   build:
+    docker:
+      - image: circleci/node:8.10
 
-    # Specify the Xcode version to use
-    macos:
-      xcode: "8.3.3"
+    working_directory: ~/repo
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "6d:28:60:63:0d:1d:ca:2f:fe:bb:80:48:54:95:d4:ab"
       - checkout
-
-      # Install CocoaPods
-      - run:
-          name: Install CocoaPods
-          command: pod install
-
-      # Build the app and run tests
-      - run:
-          name: Build and run tests
-          command: fastlane scan
-          environment:
-            SCAN_DEVICE: iPhone 6
-            SCAN_SCHEME: WebTests
-
-      # Collect XML test results data to show in the UI,
-      # and save the same XML files under test-results folder
-      # in the Artifacts tab
-      - store_test_results:
-          path: test_output/report.xml
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: scan-test-results
-      - store_artifacts:
-          path: ~/Library/Logs/scan
-          destination: scan-logs
+      - run: chmod 400 ~/.ssh/id_rsa_6d2860630d1dca2ffebb80485495d4ab
+      - run: ls ~/.ssh/
+      - run: cat ~/.ssh/id_rsa_6d2860630d1dca2ffebb80485495d4ab
+      - run: cat ~/.ssh/known_hosts
+      - run: pwd
+      - run: ls -a 
+      # - run: scp -i ~/.ssh/id_rsa_6d2860630d1dca2ffebb80485495d4ab -r public ubuntu@ec2-35-182-2-244.ca-central-1.compute.amazonaws.com:/home/ubuntu/app
+workflows:
+    version: 2
+    just_build:
+        jobs:
+            - build
