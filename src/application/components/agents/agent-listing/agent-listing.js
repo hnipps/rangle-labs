@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { CSVLink } from 'react-csv';
 import AgentPreview from "../agent-preview/agent-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
 import "./agent-listing.scss";
@@ -39,6 +40,33 @@ class AgentListing extends Component {
     });
   };
 
+  // headers for export 
+  exportHeader = [
+    {label: 'Name', key: 'name'},
+    {label: 'Are they currently a free agent?', key: 'currentFreeAgent'},
+    {label: 'Role', key: 'role'},
+    {label: 'Current Tech', key: 'currentTechnologies'},
+    {label: 'Aspirational Tech', key: 'aspirationalTechnologies'},
+  ];
+
+  // creating a new array meant for exporting
+  exportAgents = agents => {
+    return agents.map(agent => {
+      let exportAgent = {...agent};
+      exportAgent.name = exportAgent.firstName + " " + exportAgent.lastName;
+      delete exportAgent._id;
+      delete exportAgent.userId;
+      delete exportAgent.__v;
+      delete exportAgent.image;
+      delete exportAgent.firstName;
+      delete exportAgent.lastName;
+      exportAgent.currentTechnologies = exportAgent.currentTechnologies.map(tech => tech.name);
+      exportAgent.aspirationalTechnologies = exportAgent.aspirationalTechnologies.map(tech => tech.name);
+      console.log(exportAgent);
+      return exportAgent;
+    })
+  }
+
   render() {
     return (
       <ContentContainer>
@@ -60,6 +88,8 @@ class AgentListing extends Component {
             <Button onClick={this.props.toggleActiveAgentFilter} color="green">
               Toggle Active Agents
             </Button>
+            <CSVLink data={this.exportAgents(this.props.agents)} headers={this.exportHeader}
+             className= "helvetica bn f5 b no-underline br-pill ph3 pv2 mb2 ml2 dib white bg-green unselectable">Export Agents To CSV</CSVLink>
           </ControlContainer>
         </SidebarContainer>
         <CardContainer>{this.renderAgents(this.props.agents)}</CardContainer>
