@@ -30,7 +30,7 @@ class TeamListing extends Component {
                 />
               </div>
             </Link>
-            <h2 className="f7 mw3 center mt0 mb2">{`${teamMember.firstName} ${teamMember.lastName}`}</h2>
+            {this.props.renderName && <h2 className="f7 mw3 center mt0 mb2">{`${teamMember.firstName} ${teamMember.lastName}`}</h2> } 
             {addButton}
             {removeButton}
           </li>

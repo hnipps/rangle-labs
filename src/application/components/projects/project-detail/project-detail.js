@@ -92,10 +92,10 @@ class ProjectDetail extends Component {
             <TechListing technologies={project.technologies} />
             {/* PROJECT LEAD LISTING */}
             <p>Project Owner:</p>
-            <TeamListing teamMembers={project.projectLead} />
+            <TeamListing teamMembers={project.projectLead} renderName />
             {/* TEAM LISTING*/}
             <p>Team:</p>
-            <TeamListing teamMembers={project.agents} />
+            <TeamListing teamMembers={project.agents} renderName/>
             <LinkButton to={`/edit-project/${project._id}`} color="green">
               {`Edit Details for ${project.title}`}
             </LinkButton>

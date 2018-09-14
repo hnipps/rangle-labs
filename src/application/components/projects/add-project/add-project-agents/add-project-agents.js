@@ -76,6 +76,7 @@ class AddProjectAgents extends Component {
         <TeamListing
           teamMembers={this.state.search.searchResult}
           onAddClick={this.addAgentToProject}
+          renderName
           placeholder="Search results will appear here... 🕵️‍♀️"
         />
       </div>
