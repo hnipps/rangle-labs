@@ -81,10 +81,12 @@ class ProjectDetail extends Component {
               </div>
               {trelloBoardLink}
               {githubUrl}
-              <DifficultyPips difficulty={project.difficulty} size="L" />
+              
             </CardHeader>
             <h1>{project.title}</h1>
             <p>{project.description}</p>
+            <p>Difficulty:</p>
+            <DifficultyPips difficulty={project.difficulty} size="L" />
             <p>Technologies Used:</p>
             {/* TECH TOOL LISTING */}
             <TechListing technologies={project.technologies} />
