@@ -18,16 +18,16 @@ class TeamListing extends Component {
           removeButton = <Button value={i} color={"dark-red"} onClick={this.props.onRemoveClick}>Remove</Button>
         }
         return (
-          <li className="dib mr1 mb1 tc h4" key={teamMember._id}>
+          <li className="dib mr1 mb1 tc h1" key={teamMember._id}>
             <Link
-              className=""
               to={`/agents/${teamMember._id}`}
             >
-              <div>
-                <img className="mw3 br-100"
+              <div className="z-1 relative">
+                <img className="mw3 br-100 absolute z-2"
                   src={teamMember.image}
                   alt={`${teamMember.firstName} ${teamMember.lastName}`}
                 />
+                <span className="v-mid dib relative top-0 z-3">🚩</span>
               </div>
             </Link>
             {this.props.renderName && <h2 className="f7 mw3 center mt0 mb2">{`${teamMember.firstName} ${teamMember.lastName}`}</h2> } 
