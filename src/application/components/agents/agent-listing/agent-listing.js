@@ -62,7 +62,6 @@ class AgentListing extends Component {
       delete exportAgent.lastName;
       exportAgent.currentTechnologies = exportAgent.currentTechnologies.map(tech => tech.name);
       exportAgent.aspirationalTechnologies = exportAgent.aspirationalTechnologies.map(tech => tech.name);
-      console.log(exportAgent);
       return exportAgent;
     })
   }
