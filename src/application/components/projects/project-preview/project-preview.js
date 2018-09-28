@@ -27,7 +27,7 @@ class ProjectPreview extends Component {
             <p>{project.description}</p>
           </Link>
           {/* PROJECT LEAD LISTING */}
-          <TeamListing teamMembers={project.projectLead}/>
+          <TeamListing leadFlag teamMembers={project.projectLead}/>
           <TeamListing teamMembers={project.agents}/>
         </CardContent>
       </Card>

@@ -81,7 +81,6 @@ class ProjectDetail extends Component {
               </div>
               {trelloBoardLink}
               {githubUrl}
-              
             </CardHeader>
             <h1>{project.title}</h1>
             <p>{project.description}</p>
@@ -95,7 +94,9 @@ class ProjectDetail extends Component {
             <TeamListing teamMembers={project.projectLead} renderName />
             {/* TEAM LISTING*/}
             <p>Team:</p>
-            <TeamListing teamMembers={project.agents} renderName/>
+            <div className="mb2">
+              <TeamListing teamMembers={project.agents} renderName />
+            </div>
             <LinkButton to={`/edit-project/${project._id}`} color="green">
               {`Edit Details for ${project.title}`}
             </LinkButton>
