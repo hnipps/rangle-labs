@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
 import queryString from "query-string";
-
 import ContentContainer from "../../../lib/components/content-container/content-container";
 
 class Login extends Component {

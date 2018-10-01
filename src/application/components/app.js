@@ -12,7 +12,7 @@ import AgentListing from "./agents/agent-listing/agent-listing";
 import AgentDetail from "./agents/agent-detail/agent-detail";
 import AddAgent from "./agents/add-agent/add-agent";
 import AddProject from "./projects/add-project/add-project";
-import { doesArrayContainAllItems } from "../helpers";
+import { doesArrayContainAllItems, sortAgents } from "../helpers";
 import "./app.scss";
 import "./normalize.scss";
 import "./borderbox.scss";
@@ -36,7 +36,8 @@ class App extends Component {
           },
           agents: {
             active: false,
-            techTags: []
+            techTags: [],
+            sortBy: 'alphabetical'
           }
         },
         user: {
@@ -104,6 +105,7 @@ class App extends Component {
         return agent.currentFreeAgent;
       });
     }
+    sortAgents(currentlyDisplayedAgents, this.state.filters.agents.sortBy);
 
     return currentlyDisplayedAgents;
   };
@@ -171,6 +173,15 @@ class App extends Component {
       }
     }));
   };
+
+  handleSortBy = (sortBy) => {
+    this.setState({ filters: {
+      ...this.state.filters,
+      agents: {
+        ...this.state.filters.agents,
+        sortBy: sortBy
+      }}});
+  }
 
   toggleActiveAgentFilter = () => {
     this.setState(prevState => {
@@ -286,6 +297,7 @@ class App extends Component {
                   handleTechFilter={techId =>
                     this.handleTechFilter(techId, "agents")
                   }
+                  handleSortBy={(sortBy) => this.handleSortBy(sortBy)}
                   toggleActiveAgentFilter={this.toggleActiveAgentFilter}
                   resetTechFilters={() => this.resetTechFilters("agents")}
                   countAgentsWithTech={this.countAgentsWithTech}

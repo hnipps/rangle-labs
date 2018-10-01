@@ -44,24 +44,8 @@ class AgentListing extends Component {
       );
     }
 
-    agents.sort((agent1, agent2) => {
-      if (agent1.firstName < agent2.firstName) {
-        return -1;
-      }
-      return 1;
-    })
-
-    // TODO: Order agents here
-    if (this.state.agentSortType === 'alphabetical') {
-      // TODO: sort by alphabetical order
-    } else if (this.state.agentSortType === 'availability') {
-      // TODO: sort by availability
-    }
-
-    console.log(agents);
-
     return agents.map(agent => {
-      return <AgentPreview agent={agent} key={agent._id} />;
+      return <AgentPreview agent={agent} key={`${agent._id}`} />;
     });
   };
 
@@ -114,7 +98,7 @@ class AgentListing extends Component {
             </Button>
             <CSVLink data={this.exportAgents(this.props.agents)} headers={this.exportHeader}
              className= "helvetica bn f5 b no-underline br-pill ph3 pv2 mb2 ml2 dib white bg-green unselectable">Export Agents To CSV</CSVLink>
-             <select name="sort-by" onChange={(event) => this.setState({ agentSortType: event.target.value })}>
+             <select className="mb2 ml2 f5 b bn white bg-green" name="sort-by" onChange={(event) => this.props.handleSortBy(event.target.value)}>
               <option value="alphabetical">alphabetical</option>
               <option value="availability">availability</option>
              </select>
