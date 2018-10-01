@@ -18,7 +18,7 @@ class ProjectPreview extends Component {
             <ProjectStatus status={project.status} />
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent alignment="tl">
           <CardTitle to={`/projects/${project._id}`}>{project.title}</CardTitle>
           <Link
             className="no-underline mid-gray"
