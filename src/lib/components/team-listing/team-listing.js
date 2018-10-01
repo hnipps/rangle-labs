@@ -23,7 +23,7 @@ class TeamListing extends Component {
               to={`/agents/${teamMember._id}`}
             >
               <div className="z-1 relative">
-                <img className="mw3 br-100 relative z-2"
+                <img className="agent-size br-100 relative z-2"
                   src={teamMember.image}
                   alt={`${teamMember.firstName} ${teamMember.lastName}`}
                 />
