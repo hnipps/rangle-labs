@@ -19,6 +19,7 @@ class AgentPreview extends Component {
               className="h2"
               src="../assets/angular/angular.png"
               alt="Angular logo"
+              key={`${tech.name}`}
             />
           );
 
@@ -28,6 +29,7 @@ class AgentPreview extends Component {
               className="h2"
               src="../assets/react/react-logo.png"
               alt="ReactJS logo"
+              key={`${tech.name}`}
             />
           );
 
