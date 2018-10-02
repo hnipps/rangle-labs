@@ -14,15 +14,17 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function(db) {
+exports.up = function(db, cb) {
   db.dropCollection('projects');
   db.createCollection('mentorships');
+  cb();
   return db;
 };
 
-exports.down = function(db) {
+exports.down = function(db, cb) {
   db.createCollection('projects');
   db.dropCollection('mentorships');
+  cb();
   return db;
 };
 
