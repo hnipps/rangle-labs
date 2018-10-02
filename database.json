@@ -1,0 +1,7 @@
+{
+    "dev": {
+      "driver": "mongodb",
+      "database": "rangle-labs",
+      "host": "localhost"
+    }
+}
