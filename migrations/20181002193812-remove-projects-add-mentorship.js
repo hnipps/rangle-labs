@@ -16,13 +16,19 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db, cb) {
-  db.dropCollection('projects');
-  db.createCollection('mentorships');
-  cb();
-  return db;
+  if (shell.exec('mongorestore ./migration-backup/version2').code !== 0) { // restoring failed (could not find mentorship backup)
+    db.createCollection('mentorships');
+  }
+  if ( shell.exec('mongodump --collection projects --db rangle-labs --out ./migrations/migration-backup/version1').code === 0) {
+    db.dropCollection('projects');
+    cb();
+  } else {
+    cb(new Error('backing up of projects failed.'));
+  }
 };
 
 exports.down = function(db, cb) {
+  
   db.createCollection('projects');
   db.dropCollection('mentorships');
   cb();
