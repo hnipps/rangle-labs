@@ -16,10 +16,11 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db, cb) {
-  if (shell.exec('mongorestore ./migration-backup/version2').code !== 0) { // restoring failed (could not find mentorship backup)
+  if (shell.exec('mongorestore ./migrations/migration-backup/version2 2> /dev/null').code !== 0) { // restoring failed (could not find mentorship backup)
+    shell.echo('[INFO]: no mentorships backup: creating new mentorships in database')
     db.createCollection('mentorships');
   }
-  if ( shell.exec('mongodump --collection projects --db rangle-labs --out ./migrations/migration-backup/version1').code === 0) {
+  if (shell.exec('mongodump --collection projects --db rangle-labs --out ./migrations/migration-backup/version1 2> /dev/null').code === 0) {
     db.dropCollection('projects');
     cb();
   } else {
@@ -28,11 +29,16 @@ exports.up = function(db, cb) {
 };
 
 exports.down = function(db, cb) {
-  
-  db.createCollection('projects');
-  db.dropCollection('mentorships');
-  cb();
-  return db;
+  if (shell.exec('mongorestore ./migrations/migration-backup/version1 2> /dev/null').code !== 0) { // restoring failed (could not find mentorship backup)
+    shell.echo('[INFO]: no projects backup: creating new projects in database')
+    db.createCollection('projects');
+  }
+  if (shell.exec('mongodump --collection mentorships --db rangle-labs --out ./migrations/migration-backup/version2').code === 0) {
+    db.dropCollection('mentorships');
+    cb();
+  } else {
+    cb(new Error('backing up of mentorships failed.'));
+  }
 };
 
 exports._meta = {
