@@ -73,6 +73,7 @@
     "node-sass": "^4.9.2",
     "nodemon": "^1.17.3",
     "sass-loader": "^7.1.0",
+    "shelljs": "^0.8.2",
     "yarn": "^1.9.4"
   },
   "jest": {

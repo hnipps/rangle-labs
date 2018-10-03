@@ -1,4 +1,5 @@
 'use strict';
+var shell = require('shelljs');
 
 var dbm;
 var type;
