@@ -6,12 +6,12 @@ import {
   Redirect
 } from "react-router-dom";
 import axios from "axios";
-import ProjectListing from "./projects/project-listing/project-listing";
-import ProjectDetail from "./projects/project-detail/project-detail";
+import MentorshipListing from "./mentorships/mentorship-listing/mentorship-listing";
+import MentorshipDetail from "./mentorships/mentorship-detail/mentorship-detail";
 import AgentListing from "./agents/agent-listing/agent-listing";
 import AgentDetail from "./agents/agent-detail/agent-detail";
 import AddAgent from "./agents/add-agent/add-agent";
-import AddProject from "./projects/add-project/add-project";
+import AddMentorship from "./mentorships/add-mentorships/add-mentorships";
 import { doesArrayContainAllItems, sortAgents } from "../helpers";
 import "./app.scss";
 import "./normalize.scss";
@@ -27,11 +27,11 @@ class App extends Component {
       this.state = sessionState;
     } else {
       this.state = {
-        projects: [],
+        mentorships: [],
         agents: [],
         technologies: [],
         filters: {
-          projects: {
+          mentorships: {
             techTags: []
           },
           agents: {
@@ -47,14 +47,14 @@ class App extends Component {
     }
   }
 
-  // get projects from database
-  getProjects = async () => {
+  // get mentorships from database
+  getMentorships = async () => {
     try {
       const res = await axios.get("/mentorships");
-      const projects = res.data.docs;
-      this.setState({ projects });
+      const mentorships = res.data.docs;
+      this.setState({ mentorships });
     } catch (e) {
-      console.error("Something went wrong with getting the projects", e);
+      console.error("Something went wrong with getting the mentorships", e);
     }
   };
 
@@ -110,23 +110,23 @@ class App extends Component {
     return currentlyDisplayedAgents;
   };
 
-  // determine which projects should be displayed based on filters
-  assembleProjectListing = () => {
-    const allProjects = Array.from(this.state.projects);
-    let currentlyDisplayedProjects = Array.from(this.state.projects);
+  // determine which mentorships should be displayed based on filters
+  assembleMentorshipListing = () => {
+    const allMentorships = Array.from(this.state.mentorships);
+    let currentlyDisplayedMentorships = Array.from(this.state.mentorships);
 
-    // filter projects by tech filter tags if there are any active ones
-    if (this.state.filters.projects.techTags.length) {
-      currentlyDisplayedProjects = allProjects.filter(project => {
-        const projectTechIds = project.technologies.map(tech => tech._id);
+    // filter mentorships by tech filter tags if there are any active ones
+    if (this.state.filters.mentorships.techTags.length) {
+      currentlyDisplayedMentorships = allMentorships.filter(mentorship => {
+        const mentorshipTechIds = mentorship.technologies.map(tech => tech._id);
         return doesArrayContainAllItems(
-          projectTechIds,
-          this.state.filters.projects.techTags
+          mentorshipTechIds,
+          this.state.filters.mentorships.techTags
         );
       });
     }
 
-    return currentlyDisplayedProjects;
+    return currentlyDisplayedMentorships;
   };
 
   resetTechFilters = entityType => {
@@ -238,9 +238,9 @@ class App extends Component {
             {/* LINKS */}
             <Link
               className="link dim gray f6 f5-ns dib mr3 v-mid"
-              to="/projects"
-            >
-              Projects
+              to="/mentorships"
+              >
+              Mentorships
             </Link>
             <Link className="link dim gray f6 f5-ns dib mr3 v-mid" to="/agents">
               Agents
@@ -252,24 +252,24 @@ class App extends Component {
             path="/"
             exact
             render={() =>
-              loggedIn ? <Redirect to="/projects" /> : <Redirect to="/login" />
+              loggedIn ? <Redirect to="/mentorships" /> : <Redirect to="/login" />
             }
           />
           <Route
-            path="/projects"
+            path="/mentorships"
             exact
             render={props =>
               loggedIn ? (
-                <ProjectListing
+                <MentorshipListing
                   {...props}
-                  projects={this.assembleProjectListing()}
+                  mentorships={this.assembleMentorshipListing()}
                   technologies={this.state.technologies}
-                  techFilters={this.state.filters.projects.techTags}
-                  refreshProjects={() => this.getProjects()}
+                  techFilters={this.state.filters.mentorships.techTags}
+                  refreshMentorships={() => this.getMentorships()}
                   handleTechFilter={techId =>
-                    this.handleTechFilter(techId, "projects")
+                    this.handleTechFilter(techId, "mentorships")
                   }
-                  resetTechFilters={() => this.resetTechFilters("projects")}
+                  resetTechFilters={() => this.resetTechFilters("mentorships")}
                 />
               ) : (
                 <Redirect to="/login" />
@@ -277,10 +277,10 @@ class App extends Component {
             }
           />
           <Route
-            path="/projects/:project_id"
+            path="/mentorships/:mentorships_id"
             exact
             render={props =>
-              loggedIn ? <ProjectDetail {...props} /> : <Redirect to="/login" />
+              loggedIn ? <MentorshipDetail {...props} /> : <Redirect to="/login" />
             }
           />
           <Route
@@ -346,14 +346,14 @@ class App extends Component {
             }
           />
           <Route
-            path="/add-project"
+            path="/add-mentorship"
             exact
             render={props =>
               loggedIn ? (
-                <AddProject
+                <AddMentorship
                   {...props}
                   technologies={this.state.technologies}
-                  refreshAgents={() => this.getProjects()}
+                  refreshAgents={() => this.getMentorships()}
                 />
               ) : (
                 <Redirect to="/login" />
@@ -361,15 +361,15 @@ class App extends Component {
             }
           />
           <Route
-            path="/edit-project/:project_id"
+            path="/edit-mentorship/:mentorship_id"
             exact
             render={props =>
               loggedIn ? (
-                <AddProject
+                <AddMentorship
                   {...props}
                   edit={true}
                   technologies={this.state.technologies}
-                  refreshAgents={() => this.getProjects()}
+                  refreshAgents={() => this.getMentorships()}
                 />
               ) : (
                 <Redirect to="/login" />
