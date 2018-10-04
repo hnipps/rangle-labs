@@ -1,12 +1,12 @@
 require("dotenv").config();
 const User = require('../models/User');
 const Agent = require('../models/Agent');
-const Project = require('../models/Project');
+const Mentorship = require('../models/Mentorship');
 const Technology = require('../models/Technology');
 
 const users = require('./users');
 const agents = require('./agents');
-const projects = require('./projects');
+const mentorships = require('./mentorships');
 const technologies = require('./technologies');
 
 const mongoose = require('mongoose');
@@ -19,7 +19,7 @@ if (process.env.MONGODB_USERNAME && process.env.MONGODB_PASSWORD) {
 
 const truncateDatabase = async () => {
   // here we delete all our data so that we can start afresh
-  return Promise.all([User.deleteMany(), Agent.deleteMany(), Project.deleteMany(), Technology.deleteMany()]);
+  return Promise.all([User.deleteMany(), Agent.deleteMany(), Mentorship.deleteMany(), Technology.deleteMany()]);
 }
 
 const makeSeeds = async () => {
@@ -36,12 +36,12 @@ const makeSeeds = async () => {
     await Promise.all(users.map(user => user.save()));
     console.log("USERS SAVED");
 
-    // save our projects into the database
-    await Promise.all(projects.map(project => {       
-            return project.save();
+    // save our mentorships into the database
+    await Promise.all(mentorships.map(mentorships => {       
+            return mentorships.save();
         }
     ));
-    console.log("PROJECTS SAVED");
+    console.log("MENTORSHIPS SAVED");
 
     // save our agents into the database
     await Promise.all(agents.map(agent => {        
