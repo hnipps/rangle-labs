@@ -64,7 +64,7 @@ router.patch("/:mentorship_id", async (req, res, next) => {
 
 // Delete a mentorship
 router.delete("/:mentorship_id", async (req, res, next) => {
-  console.log("DELETING A PROJECT");
+  console.log("DELETING A MENTORSHIP");
   try {
     const { mentorship_id } = req.params;
     const doc = await Mentorship.findByIdAndRemove(mentorship_id);

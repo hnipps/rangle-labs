@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-<<<<<<< HEAD:src/application/components/projects/mentorship-detail/mentorship-detail.js
-import MentorshipStatus from "../../../../lib/components/status/Mentorship-status/Mentorship-status";
-=======
-import ProjectStatus from "../../../../lib/components/status/project-status/mentorship-status";
->>>>>>> :recycle: listing,preview,detail,status:src/application/components/projects/project-detail/project-detail.js
+import MentorshipStatus from "../../../../lib/components/status/mentorship-status/mentorship-status";
 import DifficultyPips from "../../../../lib/components/difficulty-pips/difficulty-pips";
 import TeamListing from "../../../../lib/components/team-listing/team-listing";
 import TechListing from "../../../../lib/components/tech-listing/tech-listing";

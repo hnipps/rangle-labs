@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProjectPreview from "../mentorship-preview/mentorship-preview";
+import MentorshipPreview from "../mentorship-preview/mentorship-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
 import CardContainer from "../../../../lib/components/card-container/card-container";
 import ContentContainer from "../../../../lib/components/content-container/content-container";
@@ -9,7 +9,7 @@ import LinkButton from "../../../../lib/components/link-button/link-button";
 
 class MentorshipListing extends Component {
   async componentDidMount() {
-    this.props.refreshProjects();
+    this.props.refreshMentorships();
     this.props.resetTechFilters();
   }
 
@@ -19,7 +19,7 @@ class MentorshipListing extends Component {
     }
 
     return mentorships.map(mentorship => {
-      return <ProjectPreview mentorship={mentorship} key={mentorship._id} />;
+      return <MentorshipPreview mentorship={mentorship} key={mentorship._id} />;
     });
   };
 
@@ -47,7 +47,7 @@ class MentorshipListing extends Component {
           />
           <ControlContainer>
             <LinkButton to="/add-mentorship" color="dark-red">
-              Add Project
+              Add Mentorships
             </LinkButton>
           </ControlContainer>
         </SidebarContainer>
