@@ -91,7 +91,7 @@ class ProjectDetail extends Component {
             <TechListing technologies={project.technologies} />
             {/* PROJECT LEAD LISTING */}
             <p>Project Owner:</p>
-            <TeamListing teamMembers={project.projectLead} renderName />
+            <TeamListing teamMembers={project.mentorshipLead} renderName />
             {/* TEAM LISTING*/}
             <p>Team:</p>
             <div className="mb2">

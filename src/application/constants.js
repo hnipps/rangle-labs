@@ -12,7 +12,7 @@ constants.colors = {
 
 constants.projectRoles = {
   agents: "agents",
-  projectLead: "projectLead",
+  mentorshipLead: "mentorshipLead",
 }
 
 module.exports = constants;

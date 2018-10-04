@@ -23,7 +23,7 @@ class AddProject extends Component {
       difficulty: 0,
       status: this.statusList[2],
       technologies: [],
-      projectLead: [],
+      mentorshipLead: [],
       agents: [],
       trelloBoardUrl: "",
       githubUrl: ""
@@ -286,14 +286,14 @@ class AddProject extends Component {
           <FormLabel>Who's the project owner?</FormLabel>
           <AddProjectAgents
             addAgentToProject={this.addPersonToProject(
-              projectRoles.projectLead
+              projectRoles.mentorshipLead
             )}
           />
           <FormLabel>Current project owner:</FormLabel>
           <TeamListing
-            teamMembers={this.state.project.projectLead}
+            teamMembers={this.state.project.mentorshipLead}
             onRemoveClick={this.removePersonFromProject(
-              projectRoles.projectLead
+              projectRoles.mentorshipLead
             )}
             renderName
             placeholder="This project doesn't have an owner 😢"
