@@ -50,6 +50,15 @@ npm start
 
 This will start your project and open it in a browser tab.
 
+## Migrations
+
+1. `./node_modules/db-migrate/bin/db-migrate create [name]` to create new migration scripts with name `name`
+**Note:** When creating a migration scripts, don't forget to add MongoDB Collections backups (`mongodump`) before deleting collections and collection restores (`mongorestore`) while creating Collections
+
+2. `./node_modules/db-migrate/bin/db-migrate up` to execute the migration scripts and bring database up to the latest version
+
+3. `./node_modules/db-migrate/bin/db-migrate down` to rollback to the previous database version. (`--count NUM` for `NUM` down migrations)
+
 ## Acknowledgements
 
 This project used https://github.com/swbloom/react-express-boilerplate as a starting point.
