@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProjectPreview from "../project-preview/project-preview";
+import ProjectPreview from "../mentorship-preview/mentorship-preview";
 import TechnologySidebar from "../../technologies/technology-sidebar/technology-sidebar";
 import CardContainer from "../../../../lib/components/card-container/card-container";
 import ContentContainer from "../../../../lib/components/content-container/content-container";
@@ -7,30 +7,30 @@ import SidebarContainer from "../../../../lib/components/sidebar-container/sideb
 import ControlContainer from "../../../../lib/components/control-container/control-container";
 import LinkButton from "../../../../lib/components/link-button/link-button";
 
-class ProjectListing extends Component {
+class MentorshipListing extends Component {
   async componentDidMount() {
     this.props.refreshProjects();
     this.props.resetTechFilters();
   }
 
-  renderProjects = projects => {
-    if (!projects.length) {
-      return <h2 className="center tc moon-gray" >Sorry, no projects match your criteria!</h2>;
+  renderMentorships = mentorships => {
+    if (!mentorships.length) {
+      return <h2 className="center tc moon-gray" >Sorry, no mentorships match your criteria!</h2>;
     }
 
-    return projects.map(project => {
-      return <ProjectPreview project={project} key={project._id} />;
+    return mentorships.map(mentorship => {
+      return <ProjectPreview mentorship={mentorship} key={mentorship._id} />;
     });
   };
 
-  compileProjectTechnologies = () => {
-    const allProjectTechnologies = [];
+  compileMentorshipTechnologies = () => {
+    const allMentorshipTechnologies = [];
 
-    this.props.projects.forEach(project => {
-      allProjectTechnologies.push(...project.technologies);
+    this.props.mentorships.forEach(mentorship => {
+      allMentorshipTechnologies.push(...mentorship.technologies);
     });
 
-    return allProjectTechnologies.map(technology => technology._id);
+    return allMentorshipTechnologies.map(technology => technology._id);
   };
 
   render() {
@@ -40,23 +40,23 @@ class ProjectListing extends Component {
           <TechnologySidebar
             history={this.props.history}
             technologies={this.props.technologies}
-            activeTechnologies={this.compileProjectTechnologies()}
+            activeTechnologies={this.compileMentorshipTechnologies()}
             techFilters={this.props.techFilters}
             handleTechFilter={techId => this.props.handleTechFilter(techId)}
-            parent={"projects"}
+            parent={"mentorships"}
           />
           <ControlContainer>
-            <LinkButton to="/add-project" color="dark-red">
+            <LinkButton to="/add-mentorship" color="dark-red">
               Add Project
             </LinkButton>
           </ControlContainer>
         </SidebarContainer>
         <CardContainer>
-          {this.renderProjects(this.props.projects)}
+          {this.renderMentorships(this.props.mentorships)}
         </CardContainer>
       </ContentContainer>
     );
   }
 }
 
-export default ProjectListing;
+export default MentorshipListing;

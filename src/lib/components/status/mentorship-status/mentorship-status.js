@@ -1,7 +1,7 @@
 import constants from "../../../../application/constants";
 import Status from '../status';
 
-class ProjectStatus extends Status {
+class MentorshipStatus extends Status {
 
   determineColor = () => {
     switch (this.props.status) {
@@ -20,4 +20,4 @@ class ProjectStatus extends Status {
   }
 }
 
-export default ProjectStatus;
+export default MentorshipStatus;
