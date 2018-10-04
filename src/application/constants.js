@@ -10,7 +10,7 @@ constants.colors = {
   staffedAgentColor: '#FF0000'
 };
 
-constants.projectRoles = {
+constants.mentorshipRoles = {
   agents: "agents",
   mentorshipLead: "mentorshipLead",
 }
