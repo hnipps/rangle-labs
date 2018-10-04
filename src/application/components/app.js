@@ -50,7 +50,7 @@ class App extends Component {
   // get projects from database
   getProjects = async () => {
     try {
-      const res = await axios.get("/projects");
+      const res = await axios.get("/mentorships");
       const projects = res.data.docs;
       this.setState({ projects });
     } catch (e) {
