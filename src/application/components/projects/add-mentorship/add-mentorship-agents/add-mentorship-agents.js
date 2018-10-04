@@ -5,7 +5,7 @@ import axios from "axios";
 import TeamListing from "../../../../../lib/components/team-listing/team-listing";
 import FormInput from '../../../../../lib/components/form/form-input/form-input';
 
-class AddProjectAgents extends Component {
+class AddMentorshipAgents extends Component {
 
   state;
 
@@ -34,11 +34,11 @@ class AddProjectAgents extends Component {
     }));
   };
 
-  addAgentToProject = event => {
+  addAgentToMentorship = event => {
     event.preventDefault();
     const teamMemberIndex = event.target.value;
     const teamMember = (this.state.search.searchResult[teamMemberIndex]);
-    this.props.addAgentToProject(teamMember);
+    this.props.addAgentToMentorship(teamMember);
   }
 
   searchForAgent = async event => {
@@ -75,7 +75,7 @@ class AddProjectAgents extends Component {
         />
         <TeamListing
           teamMembers={this.state.search.searchResult}
-          onAddClick={this.addAgentToProject}
+          onAddClick={this.addAgentToMentorship}
           renderName
           placeholder="Search results will appear here... 🕵️‍♀️"
         />
@@ -84,4 +84,4 @@ class AddProjectAgents extends Component {
   }
 }
 
-export default AddProjectAgents;
+export default AddMentorshipAgents;
