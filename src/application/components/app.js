@@ -11,7 +11,7 @@ import MentorshipDetail from "./mentorships/mentorship-detail/mentorship-detail"
 import AgentListing from "./agents/agent-listing/agent-listing";
 import AgentDetail from "./agents/agent-detail/agent-detail";
 import AddAgent from "./agents/add-agent/add-agent";
-import AddMentorship from "./mentorships/add-mentorships/add-mentorships";
+import AddMentorship from "./mentorships/add-mentorship/add-mentorship";
 import { doesArrayContainAllItems, sortAgents } from "../helpers";
 import "./app.scss";
 import "./normalize.scss";
@@ -277,7 +277,7 @@ class App extends Component {
             }
           />
           <Route
-            path="/mentorships/:mentorships_id"
+            path="/mentorships/:mentorship_id"
             exact
             render={props =>
               loggedIn ? <MentorshipDetail {...props} /> : <Redirect to="/login" />
