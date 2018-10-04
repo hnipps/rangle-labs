@@ -1,11 +1,11 @@
 const express = require('express');
 const Router = express.Router;
 const router = Router();
-const Project = require('../models/Project');
+const Mentorship = require('../models/Mentorship');
 
 router.get('/', async (req, res, next) => {
   try {
-    const docs = await Project.find().populate('agents').populate('technologies').populate('projectLead');
+    const docs = await Mentorship.find().populate('agents').populate('technologies').populate('mentorshipLead');
     res.status(200).json({docs});
   } catch (err) {
     console.error("An error occurred:", err);
@@ -13,11 +13,11 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:project_id', async (req, res, next) => {
+router.get('/:mentorship_id', async (req, res, next) => {
 
   try {
-    const { project_id } = req.params;
-    const docs = await Project.findById(project_id).populate('agents').populate('technologies').populate('projectLead');
+    const { mentorship_id } = req.params;
+    const docs = await Mentorship.findById(mentorship_id).populate('agents').populate('technologies').populate('mentorshipLead');
     res.status(200).send(docs);
   } catch (err) {
     console.error("An error occurred:", err);
@@ -25,36 +25,36 @@ router.get('/:project_id', async (req, res, next) => {
   }
 });
 
-// Add a new project
+// Add a new mentorship
 router.post("/", async (req, res) => {
-  const project = new Project({
+  const mentorship = new Mentorship({
     title: req.body.title,
     description: req.body.description,
     difficulty: req.body.difficulty,
     status: req.body.status,
     technologies: req.body.technologies,
-    projectLead: req.body.projectLead,
+    mentorshipLead: req.body.mentorshipLead,
     agents: req.body.agents,
     trelloBoardUrl: req.body.trelloBoardUrl,
     githubUrl: req.body.githubUrl
   });
 
-  project
+  mentorship
     .save()
     .then(doc => {
       res.status(200).send({ message: "success", payload: doc });
     })
     .catch(err => {
-      console.error("An error occurred while adding a new project:", err);
+      console.error("An error occurred while adding a new mentorship:", err);
       res.status(500).send({ message: err.message });
     });
 });
 
-// Update an existing project
-router.patch("/:project_id", async (req, res, next) => {
+// Update an existing mentorship
+router.patch("/:mentorship_id", async (req, res, next) => {
   try {
-    const { project_id } = req.params;
-    const doc = await Project.findByIdAndUpdate(project_id, req.body);
+    const { mentorship_id } = req.params;
+    const doc = await Mentorship.findByIdAndUpdate(mentorship_id, req.body);
     res.status(200).send(doc);
   } catch (err) {
     console.error("An error occurred while updating an existing agent:", err);
@@ -62,15 +62,15 @@ router.patch("/:project_id", async (req, res, next) => {
   }
 });
 
-// Delete a project
-router.delete("/:project_id", async (req, res, next) => {
+// Delete a mentorship
+router.delete("/:mentorship_id", async (req, res, next) => {
   console.log("DELETING A PROJECT");
   try {
-    const { project_id } = req.params;
-    const doc = await Project.findByIdAndRemove(project_id);
+    const { mentorship_id } = req.params;
+    const doc = await Mentorship.findByIdAndRemove(mentorship_id);
     res.status(204).send(doc);
   } catch (err) {
-    console.log("An error occurred while deleting a project:", err);
+    console.log("An error occurred while deleting a mentorship:", err);
     next(err);
   }
 });

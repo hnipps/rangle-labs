@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const projectSchema = new Schema({
+const mentorshipSchema = new Schema({
   title: {
     type: String,
     required: true
@@ -24,7 +24,7 @@ const projectSchema = new Schema({
       ref: "Technology"
     }
   ],
-  projectLead: [
+  mentorshipLead: [
     {
       type: Schema.Types.ObjectId,
       ref: "Agent"
@@ -46,4 +46,4 @@ const projectSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Project", projectSchema);
+module.exports = mongoose.model("Mentorship", mentorshipSchema);

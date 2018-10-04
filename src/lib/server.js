@@ -86,7 +86,7 @@ const authRequired = (req, res, next) => {
 
 app.use("/users", require("./api/users"));
 app.use("/agents", authRequired, require("./api/agents"));
-app.use("/projects", authRequired, require("./api/projects"));
+app.use("/mentorships", authRequired, require("./api/mentorships"));
 app.use("/technologies", authRequired, require("./api/technologies"));
 
 const statusCodes = {
