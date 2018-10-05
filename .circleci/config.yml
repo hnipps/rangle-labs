@@ -17,7 +17,7 @@ jobs:
       - run: cat ~/.ssh/known_hosts
       - run: pwd
       - run: ls -a 
-      # - run: scp -i ~/.ssh/id_rsa_6d2860630d1dca2ffebb80485495d4ab -r public ubuntu@ec2-35-182-2-244.ca-central-1.compute.amazonaws.com:/home/ubuntu/app
+      - run: scp -i ~/.ssh/id_rsa_6d2860630d1dca2ffebb80485495d4ab -o StrictHostKeyChecking=no -r public ubuntu@ec2-35-182-2-244.ca-central-1.compute.amazonaws.com:/home/ubuntu/app
 workflows:
     version: 2
     just_build:
