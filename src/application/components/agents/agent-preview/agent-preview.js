@@ -61,7 +61,7 @@ class AgentPreview extends Component {
         <CardHeader>
           <AgentStatus status={agentStatus} ></AgentStatus>
         </CardHeader>
-        <CardContent>
+        <CardContent alignment="tc">
           <Link className="no-underline" to={`/agents/${agent._id}`}>
             <img
               className="br-100 h4 w4 dib ba b--black-05 pa2"

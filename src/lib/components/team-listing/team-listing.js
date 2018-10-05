@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Button from "../button/button";
-
+import './team-listing.scss'
 class TeamListing extends Component {
 
   createTeamListing = teamMembers => {
@@ -18,19 +18,19 @@ class TeamListing extends Component {
           removeButton = <Button value={i} color={"dark-red"} onClick={this.props.onRemoveClick}>Remove</Button>
         }
         return (
-          <li className="dib mr1 mb1 tc h4" key={teamMember._id}>
+          <li className="dib ma1 tc h1" key={teamMember._id}>
             <Link
-              className=""
               to={`/agents/${teamMember._id}`}
             >
-              <div>
-                <img className="mw3 br-100"
+              <div className="z-1 relative">
+                <img className="agent-size br-100 relative z-2"
                   src={teamMember.image}
                   alt={`${teamMember.firstName} ${teamMember.lastName}`}
                 />
+                {this.props.leadFlag && <span role="img" aria-label="flag" className="v-mid dib absolute top-0 z-3 lead-flag">🚩</span>}
               </div>
             </Link>
-            <h2 className="f7 mw3 center mt0 mb2">{`${teamMember.firstName} ${teamMember.lastName}`}</h2>
+            { this.props.renderName && <h2 className="f7 mw3 center mt0 mb2">{`${teamMember.firstName} ${teamMember.lastName}`}</h2> } 
             {addButton}
             {removeButton}
           </li>
@@ -45,7 +45,7 @@ class TeamListing extends Component {
     }
 
   
-    return <ul className="list ph2 pv0 ma0 h4 mb2 dt w-100">{team}</ul>;
+    return <ul className="list ph0 pv0 ma0 h3 mb2 di w-100">{team}</ul>;
   };
 
   render() {

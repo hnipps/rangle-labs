@@ -295,6 +295,7 @@ class AddProject extends Component {
             onRemoveClick={this.removePersonFromProject(
               projectRoles.projectLead
             )}
+            renderName
             placeholder="This project doesn't have an owner 😢"
           />
         </div>
@@ -308,6 +309,7 @@ class AddProject extends Component {
           <TeamListing
             teamMembers={this.state.project.agents}
             onRemoveClick={this.removePersonFromProject(projectRoles.agents)}
+            renderName
             placeholder="This team has no members 😱"
           />
         </div>

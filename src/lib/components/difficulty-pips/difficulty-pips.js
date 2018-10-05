@@ -22,7 +22,7 @@ const DifficultyPips = ({ difficulty, size }) => {
   }
 
   return (
-    <div className="dtc v-mid">
+    <div className="v-mid">
       {pips}
     </div>
   );

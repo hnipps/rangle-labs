@@ -81,19 +81,22 @@ class ProjectDetail extends Component {
               </div>
               {trelloBoardLink}
               {githubUrl}
-              <DifficultyPips difficulty={project.difficulty} size="L" />
             </CardHeader>
             <h1>{project.title}</h1>
             <p>{project.description}</p>
+            <p>Difficulty:</p>
+            <DifficultyPips difficulty={project.difficulty} size="L" />
             <p>Technologies Used:</p>
             {/* TECH TOOL LISTING */}
             <TechListing technologies={project.technologies} />
             {/* PROJECT LEAD LISTING */}
             <p>Project Owner:</p>
-            <TeamListing teamMembers={project.projectLead} />
+            <TeamListing teamMembers={project.projectLead} renderName />
             {/* TEAM LISTING*/}
             <p>Team:</p>
-            <TeamListing teamMembers={project.agents} />
+            <div className="mb2">
+              <TeamListing teamMembers={project.agents} renderName />
+            </div>
             <LinkButton to={`/edit-project/${project._id}`} color="green">
               {`Edit Details for ${project.title}`}
             </LinkButton>
