@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# migrations 
+/migrations/migration-backup/*
+
 # misc
 .DS_Store
 .env
