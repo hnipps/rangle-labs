@@ -295,12 +295,8 @@ class AddMentorship extends Component {
             onRemoveClick={this.removePersonFromMentorship(
               mentorshipRoles.mentorshipLead
             )}
-<<<<<<< HEAD:src/application/components/projects/add-project/add-project.js
-            renderName
-            placeholder="This project doesn't have an owner 😢"
-=======
             placeholder="This mentorship doesn't have an owner 😢"
->>>>>>> refactor add-project -> add-mentorship:src/application/components/projects/add-mentorship/add-mentorship.js
+            renderName
           />
         </div>
 
@@ -311,14 +307,9 @@ class AddMentorship extends Component {
           />
           <FormLabel>Current team members:</FormLabel>
           <TeamListing
-<<<<<<< HEAD:src/application/components/projects/add-project/add-project.js
-            teamMembers={this.state.project.agents}
-            onRemoveClick={this.removePersonFromProject(projectRoles.agents)}
-            renderName
-=======
             teamMembers={this.state.mentorship.agents}
             onRemoveClick={this.removePersonFromMentorship(mentorshipRoles.agents)}
->>>>>>> refactor add-project -> add-mentorship:src/application/components/projects/add-mentorship/add-mentorship.js
+            renderName
             placeholder="This team has no members 😱"
           />
         </div>

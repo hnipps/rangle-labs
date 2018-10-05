@@ -81,7 +81,6 @@ class MentorshipDetail extends Component {
               </div>
               {trelloBoardLink}
               {githubUrl}
-              <DifficultyPips difficulty={mentorship.difficulty} size="L" />
             </CardHeader>
             <h1>{mentorship.title}</h1>
             <p>{mentorship.description}</p>
@@ -92,10 +91,11 @@ class MentorshipDetail extends Component {
             <TechListing technologies={mentorship.technologies} />
             {/* MENTORSHIP LEAD LISTING */}
             <p>Mentorship Owner:</p>
-            <TeamListing teamMembers={mentorship.mentorshipLead} />
+            <TeamListing teamMembers={mentorship.mentorshipLead} renderName/>
             {/* TEAM LISTING*/}
             <p>Team:</p>
-            <TeamListing teamMembers={mentorship.agents} />
+            <div className="mb3">   <TeamListing teamMembers={mentorship.agents} renderName/> </div>
+         
             <LinkButton to={`/edit-mentorship/${mentorship._id}`} color="green">
               {`Edit Details for ${mentorship.title}`}
             </LinkButton>
