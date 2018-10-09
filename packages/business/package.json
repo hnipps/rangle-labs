@@ -5,6 +5,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "server": "nodemon --inspect ./src/server.js",
+    "start": "npm run server",
     "run": "tsc --project ./config/tsconfig.json && node ./dist/index.js",
     "build": "tsc --project ./config/tsconfig.json",
     "prep": "tsc --project ./config/tsconfig.json",
@@ -26,6 +28,7 @@
     "fix": "prettier --write '**/*.{css,js,json,md,scss,ts}'",
     "pack": "yarn pack && find ./ -type f -name *-v[0-9].[0-9].[0-9].tgz -exec cp '{}' package.tgz ';' && find ./ -type f -name *-v[0-9].[0-9].[0-9].tgz -exec rm '{}' ';'"
   },
+  "proxy": "http://localhost:8080",
   "devDependencies": {
     "data": "*",
     "express": "^4.16.3",

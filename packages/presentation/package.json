@@ -52,8 +52,7 @@
     "client": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "server": "nodemon src/lib/server.js --ignore src/application/",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start": "npm run client",
     "seeds": "node src/lib/seeds/index.js",
     "fix": "eslint -c ./config/.eslintrc src/**/*.js --fix || exit 0",
     "lint": "eslint -c ./config/.eslintrc src/**/*.js || exit 0"
