@@ -1,0 +1,9 @@
+{
+  "extends": "../../../config/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../dist",
+    "lib": ["es2018", "dom"],
+    "noImplicitAny": false
+  },
+  "include": ["../src/**/*.ts"]
+}

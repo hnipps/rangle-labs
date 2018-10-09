@@ -1,0 +1,40 @@
+{
+  "name": "business",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "run": "tsc --project ./config/tsconfig.json && node ./dist/index.js",
+    "build": "tsc --project ./config/tsconfig.json",
+    "prep": "tsc --project ./config/tsconfig.json",
+    "watch": "nodemon --watch ./dist/index.js",
+    "setup": "yarn run clean && yarn run reset && yarn run bootstrap",
+    "test": "yarn run jest",
+    "lerna:test:watch": "yarn run jest:watch",
+    "lerna:test:coverage": "yarn run jest:coverage",
+    "build:watch": "tsc --watch --project ./config/tsconfig.json",
+    "clean": "rimraf ./dist",
+    "reset": "rimraf ./node_modules",
+    "bootstrap": "lerna bootstrap",
+    "jest": "jest",
+    "jest:watch": "jest --watch",
+    "jest:coverage": "jest --coverage",
+    "lint": "tslint -p config -c ./config/tslint.json",
+    "lint:fix": "tslint -p config -c ./config/tslint.json --fix",
+    "pretty:check": "prettier --list-different '**/*.{css,js,json,md,scss,ts}'",
+    "fix": "prettier --write '**/*.{css,js,json,md,scss,ts}'",
+    "pack": "yarn pack && find ./ -type f -name *-v[0-9].[0-9].[0-9].tgz -exec cp '{}' package.tgz ';' && find ./ -type f -name *-v[0-9].[0-9].[0-9].tgz -exec rm '{}' ';'"
+  },
+  "devDependencies": {
+    "data": "*",
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^14.0.2",
+    "logging": "*",
+    "nodemon": "^1.18.4",
+    "npm-watch": "^0.4.0",
+    "server": "*",
+    "state-stream": "*"
+  }
+}
