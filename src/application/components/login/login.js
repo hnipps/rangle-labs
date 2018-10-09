@@ -49,6 +49,7 @@ class Login extends Component {
               }
             />
           </a>
+          <a href="/qrauth">Auth by QR</a>
         </div>
       </ContentContainer>
     );

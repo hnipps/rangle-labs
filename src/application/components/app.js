@@ -17,6 +17,7 @@ import "./app.scss";
 import "./normalize.scss";
 import "./borderbox.scss";
 import Login from "./login/login";
+import QRAuth from "./qr-auth/qr-auth";
 
 class App extends Component {
   constructor(props) {
@@ -387,6 +388,15 @@ class App extends Component {
               />
             )}
           />
+          <Route
+            path="/qrauth"
+            exact
+            render={props => (
+              <QRAuth
+                {...props}
+              />
+            )}
+            />
         </div>
       </Router>
     );
