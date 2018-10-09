@@ -23,8 +23,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    if (window.sessionStorage.state) {
-      const sessionState = JSON.parse(window.sessionStorage.state);
+    if (window.localStorage.state) {
+      const sessionState = JSON.parse(window.localStorage.state);
       this.state = sessionState;
     } else {
       this.state = {
@@ -211,6 +211,7 @@ class App extends Component {
         }
       };
       window.sessionStorage.state = JSON.stringify(newState);
+      window.localStorage.state = JSON.stringify(newState);
       return newState;
     });
   };
