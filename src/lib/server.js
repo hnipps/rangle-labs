@@ -114,5 +114,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  await mongoose.connect(uri);
+  await mongoose.connect(uri, { useNewUrlParser: true });
 });
