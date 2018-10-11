@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "start": "lerna run start --progress --stream --parallel",
-    "seed": "lerna run seed --progress --stream",
+    "seed": "lerna run seeds --progress --stream",
     "build": "lerna run build --progress --stream",
     "prep": "lerna run prep --progress --stream",
     "run:watch": "lerna run --parallel run:watch",

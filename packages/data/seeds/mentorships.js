@@ -1,6 +1,7 @@
-const Mentorship = require('../models/Mentorship');
 const agents = require('./agents');
 const technologies = require('./technologies');
+const business = require('business');
+const Mentorship = business.models.mentorship;
 
 const mentorships = [];
 

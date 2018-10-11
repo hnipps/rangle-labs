@@ -1,4 +1,5 @@
-const User = require('../models/User')
+const business = require('business');
+const User = business.models.user;
 
 const users = [];
 

@@ -53,7 +53,6 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "start": "npm run client",
-    "seeds": "node src/lib/seeds/index.js",
     "fix": "eslint -c ./config/.eslintrc src/**/*.js --fix || exit 0",
     "lint": "eslint -c ./config/.eslintrc src/**/*.js || exit 0"
   },

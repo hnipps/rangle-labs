@@ -1,8 +1,11 @@
 require("dotenv").config();
-const User = require('../models/User');
-const Agent = require('../models/Agent');
-const Mentorship = require('../models/Mentorship');
-const Technology = require('../models/Technology');
+
+const business  = require('business');
+const models = business.models;
+const User = models.user;
+const Agent = models.agent;
+const Mentorship = models.mentorship;
+const Technology = models.technology;
 
 const users = require('./users');
 const agents = require('./agents');
