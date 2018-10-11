@@ -8,7 +8,7 @@ node_modules
 /coverage
 
 # migrations 
-/migrations/migration-backup/*
+packages/data/migrations/migration-backup/*
 
 # misc
 .DS_Store
