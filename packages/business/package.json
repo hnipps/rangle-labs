@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "server": "nodemon --inspect ./src/server.js",
+    "server": "nodemon ./src/server.js",
     "start": "npm run server",
     "run": "tsc --project ./config/tsconfig.json && node ./dist/index.js",
     "build": "tsc --project ./config/tsconfig.json",
