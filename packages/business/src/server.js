@@ -98,7 +98,7 @@ app.use((appErr, req, res, next) => {
   res.status(statusCodes.internalServer).json({ appErr: appErr.toString() });
 });
 
-app.use("/", express.static(path.join(__dirname, "../build")));
+app.use("/", express.static(path.join(__dirname, "../../presentation/build")));
 
 app.get("/", (req, res) => {
   res.status(statusCodes.success).json({
@@ -110,7 +110,7 @@ app.get("/", (req, res) => {
 // if the user requests a route that isn't listed here (becuase react-router is taking care of the routing for it),
 // direct the user to the index.html page so that react-router can take over the navigation
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./build/index.html"));
+  res.sendFile(path.join(__dirname, "../../presentation/build/index.html"));
 });
 
 app.listen(PORT, async () => {

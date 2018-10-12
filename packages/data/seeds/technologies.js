@@ -1,4 +1,5 @@
-const Tech = require('../models/Technology');
+const business = require('business');
+const Tech = business.models.technology;
 
 const technologies = [];
 

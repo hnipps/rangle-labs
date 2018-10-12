@@ -1,4 +1,5 @@
-const Agent = require('../models/Agent');
+const business = require('business');
+const Agent = business.models.agent;
 const technologies = require('./technologies');
 
 const agents = [];

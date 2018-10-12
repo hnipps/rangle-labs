@@ -1,0 +1,25 @@
+{
+  "name": "data",
+  "version": "0.0.1",
+  "homepage": "https://github.com/rangle/rangle-labs#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rangle/rangle-labs.git"
+  },
+  "scripts": {
+    "seeds": "node ./seeds/index.js",
+    "migrate:down": "./node_modules/.bin/db-migrate down",
+    "migrate:up": "./node_modules/.bin/db-migrate up"
+  },
+  "bugs": {
+    "url": "https://github.com/rangle/rangle-labs/issues"
+  },
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "business": "^0.0.0",
+    "db-migrate": "^0.11.3",
+    "mongoose": "^5.3.2"
+  }
+}

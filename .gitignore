@@ -1,13 +1,14 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules
+
 
 # testing
 /coverage
 
 # migrations 
-/migrations/migration-backup/*
+packages/data/migrations/migration-backup/*
 
 # misc
 .DS_Store
