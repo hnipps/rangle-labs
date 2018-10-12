@@ -236,14 +236,14 @@ class App extends Component {
             />
             <div className="black b f6 f5-ns dib mr3 v-mid">Rangle Labs</div>
             {/* LINKS */}
+            <Link className="link dim gray f6 f5-ns dib mr3 v-mid" to="/agents">
+              Agents
+            </Link>
             <Link
               className="link dim gray f6 f5-ns dib mr3 v-mid"
               to="/mentorships"
               >
               Mentorships
-            </Link>
-            <Link className="link dim gray f6 f5-ns dib mr3 v-mid" to="/agents">
-              Agents
             </Link>
           </nav>
 
@@ -252,7 +252,7 @@ class App extends Component {
             path="/"
             exact
             render={() =>
-              loggedIn ? <Redirect to="/mentorships" /> : <Redirect to="/login" />
+              loggedIn ? <Redirect to="/agents" /> : <Redirect to="/login" />
             }
           />
           <Route
