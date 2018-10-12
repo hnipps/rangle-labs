@@ -9,7 +9,7 @@ This is a MERN stack (MongoDB, Express, React, Node) web app to keep track of al
 2. In your terminal, cd into the project root folder and run:
 
 ```
-npm install
+yarn install
 ```
 
 3. Install MongoDB if you don't already have it (https://docs.mongodb.com/manual/administration/install-community/).
@@ -22,13 +22,15 @@ mongod
 
 5. Rename `.env-sample` to `.env`
 
-6. This project uses seeds to supply dummy data so that you have something to work with while you're developing. You need to run a command in your terminal to populate the seed data in MongoDB. In the terminal, in the root of your project, run:
+6. In order to login, you'll need to add a Google Auth2.0 Client Id and Secret to `.env`. Speak to the project owner to get hold of these.
+
+7. Copy `.env` into all of the packages in /packages. 
+
+8. This project uses seeds to supply dummy data so that you have something to work with while you're developing. You need to run a command in your terminal to populate the seed data in MongoDB. In the terminal, in the root of your project, run:
 
 ```
-npm run seeds
+yarn seed
 ```
-
-7. In order to login, you'll need to add a Google Auth2.0 Client Id and Secret to `.env`. Speak to the project owner to get hold of these.
 
 Okay, now you should be all set up and ready to go!
 
@@ -45,20 +47,24 @@ This will start the MongoDB database so that you can access the project data.
 2.  Open a second terminal window, navigate into the root folder of the project, and run:
 
 ```
-npm start
+yarn start
 ```
 
 This will start your project and open it in a browser tab.
 
 ## Migrations
 
-1. `./node_modules/db-migrate/bin/db-migrate create [name]` to create new migration scripts with name `name`
+1. ```./packages/data/node_modules/.bin/db-migrate create [name]``` to create new migration scripts with name `name`
 **Note:** When creating a migration scripts, don't forget to add MongoDB Collections backups (`mongodump`) before deleting collections and collection restores (`mongorestore`) while creating Collections
 
-2. `./node_modules/db-migrate/bin/db-migrate up` to execute the migration scripts and bring database up to the latest version
+2. ```yarn migrate:up``` to execute the migration scripts and bring database up to the latest version
 
-3. `./node_modules/db-migrate/bin/db-migrate down` to rollback to the previous database version. (`--count NUM` for `NUM` down migrations)
+3. ```yarn migrate:down``` to rollback to the lowest database version.
+
+4.  ```./packages/data/node_modules/.bin/db-migrate down``` (`--count NUM` for `NUM` down migrations) for more specific rollbacks
 
 ## Acknowledgements
 
 This project used https://github.com/swbloom/react-express-boilerplate as a starting point.
+
+For migrations, we used db-migrate (https://db-migrate.readthedocs.io/en/latest/).
