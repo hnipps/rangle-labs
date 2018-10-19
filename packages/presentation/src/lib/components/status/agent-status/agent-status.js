@@ -10,6 +10,12 @@ class AgentStatus extends Status {
       case 'Available to Mentor':
         this.color = constants.colors.availableColor
         break
+      case 'Available':
+        this.color = constants.colors.availableColor
+        break
+      case 'Unavailable':
+        this.color = constants.colors.unavailableColor
+        break
       default:
         this.color = constants.colors.unavailableColor
     }

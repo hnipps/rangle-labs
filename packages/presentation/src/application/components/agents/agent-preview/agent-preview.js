@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "./agent-preview.scss";
-import Card from "../../../../lib/components/card/card";
-import CardTitle from "../../../../lib/components/card/card-title/card-title";
-import CardContent from "../../../../lib/components/card/card-content/card-content";
-import CardHeader from "../../../../lib/components/card/card-header/card-header";
-import AgentStatus from "../../../../lib/components/status/agent-status/agent-status";
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import './agent-preview.scss'
+import Card from '../../../../lib/components/card/card'
+import CardTitle from '../../../../lib/components/card/card-title/card-title'
+import CardContent from '../../../../lib/components/card/card-content/card-content'
+import CardHeader from '../../../../lib/components/card/card-header/card-header'
+import AgentStatus from '../../../../lib/components/status/agent-status/agent-status'
 
 class AgentPreview extends Component {
   render() {
-    const { agent } = this.props;
+    const { agent } = this.props
 
     const technologies = agent.currentTechnologies.map(tech => {
       switch (tech.name) {
-        case "Angular":
+        case 'Angular':
           return (
             <img
               className="h2"
@@ -21,9 +21,9 @@ class AgentPreview extends Component {
               alt="Angular logo"
               key={`${tech.name}`}
             />
-          );
+          )
 
-        case "React":
+        case 'React':
           return (
             <img
               className="h2"
@@ -31,35 +31,33 @@ class AgentPreview extends Component {
               alt="ReactJS logo"
               key={`${tech.name}`}
             />
-          );
+          )
 
         default:
-          return null;
+          return null
       }
-    });
+    })
 
-    let technologyBar;
+    let technologyBar
     if (
       agent.currentTechnologies.find(tech => {
-        return tech.name === "Angular" || tech.name === "React";
+        return tech.name === 'Angular' || tech.name === 'React'
       }) !== undefined
     ) {
-      technologyBar = (
-        <div className="dib nt4 flex justify-end w4 center">{technologies}</div>
-      );
+      technologyBar = <div className="dib nt4 flex justify-end w4 center">{technologies}</div>
     }
 
-    let agentStatus;
+    let agentStatus
     if (agent.currentFreeAgent) {
-      agentStatus = "Available to Mentor"
+      agentStatus = 'Available'
     } else {
-      agentStatus = "Unavailable to Mentor"
+      agentStatus = 'Unavailable'
     }
 
     return (
       <Card>
         <CardHeader>
-          <AgentStatus status={agentStatus} ></AgentStatus>
+          <AgentStatus status={agentStatus} />
         </CardHeader>
         <CardContent alignment="tc">
           <Link className="no-underline" to={`/agents/${agent._id}`}>
@@ -76,8 +74,8 @@ class AgentPreview extends Component {
           <p>{agent.role}</p>
         </CardContent>
       </Card>
-    );
+    )
   }
 }
 
-export default AgentPreview;
+export default AgentPreview
