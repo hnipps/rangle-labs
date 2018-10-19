@@ -51,9 +51,9 @@ class AgentPreview extends Component {
 
     let agentStatus;
     if (agent.currentFreeAgent) {
-      agentStatus = "Free Agent"
+      agentStatus = "Available to Mentor"
     } else {
-      agentStatus = "Staffed to Project"
+      agentStatus = "Unavailable to Mentor"
     }
 
     return (
