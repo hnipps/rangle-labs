@@ -48,7 +48,7 @@ class AgentPreview extends Component {
     }
 
     let agentStatus
-    if (agent.currentFreeAgent) {
+    if (agent.available) {
       agentStatus = 'Available'
     } else {
       agentStatus = 'Unavailable'

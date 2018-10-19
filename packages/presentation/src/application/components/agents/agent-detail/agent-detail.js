@@ -55,7 +55,7 @@ class AgentDetail extends Component {
 
     if (!this.state.agent) return <h2 className="helvetica center tc moon-gray">Loading...</h2>
 
-    const status = agent.currentFreeAgent ? 'Available to Mentor' : 'Unavailable to Mentor'
+    const status = agent.available ? 'Available to Mentor' : 'Unavailable to Mentor'
 
     return (
       <ContentContainer>

@@ -1,41 +1,41 @@
 // HELPER FUNCTIONS
 
 function doesArrayContainItem(arr, itemInQuestion) {
-  let itemPresent = false;
+  let itemPresent = false
 
-  arr.forEach((arrItem) => {
+  arr.forEach(arrItem => {
     if (arrItem === itemInQuestion) {
-      itemPresent = true;
+      itemPresent = true
     }
-  });
+  })
 
-  return itemPresent;
+  return itemPresent
 }
 
 function doesArrayContainAllItems(haystack, needles) {
   if (needles.length === 0) {
-    return true;
+    return true
   }
-  return needles.every((value) => haystack.indexOf(value) >= 0);
+  return needles.every(value => haystack.indexOf(value) >= 0)
 }
 
 function sortAgents(agents, sortType) {
   if (sortType === 'alphabetical') {
     agents.sort((agent1, agent2) => {
       if (agent1.firstName < agent2.firstName) {
-        return -1;
+        return -1
       }
-      return 1;
+      return 1
     })
   } else if (sortType === 'availability') {
     agents.sort((agent1, agent2) => {
-      if (agent1.currentFreeAgent) {
-        return -1;
+      if (agent1.available) {
+        return -1
       }
-      return 1;
-    });
+      return 1
+    })
   }
-  return agents;
+  return agents
 }
 
-module.exports = { doesArrayContainAllItems, doesArrayContainItem, sortAgents };
+module.exports = { doesArrayContainAllItems, doesArrayContainItem, sortAgents }

@@ -1,30 +1,25 @@
-import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
-import axios from "axios";
-import MentorshipListing from "./mentorships/mentorship-listing/mentorship-listing";
-import MentorshipDetail from "./mentorships/mentorship-detail/mentorship-detail";
-import AgentListing from "./agents/agent-listing/agent-listing";
-import AgentDetail from "./agents/agent-detail/agent-detail";
-import AddAgent from "./agents/add-agent/add-agent";
-import AddMentorship from "./mentorships/add-mentorship/add-mentorship";
-import { doesArrayContainAllItems, sortAgents } from "../helpers";
-import "./app.scss";
-import "./normalize.scss";
-import "./borderbox.scss";
-import Login from "./login/login";
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+import axios from 'axios'
+import MentorshipListing from './mentorships/mentorship-listing/mentorship-listing'
+import MentorshipDetail from './mentorships/mentorship-detail/mentorship-detail'
+import AgentListing from './agents/agent-listing/agent-listing'
+import AgentDetail from './agents/agent-detail/agent-detail'
+import AddAgent from './agents/add-agent/add-agent'
+import AddMentorship from './mentorships/add-mentorship/add-mentorship'
+import { doesArrayContainAllItems, sortAgents } from '../helpers'
+import './app.scss'
+import './normalize.scss'
+import './borderbox.scss'
+import Login from './login/login'
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     if (window.sessionStorage.state) {
-      const sessionState = JSON.parse(window.sessionStorage.state);
-      this.state = sessionState;
+      const sessionState = JSON.parse(window.sessionStorage.state)
+      this.state = sessionState
     } else {
       this.state = {
         mentorships: [],
@@ -32,102 +27,96 @@ class App extends Component {
         technologies: [],
         filters: {
           mentorships: {
-            techTags: []
+            techTags: [],
           },
           agents: {
             active: false,
             techTags: [],
-            sortBy: 'alphabetical'
-          }
+            sortBy: 'alphabetical',
+          },
         },
         user: {
-          loggedIn: false
-        }
-      };
+          loggedIn: false,
+        },
+      }
     }
   }
 
   // get mentorships from database
   getMentorships = async () => {
     try {
-      const res = await axios.get("/mentorships");
-      const mentorships = res.data.docs;
-      this.setState({ mentorships });
+      const res = await axios.get('/mentorships')
+      const mentorships = res.data.docs
+      this.setState({ mentorships })
     } catch (e) {
-      console.error("Something went wrong with getting the mentorships", e);
+      console.error('Something went wrong with getting the mentorships', e)
     }
-  };
+  }
 
   // get agents from database
   getAgents = async () => {
     try {
-      const res = await axios.get("/agents");
-      const agents = res.data;
-      this.setState({ agents });
+      const res = await axios.get('/agents')
+      const agents = res.data
+      this.setState({ agents })
     } catch (e) {
-      console.error("Something went wrong with getting the agents", e);
+      console.error('Something went wrong with getting the agents', e)
     }
-  };
+  }
 
   // get technologies from database
   getTechnologies = async () => {
     try {
-      const res = await axios.get("/technologies");
-      const technologies = res.data.docs;
-      this.setState({ technologies });
+      const res = await axios.get('/technologies')
+      const technologies = res.data.docs
+      this.setState({ technologies })
     } catch (e) {
-      console.error("Something went wrong with getting the technologies", e);
+      console.error('Something went wrong with getting the technologies', e)
     }
-  };
+  }
 
   async componentDidMount() {
-    this.getTechnologies();
+    this.getTechnologies()
   }
 
   // determine which agents should be displayed based on filters
   assembleAgentListing = () => {
-    let currentlyDisplayedAgents = Array.from(this.state.agents);
+    let currentlyDisplayedAgents = Array.from(this.state.agents)
 
     // filter agents by tech filter tags if there are any active ones
     if (this.state.filters.agents.techTags.length) {
       currentlyDisplayedAgents = currentlyDisplayedAgents.filter(agent => {
-        const agentTechIds = agent.currentTechnologies.map(tech => tech._id);
-        return doesArrayContainAllItems(
-          agentTechIds,
-          this.state.filters.agents.techTags
-        );
-      });
+        const agentTechIds = agent.currentTechnologies.map(tech => tech._id)
+        return doesArrayContainAllItems(agentTechIds, this.state.filters.agents.techTags)
+      })
     }
 
     // filter agents if they are active
     if (this.state.filters.agents.active) {
       currentlyDisplayedAgents = currentlyDisplayedAgents.filter(agent => {
-        return agent.currentFreeAgent;
-      });
+        return agent.available
+      })
     }
-    sortAgents(currentlyDisplayedAgents, this.state.filters.agents.sortBy);
+    sortAgents(currentlyDisplayedAgents, this.state.filters.agents.sortBy)
 
-    return currentlyDisplayedAgents;
-  };
+    return currentlyDisplayedAgents
+  }
 
   // determine which mentorships should be displayed based on filters
   assembleMentorshipListing = () => {
-    const allMentorships = Array.from(this.state.mentorships);
-    let currentlyDisplayedMentorships = Array.from(this.state.mentorships);
+    const allMentorships = Array.from(this.state.mentorships)
+    let currentlyDisplayedMentorships = Array.from(this.state.mentorships)
 
     // filter mentorships by tech filter tags if there are any active ones
     if (this.state.filters.mentorships.techTags.length) {
       currentlyDisplayedMentorships = allMentorships.filter(mentorship => {
-        const mentorshipTechIds = mentorship.technologies.map(tech => tech._id);
-        return doesArrayContainAllItems(
-          mentorshipTechIds,
-          this.state.filters.mentorships.techTags
-        );
-      });
+        const mentorshipTechIds = mentorship.technologies.map(tech => tech._id)
+        return doesArrayContainAllItems(mentorshipTechIds, this.state.filters.mentorships.techTags)
+      })
     }
 
-    return currentlyDisplayedMentorships;
-  };
+    return currentlyDisplayedMentorships
+  }
 
   resetTechFilters = entityType => {
     this.setState(prevState => ({
@@ -135,32 +124,32 @@ class App extends Component {
         ...prevState.filters,
         [entityType]: {
           ...prevState.filters[entityType],
-          techTags: []
-        }
-      }
-    }));
-  };
+          techTags: [],
+        },
+      },
+    }))
+  }
 
   // make whichever filter was clicked active or inactive as necessary
   handleTechFilter = (techId, entityType) => {
-    const filterTags = Array.from(this.state.filters[entityType].techTags);
+    const filterTags = Array.from(this.state.filters[entityType].techTags)
 
-    let tagPresent = false;
-    let tagIndex = -1;
-    let count = 0;
+    let tagPresent = false
+    let tagIndex = -1
+    let count = 0
 
     filterTags.forEach(tag => {
       if (tag === techId) {
-        tagPresent = true;
-        tagIndex = count;
+        tagPresent = true
+        tagIndex = count
       }
-      count++;
-    });
+      count++
+    })
 
     if (tagPresent && tagIndex !== -1) {
-      filterTags.splice(tagIndex, 1);
+      filterTags.splice(tagIndex, 1)
     } else {
-      filterTags.push(techId);
+      filterTags.push(techId)
     }
 
     this.setState(prevState => ({
@@ -168,19 +157,22 @@ class App extends Component {
         ...prevState.filters,
         [entityType]: {
           ...prevState.filters[entityType],
-          techTags: filterTags
-        }
-      }
-    }));
-  };
+          techTags: filterTags,
+        },
+      },
+    }))
+  }
 
-  handleSortBy = (sortBy) => {
-    this.setState({ filters: {
-      ...this.state.filters,
-      agents: {
-        ...this.state.filters.agents,
-        sortBy: sortBy
-      }}});
+  handleSortBy = sortBy => {
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        agents: {
+          ...this.state.filters.agents,
+          sortBy: sortBy,
+        },
+      },
+    })
   }
 
   toggleActiveAgentFilter = () => {
@@ -191,14 +183,14 @@ class App extends Component {
           ...prevState.filters,
           agents: {
             ...prevState.filters.agents,
-            active: !this.state.filters.agents.active
-          }
-        }
-      };
+            active: !this.state.filters.agents.active,
+          },
+        },
+      }
 
-      return newState;
-    });
-  };
+      return newState
+    })
+  }
 
   logUserIn = () => {
     this.setState(prevState => {
@@ -206,25 +198,25 @@ class App extends Component {
         ...prevState,
         user: {
           ...prevState.user,
-          loggedIn: true
-        }
-      };
-      window.sessionStorage.state = JSON.stringify(newState);
-      return newState;
-    });
-  };
+          loggedIn: true,
+        },
+      }
+      window.sessionStorage.state = JSON.stringify(newState)
+      return newState
+    })
+  }
 
   countAgentsWithTech = (techId, agents) => {
     const agentsWithTech = agents.filter(agent => {
       return agent.currentTechnologies.some(tech => {
-        return tech._id === techId;
-      });
-    });
-    return agentsWithTech.length;
-  };
+        return tech._id === techId
+      })
+    })
+    return agentsWithTech.length
+  }
 
   render() {
-    const loggedIn = this.state.user.loggedIn;
+    const loggedIn = this.state.user.loggedIn
     return (
       <Router>
         <div className="app">
@@ -239,10 +231,7 @@ class App extends Component {
             <Link className="link dim gray f6 f5-ns dib mr3 v-mid" to="/agents">
               Agents
             </Link>
-            <Link
-              className="link dim gray f6 f5-ns dib mr3 v-mid"
-              to="/mentorships"
-              >
+            <Link className="link dim gray f6 f5-ns dib mr3 v-mid" to="/mentorships">
               Mentorships
             </Link>
           </nav>
@@ -251,9 +240,7 @@ class App extends Component {
           <Route
             path="/"
             exact
-            render={() =>
-              loggedIn ? <Redirect to="/agents" /> : <Redirect to="/login" />
-            }
+            render={() => (loggedIn ? <Redirect to="/agents" /> : <Redirect to="/login" />)}
           />
           <Route
             path="/mentorships"
@@ -266,10 +253,8 @@ class App extends Component {
                   technologies={this.state.technologies}
                   techFilters={this.state.filters.mentorships.techTags}
                   refreshMentorships={() => this.getMentorships()}
-                  handleTechFilter={techId =>
-                    this.handleTechFilter(techId, "mentorships")
-                  }
-                  resetTechFilters={() => this.resetTechFilters("mentorships")}
+                  handleTechFilter={techId => this.handleTechFilter(techId, 'mentorships')}
+                  resetTechFilters={() => this.resetTechFilters('mentorships')}
                 />
               ) : (
                 <Redirect to="/login" />
@@ -294,12 +279,10 @@ class App extends Component {
                   refreshAgents={() => this.getAgents()}
                   technologies={this.state.technologies}
                   techFilters={this.state.filters.agents.techTags}
-                  handleTechFilter={techId =>
-                    this.handleTechFilter(techId, "agents")
-                  }
-                  handleSortBy={(sortBy) => this.handleSortBy(sortBy)}
+                  handleTechFilter={techId => this.handleTechFilter(techId, 'agents')}
+                  handleSortBy={sortBy => this.handleSortBy(sortBy)}
                   toggleActiveAgentFilter={this.toggleActiveAgentFilter}
-                  resetTechFilters={() => this.resetTechFilters("agents")}
+                  resetTechFilters={() => this.resetTechFilters('agents')}
                   countAgentsWithTech={this.countAgentsWithTech}
                 />
               ) : (
@@ -325,9 +308,7 @@ class App extends Component {
           <Route
             path="/agents/:agent_id"
             exact
-            render={props =>
-              loggedIn ? <AgentDetail {...props} /> : <Redirect to="/login" />
-            }
+            render={props => (loggedIn ? <AgentDetail {...props} /> : <Redirect to="/login" />)}
           />
           <Route
             path="/edit-agent/:agent_id"
@@ -379,18 +360,12 @@ class App extends Component {
           <Route
             path="/login"
             exact
-            render={props => (
-              <Login
-                {...props}
-                logUserIn={this.logUserIn}
-                loggedIn={loggedIn}
-              />
-            )}
+            render={props => <Login {...props} logUserIn={this.logUserIn} loggedIn={loggedIn} />}
           />
         </div>
       </Router>
-    );
+    )
   }
 }
 
-export default App;
+export default App
