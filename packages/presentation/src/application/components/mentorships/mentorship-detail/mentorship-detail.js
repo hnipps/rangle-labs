@@ -53,10 +53,10 @@ class MentorshipDetail extends Component {
             {/* TECH TOOL LISTING */}
             <TechListing technologies={mentorship.technologies} />
             {/* MENTORSHIP LEAD LISTING */}
-            <p>Mentorship Owner:</p>
+            <p>Mentor:</p>
             <TeamListing teamMembers={mentorship.mentorshipLead} renderName />
             {/* TEAM LISTING*/}
-            <p>Team:</p>
+            <p>Mentee:</p>
             <div className="mb3">
               {' '}
               <TeamListing teamMembers={mentorship.agents} renderName />{' '}

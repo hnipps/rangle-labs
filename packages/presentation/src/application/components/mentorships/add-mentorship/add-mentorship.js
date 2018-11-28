@@ -206,15 +206,15 @@ class AddMentorship extends Component {
           technologies={this.props.technologies}
           activeTechnologies={mentorship.technologies}
           handleTechClick={techId => this.handleTechClick(techId, 'currentTechnologies')}
-          label="Which technologies are used for this mentorship?"
+          label="Which technologies are being discussed for this mentorship?"
         />
 
         <div className="measure mb2 center">
-          <FormLabel>Who's the mentorship owner?</FormLabel>
+          <FormLabel>Who's the mentor?</FormLabel>
           <AddMentorshipAgents
             addAgentToMentorship={this.addPersonToMentorship(mentorshipRoles.mentorshipLead)}
           />
-          <FormLabel>Current mentorship owner:</FormLabel>
+          <FormLabel>Mentor:</FormLabel>
           <TeamListing
             teamMembers={this.state.mentorship.mentorshipLead}
             onRemoveClick={this.removePersonFromMentorship(mentorshipRoles.mentorshipLead)}
@@ -224,11 +224,11 @@ class AddMentorship extends Component {
         </div>
 
         <div className="measure mb3 center">
-          <FormLabel>Who else is on the mentorship team?</FormLabel>
+          <FormLabel>Who is the mentee?</FormLabel>
           <AddMentorshipAgents
             addAgentToMentorship={this.addPersonToMentorship(mentorshipRoles.agents)}
           />
-          <FormLabel>Current team members:</FormLabel>
+          <FormLabel>Mentee:</FormLabel>
           <TeamListing
             teamMembers={this.state.mentorship.agents}
             onRemoveClick={this.removePersonFromMentorship(mentorshipRoles.agents)}
