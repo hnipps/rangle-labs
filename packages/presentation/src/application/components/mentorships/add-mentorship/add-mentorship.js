@@ -1,181 +1,170 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react'
+import axios from 'axios'
 
 // TODO: Move and rename AddAgentTechnologies, to make it more reusable
-import AddTechnologies from "../../../../lib/components/form/add-technologies/add-technologies.js";
-import AddMentorshipAgents from "./add-mentorship-agents/add-mentorship-agents";
-import TeamListing from "../../../../lib/components/team-listing/team-listing.js";
-import { mentorshipRoles } from "../../../constants.js";
-import FormLabel from "../../../../lib/components/form/form-label/form-label.js";
-import FormInput from "../../../../lib/components/form/form-input/form-input.js";
-import Button from "../../../../lib/components/button/button.js";
-import CenterContentWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper.js";
+import AddTechnologies from '../../../../lib/components/form/add-technologies/add-technologies.js'
+import AddMentorshipAgents from './add-mentorship-agents/add-mentorship-agents'
+import TeamListing from '../../../../lib/components/team-listing/team-listing.js'
+import { mentorshipRoles } from '../../../constants.js'
+import FormLabel from '../../../../lib/components/form/form-label/form-label.js'
+import FormInput from '../../../../lib/components/form/form-input/form-input.js'
+import Button from '../../../../lib/components/button/button.js'
+import CenterContentWrapper from '../../../../lib/components/form/center-content-wrapper/center-content-wrapper.js'
 
 class AddMentorship extends Component {
-  statusList = ["Active", "Hiatus", "Backlog"];
+  statusList = ['Active', 'Hiatus', 'Backlog']
 
-  _radioInputs = [false, false, false, false, false];
+  _radioInputs = [false, false, false, false, false]
 
   state = {
     mentorship: {
-      title: "",
-      description: "",
+      title: '',
+      description: '',
       difficulty: 0,
       status: this.statusList[2],
       technologies: [],
       mentorshipLead: [],
       agents: [],
-      trelloBoardUrl: "",
-      githubUrl: ""
-    }
-  };
+      trelloBoardUrl: '',
+      githubUrl: '',
+    },
+  }
 
   getMentorship = async mentorship_id => {
-    const res = await axios.get(`/mentorships/${mentorship_id}`);
-    return res.data;
-  };
+    const res = await axios.get(`/mentorships/${mentorship_id}`)
+    return res.data
+  }
 
   async componentDidMount() {
     // if we are on the "Edit an Agent" page, get the agent to edit by id
     if (this.props.edit) {
-      const { mentorship_id } = this.props.match.params;
-      const mentorship = await this.getMentorship(mentorship_id);
-      this.setState({ mentorship });
+      const { mentorship_id } = this.props.match.params
+      const mentorship = await this.getMentorship(mentorship_id)
+      this.setState({ mentorship })
     }
   }
 
   handleTechClick = techId => {
-    const previousTechnologies = Array.from(this.state.mentorship.technologies);
+    const previousTechnologies = Array.from(this.state.mentorship.technologies)
 
-    const matchingTech = previousTechnologies.filter(
-      tech => tech._id === techId
-    );
+    const matchingTech = previousTechnologies.filter(tech => tech._id === techId)
 
-    let alteredTechnologies;
+    let alteredTechnologies
 
     if (matchingTech.length) {
-      alteredTechnologies = previousTechnologies.filter(
-        tech => tech._id !== techId
-      );
+      alteredTechnologies = previousTechnologies.filter(tech => tech._id !== techId)
     } else {
-      alteredTechnologies = previousTechnologies;
+      alteredTechnologies = previousTechnologies
 
-      const techToAdd = this.props.technologies.find(
-        tech => tech._id === techId
-      );
-      alteredTechnologies.push(techToAdd);
+      const techToAdd = this.props.technologies.find(tech => tech._id === techId)
+      alteredTechnologies.push(techToAdd)
     }
 
     this.setState(prevState => ({
       mentorship: {
         ...prevState.mentorship,
-        technologies: alteredTechnologies
-      }
-    }));
-  };
+        technologies: alteredTechnologies,
+      },
+    }))
+  }
 
   onInput = event => {
-    const name = event.target.name;
-    const value =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
+    const name = event.target.name
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
 
     this.setState(prevState => ({
       mentorship: {
         ...prevState.mentorship,
-        [name]: value
-      }
-    }));
-  };
+        [name]: value,
+      },
+    }))
+  }
 
   addNewMentorship = async mentorship => {
     try {
-      const res = await axios.post("/mentorships", mentorship);
+      const res = await axios.post('/mentorships', mentorship)
 
       if (res) {
-        this.props.history.push("/mentorships");
+        this.props.history.push('/mentorships')
       }
     } catch (err) {
-      console.error("There was an error adding a new mentorship:", err);
+      console.error('There was an error adding a new mentorship:', err)
     }
-  };
+  }
 
   editExistingMentorship = async mentorship => {
-    const { mentorship_id } = this.props.match.params;
+    const { mentorship_id } = this.props.match.params
 
     try {
-      const res = await axios.patch(`/mentorships/${mentorship_id}`, mentorship);
+      const res = await axios.patch(`/mentorships/${mentorship_id}`, mentorship)
 
       if (res) {
-        this.props.history.push(`/mentorships/${mentorship_id}`);
+        this.props.history.push(`/mentorships/${mentorship_id}`)
       }
     } catch (err) {
-      console.error("There was an error editing an existing mentorship", err);
+      console.error('There was an error editing an existing mentorship', err)
     }
-  };
+  }
 
   handleSubmission = event => {
-    event.preventDefault();
-    const mentorship = this.state.mentorship;
+    event.preventDefault()
+    const mentorship = this.state.mentorship
 
     if (this.props.edit) {
-      this.editExistingMentorship(mentorship);
+      this.editExistingMentorship(mentorship)
     } else {
-      this.addNewMentorship(mentorship);
+      this.addNewMentorship(mentorship)
     }
-  };
+  }
 
   cancelAction = event => {
-    event.preventDefault();
-    const { mentorship_id } = this.props.match.params;
-    this.props.history.push(`/mentorships/${mentorship_id}`);
-  };
+    event.preventDefault()
+    const { mentorship_id } = this.props.match.params
+    this.props.history.push(`/mentorships/${mentorship_id}`)
+  }
 
   addPersonToMentorship = role => {
     return teamMember => {
-      const newPeople = [...this.state.mentorship[role]];
-      newPeople.push(teamMember);
+      const newPeople = [...this.state.mentorship[role]]
+      newPeople.push(teamMember)
       this.setState(prevState => ({
         mentorship: {
           ...prevState.mentorship,
-          [role]: newPeople
-        }
-      }));
-    };
-  };
+          [role]: newPeople,
+        },
+      }))
+    }
+  }
 
   removePersonFromMentorship = role => {
     return event => {
-      event.preventDefault();
-      const personIndex = event.target.value;
-      const newPeople = [...this.state.mentorship[role]];
-      newPeople.splice(personIndex, 1);
+      event.preventDefault()
+      const personIndex = event.target.value
+      const newPeople = [...this.state.mentorship[role]]
+      newPeople.splice(personIndex, 1)
       this.setState(prevState => ({
         mentorship: {
           ...prevState.mentorship,
-          [role]: newPeople
-        }
-      }));
-    };
-  };
+          [role]: newPeople,
+        },
+      }))
+    }
+  }
 
   render() {
-    const { mentorship } = this.state;
+    const { mentorship } = this.state
 
     // get the agent name for headings - if one exists
-    const mentorshipAppellation = mentorship.title ? mentorship.title : "this mentorship";
+    const mentorshipAppellation = mentorship.title ? mentorship.title : 'this mentorship'
 
     // determine which heading to show
     const heading = this.props.edit
       ? `Edit Details for ${mentorshipAppellation}`
-      : `Add a Mentorship`;
+      : `Add a Mentorship`
 
     // determine which text to show in the submit and cancel buttons
-    const submitButtonText = this.props.edit
-      ? "Submit Edits"
-      : "Add this Mentorship";
-    const cancelButtonText = "Cancel Without Saving";
+    const submitButtonText = this.props.edit ? 'Submit Edits' : 'Add this Mentorship'
+    const cancelButtonText = 'Cancel Without Saving'
 
     return (
       <CenterContentWrapper>
@@ -199,20 +188,12 @@ class AddMentorship extends Component {
           value={mentorship.description}
           onChange={this.onInput}
         />
-        <FormLabel htmlFor="difficulty">
-          How difficult is this mentorship?
-        </FormLabel>
-        <fieldset
-          id="mentorship_difficulty"
-          className="bn pl0 flex justify-center mb2"
-        >
+        <FormLabel htmlFor="difficulty">How difficult is this mentorship?</FormLabel>
+        <fieldset id="mentorship_difficulty" className="bn pl0 flex justify-center mb2">
           {this._radioInputs.map((item, i) => {
-            const radioValue = i + 1;
+            const radioValue = i + 1
             return (
-              <div
-                key={`difficulty_${i}`}
-                className="flex items-center mb2 ph2"
-              >
+              <div key={`difficulty_${i}`} className="flex items-center mb2 ph2">
                 <input
                   name="difficulty"
                   className="mr2"
@@ -220,8 +201,7 @@ class AddMentorship extends Component {
                   id={radioValue}
                   ref={input => (this._radioInputs[i] = input)}
                   checked={
-                    Number(this.state.mentorship.difficulty) ===
-                    Number(this._radioInputs[i].value)
+                    Number(this.state.mentorship.difficulty) === Number(this._radioInputs[i].value)
                   }
                   value={radioValue}
                   onChange={this.onInput}
@@ -230,13 +210,11 @@ class AddMentorship extends Component {
                   {radioValue}
                 </label>
               </div>
-            );
+            )
           })}
         </fieldset>
         <div className="measure mb3 center">
-          <FormLabel htmlFor="status">
-            What's the status of this mentorship?
-          </FormLabel>
+          <FormLabel htmlFor="status">What's the status of this mentorship?</FormLabel>
           <select
             className="w-100 f6 h2 bg-white ma1 b--black-20 mid-gray"
             name="status"
@@ -248,7 +226,7 @@ class AddMentorship extends Component {
                 <option key={`status_${i}`} value={status}>
                   {status}
                 </option>
-              );
+              )
             })}
           </select>
         </div>
@@ -276,25 +254,19 @@ class AddMentorship extends Component {
         <AddTechnologies
           technologies={this.props.technologies}
           activeTechnologies={mentorship.technologies}
-          handleTechClick={techId =>
-            this.handleTechClick(techId, "currentTechnologies")
-          }
+          handleTechClick={techId => this.handleTechClick(techId, 'currentTechnologies')}
           label="Which technologies are used for this mentorship?"
         />
 
         <div className="measure mb2 center">
           <FormLabel>Who's the mentorship owner?</FormLabel>
           <AddMentorshipAgents
-            addAgentToMentorship={this.addPersonToMentorship(
-              mentorshipRoles.mentorshipLead
-            )}
+            addAgentToMentorship={this.addPersonToMentorship(mentorshipRoles.mentorshipLead)}
           />
           <FormLabel>Current mentorship owner:</FormLabel>
           <TeamListing
             teamMembers={this.state.mentorship.mentorshipLead}
-            onRemoveClick={this.removePersonFromMentorship(
-              mentorshipRoles.mentorshipLead
-            )}
+            onRemoveClick={this.removePersonFromMentorship(mentorshipRoles.mentorshipLead)}
             placeholder="This mentorship doesn't have an owner 😢"
             renderName
           />
@@ -321,8 +293,8 @@ class AddMentorship extends Component {
           {cancelButtonText}
         </Button>
       </CenterContentWrapper>
-    );
+    )
   }
 }
 
-export default AddMentorship;
+export default AddMentorship

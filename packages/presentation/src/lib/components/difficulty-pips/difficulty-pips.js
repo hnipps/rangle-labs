@@ -1,31 +1,27 @@
-import React from "react";
+import React from 'react'
 
 const DifficultyPips = ({ difficulty, size }) => {
-  const pips = [];
-  const maxpips = 5;
-  let sizeClasses;
-  let pipColourClass;
+  const pips = []
+  const maxpips = 5
+  let sizeClasses
+  let pipColourClass
 
-  if (size === "L") {
-    sizeClasses = "h2 w2";
+  if (size === 'L') {
+    sizeClasses = 'h2 w2'
   } else {
-    sizeClasses = "h1 w1";
+    sizeClasses = 'h1 w1'
   }
 
   for (let i = 0; i < maxpips; i++) {
-    const key = i;
-    pipColourClass = i < difficulty ? 'dark' : 'light';
+    const key = i
+    pipColourClass = i < difficulty ? 'dark' : 'light'
     const pip = (
       <div className={`${sizeClasses} v-mid bg-${pipColourClass}-blue br-100 dib`} key={key} />
-    );
-    pips.push(pip);
+    )
+    pips.push(pip)
   }
 
-  return (
-    <div className="v-mid">
-      {pips}
-    </div>
-  );
-};
+  return <div className="v-mid">{pips}</div>
+}
 
-export default DifficultyPips;
+export default DifficultyPips

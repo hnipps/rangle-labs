@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
 class Button extends Component {
   render() {
@@ -9,13 +9,13 @@ class Button extends Component {
         className={`helvetica bn f5 b no-underline br-pill ph3 pv2 mb2 ml2 dib white bg-${
           this.props.color
         } unselectable`}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: 'pointer' }}
         onClick={this.props.onClick}
       >
         {this.props.children}
       </button>
-    );
+    )
   }
 }
 
-export default Button;
+export default Button

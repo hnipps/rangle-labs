@@ -1,71 +1,67 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import axios from "axios";
+import axios from 'axios'
 
-import TeamListing from "../../../../../lib/components/team-listing/team-listing";
-import FormInput from '../../../../../lib/components/form/form-input/form-input';
+import TeamListing from '../../../../../lib/components/team-listing/team-listing'
+import FormInput from '../../../../../lib/components/form/form-input/form-input'
 
 class AddMentorshipAgents extends Component {
-
-  state;
+  state
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       search: {
         searchResult: [],
-        searchValue: "",
-      }
+        searchValue: '',
+      },
     }
   }
 
   onInput = event => {
-    const name = event.target.name;
-    const value =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
+    const name = event.target.name
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
 
     this.setState(prevState => ({
       search: {
         ...prevState.search,
-        [name]: value
+        [name]: value,
       },
-    }));
-  };
+    }))
+  }
 
   addAgentToMentorship = event => {
-    event.preventDefault();
-    const teamMemberIndex = event.target.value;
-    const teamMember = (this.state.search.searchResult[teamMemberIndex]);
-    this.props.addAgentToMentorship(teamMember);
+    event.preventDefault()
+    const teamMemberIndex = event.target.value
+    const teamMember = this.state.search.searchResult[teamMemberIndex]
+    this.props.addAgentToMentorship(teamMember)
   }
 
   searchForAgent = async event => {
-    this.onInput(event);
-    const searchTerm = event.target.value;
+    this.onInput(event)
+    const searchTerm = event.target.value
 
     if (!searchTerm) {
       this.setState(prevState => ({
         search: {
           ...prevState.search,
           searchResult: [],
-        }
-      }));
-      return;
+        },
+      }))
+      return
     }
-    const res = await axios.get(`/agents/search/${searchTerm}`);
-    
+    const res = await axios.get(`/agents/search/${searchTerm}`)
+
     this.setState(prevState => ({
       search: {
         ...prevState.search,
         searchResult: res.data,
-      }
-    }));
+      },
+    }))
   }
 
   render() {
-    return(
+    return (
       <div>
         <FormInput
           name="searchValue"
@@ -80,8 +76,8 @@ class AddMentorshipAgents extends Component {
           placeholder="Search results will appear here... 🕵️‍♀️"
         />
       </div>
-    );
+    )
   }
 }
 
-export default AddMentorshipAgents;
+export default AddMentorshipAgents
