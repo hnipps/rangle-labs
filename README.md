@@ -24,7 +24,7 @@ mongod
 
 6. In order to login, you'll need to add a Google Auth2.0 Client Id and Secret to `.env`. Speak to the project owner to get hold of these.
 
-7. Copy `.env` into all of the packages in /packages. 
+7. Copy `.env` into all of the packages in /packages.
 
 8. This project uses seeds to supply dummy data so that you have something to work with while you're developing. You need to run a command in your terminal to populate the seed data in MongoDB. In the terminal, in the root of your project, run:
 
@@ -54,14 +54,14 @@ This will start your project and open it in a browser tab.
 
 ## Migrations
 
-1. ```./packages/data/node_modules/.bin/db-migrate create [name]``` to create new migration scripts with name `name`
-**Note:** When creating a migration scripts, don't forget to add MongoDB Collections backups (`mongodump`) before deleting collections and collection restores (`mongorestore`) while creating Collections
+1. Inside of packages/data run `./node_modules/.bin/db-migrate create [name]` to create new migration scripts with name `name`
+   **Note:** When creating a migration scripts, don't forget to add MongoDB Collections backups (`mongodump`) before deleting collections and collection restores (`mongorestore`) while creating Collections
 
-2. ```yarn migrate:up``` to execute the migration scripts and bring database up to the latest version
+2. `yarn migrate:up` to execute the migration scripts and bring database up to the latest version
 
-3. ```yarn migrate:down``` to rollback to the lowest database version.
+3. `yarn migrate:down` to rollback to the lowest database version.
 
-4.  ```./packages/data/node_modules/.bin/db-migrate down``` (`--count NUM` for `NUM` down migrations) for more specific rollbacks
+4. `./packages/data/node_modules/.bin/db-migrate down` (`--count NUM` for `NUM` down migrations) for more specific rollbacks
 
 ## Acknowledgements
 
