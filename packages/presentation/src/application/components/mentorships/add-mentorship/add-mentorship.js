@@ -218,13 +218,13 @@ class AddMentorship extends Component {
           <TeamListing
             teamMembers={this.state.mentorship.mentorshipLead}
             onRemoveClick={this.removePersonFromMentorship(mentorshipRoles.mentorshipLead)}
-            placeholder="This mentorship doesn't have an owner 😢"
+            placeholder="This mentorship doesn't have a mentor 😢"
             renderName
           />
         </div>
 
         <div className="measure mb3 center">
-          <FormLabel>Who is the mentee?</FormLabel>
+          <FormLabel>Who's the mentee?</FormLabel>
           <AddMentorshipAgents
             addAgentToMentorship={this.addPersonToMentorship(mentorshipRoles.agents)}
           />
@@ -233,7 +233,7 @@ class AddMentorship extends Component {
             teamMembers={this.state.mentorship.agents}
             onRemoveClick={this.removePersonFromMentorship(mentorshipRoles.agents)}
             renderName
-            placeholder="This team has no members 😱"
+            placeholder="This mentorship doesn't have a mentee 😱"
           />
         </div>
 
