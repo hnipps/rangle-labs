@@ -2,38 +2,42 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const agentSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    required: false,
+  },
+  image: {
+    type: String,
+    required: false,
+  },
+  currentTechnologies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Technology',
     },
-    lastName: {
-        type: String,
-        required: true
+  ],
+  aspirationalTechnologies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Technology',
     },
-    role: {
-        type: String,
-        required: false,
-    },
-    image: {
-        type: String,
-        required: false,
-    },
-    currentTechnologies: [{
-        type: Schema.Types.ObjectId, 
-        ref: 'Technology',
-    }],
-    aspirationalTechnologies: [{
-        type: Schema.Types.ObjectId, 
-        ref: 'Technology',
-    }],
-    currentFreeAgent:  {
-        type: Boolean,
-        required: false,
-    },
-    userId: {
-        type: String,
-        required: false
-    }
-});
+  ],
+  available: {
+    type: Boolean,
+    required: false,
+  },
+  userId: {
+    type: String,
+    required: false,
+  },
+})
 
-module.exports = mongoose.model('Agent', agentSchema);
+module.exports = mongoose.model('Agent', agentSchema)

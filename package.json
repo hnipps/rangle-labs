@@ -8,7 +8,7 @@
   "scripts": {
     "start": "lerna run start --progress --stream --parallel",
     "seed": "lerna run seeds --progress --stream",
-    "migrate": "lerna run migrate:down --progress --stream",
+    "migrate:down": "lerna run migrate:down --progress --stream",
     "migrate:up": "lerna run migrate:up --progress --stream",
     "build": "lerna run build --progress --stream",
     "prep": "lerna run prep --progress --stream",
