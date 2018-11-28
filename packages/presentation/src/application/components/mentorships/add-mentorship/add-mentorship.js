@@ -12,7 +12,7 @@ import Button from '../../../../lib/components/button/button.js'
 import CenterContentWrapper from '../../../../lib/components/form/center-content-wrapper/center-content-wrapper.js'
 
 class AddMentorship extends Component {
-  statusList = ['Active', 'Hiatus', 'Backlog']
+  statusList = ['Active', 'Hiatus']
 
   _radioInputs = [false, false, false, false, false]
 
@@ -20,13 +20,10 @@ class AddMentorship extends Component {
     mentorship: {
       title: '',
       description: '',
-      difficulty: 0,
       status: this.statusList[2],
       technologies: [],
       mentorshipLead: [],
       agents: [],
-      trelloBoardUrl: '',
-      githubUrl: '',
     },
   }
 
@@ -188,31 +185,6 @@ class AddMentorship extends Component {
           value={mentorship.description}
           onChange={this.onInput}
         />
-        <FormLabel htmlFor="difficulty">How difficult is this mentorship?</FormLabel>
-        <fieldset id="mentorship_difficulty" className="bn pl0 flex justify-center mb2">
-          {this._radioInputs.map((item, i) => {
-            const radioValue = i + 1
-            return (
-              <div key={`difficulty_${i}`} className="flex items-center mb2 ph2">
-                <input
-                  name="difficulty"
-                  className="mr2"
-                  type="radio"
-                  id={radioValue}
-                  ref={input => (this._radioInputs[i] = input)}
-                  checked={
-                    Number(this.state.mentorship.difficulty) === Number(this._radioInputs[i].value)
-                  }
-                  value={radioValue}
-                  onChange={this.onInput}
-                />
-                <label htmlFor={radioValue} className="lh-copy">
-                  {radioValue}
-                </label>
-              </div>
-            )
-          })}
-        </fieldset>
         <div className="measure mb3 center">
           <FormLabel htmlFor="status">What's the status of this mentorship?</FormLabel>
           <select
@@ -230,59 +202,38 @@ class AddMentorship extends Component {
             })}
           </select>
         </div>
-
-        <FormInput
-          id="trelloBoardUrl"
-          name="trelloBoardUrl"
-          aria-describedby="trelloBoardUrl-desc"
-          placeholder="Where can you find the Trello board?"
-          value={mentorship.trelloBoardUrl}
-          onChange={this.onInput}
-          label="Trello Board URL"
-        />
-
-        <FormInput
-          id="githubUrl"
-          name="githubUrl"
-          aria-describedby="githubUrl-desc"
-          placeholder="Does this mentorship have a GitHub repository?"
-          value={mentorship.githubUrl}
-          onChange={this.onInput}
-          label="GitHub URL"
-        />
-
         <AddTechnologies
           technologies={this.props.technologies}
           activeTechnologies={mentorship.technologies}
           handleTechClick={techId => this.handleTechClick(techId, 'currentTechnologies')}
-          label="Which technologies are used for this mentorship?"
+          label="Which technologies are being discussed for this mentorship?"
         />
 
         <div className="measure mb2 center">
-          <FormLabel>Who's the mentorship owner?</FormLabel>
+          <FormLabel>Who's the mentor?</FormLabel>
           <AddMentorshipAgents
             addAgentToMentorship={this.addPersonToMentorship(mentorshipRoles.mentorshipLead)}
           />
-          <FormLabel>Current mentorship owner:</FormLabel>
+          <FormLabel>Mentor:</FormLabel>
           <TeamListing
             teamMembers={this.state.mentorship.mentorshipLead}
             onRemoveClick={this.removePersonFromMentorship(mentorshipRoles.mentorshipLead)}
-            placeholder="This mentorship doesn't have an owner 😢"
+            placeholder="This mentorship doesn't have a mentor 😢"
             renderName
           />
         </div>
 
         <div className="measure mb3 center">
-          <FormLabel>Who else is on the mentorship team?</FormLabel>
+          <FormLabel>Who's the mentee?</FormLabel>
           <AddMentorshipAgents
             addAgentToMentorship={this.addPersonToMentorship(mentorshipRoles.agents)}
           />
-          <FormLabel>Current team members:</FormLabel>
+          <FormLabel>Mentee:</FormLabel>
           <TeamListing
             teamMembers={this.state.mentorship.agents}
             onRemoveClick={this.removePersonFromMentorship(mentorshipRoles.agents)}
             renderName
-            placeholder="This team has no members 😱"
+            placeholder="This mentorship doesn't have a mentee 😱"
           />
         </div>
 

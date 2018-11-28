@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import MentorshipStatus from '../../../../lib/components/status/mentorship-status/mentorship-status'
-import DifficultyPips from '../../../../lib/components/difficulty-pips/difficulty-pips'
 import TeamListing from '../../../../lib/components/team-listing/team-listing'
 import TechListing from '../../../../lib/components/tech-listing/tech-listing'
 import './mentorship-detail.scss'
@@ -39,29 +38,6 @@ class MentorshipDetail extends Component {
 
     if (!this.state.mentorship) return <h2 className="helvetica center tc moon-gray">Loading...</h2>
 
-    let trelloBoardLink
-    if (mentorship.trelloBoardUrl) {
-      trelloBoardLink = (
-        <div className="mb3">
-          <a href={mentorship.trelloBoardUrl}>
-            <img className="h2" src="../assets/trello/trello-mark-blue.png" alt="Trello" />
-          </a>
-        </div>
-      )
-    }
-
-    let githubUrl
-    if (mentorship.githubUrl) {
-      // GitHub-Mark-64px
-      githubUrl = (
-        <div className="mb3">
-          <a href={mentorship.githubUrl}>
-            <img className="h2" src="../assets/github/GitHub-Mark-64px.png" alt="GitHub" />
-          </a>
-        </div>
-      )
-    }
-
     return (
       <ContentContainer>
         <CenterContentWrapper>
@@ -70,21 +46,17 @@ class MentorshipDetail extends Component {
               <div className="dtc v-mid mid-gray mb0">
                 <MentorshipStatus status={mentorship.status} size="L" />
               </div>
-              {trelloBoardLink}
-              {githubUrl}
             </CardHeader>
             <h1>{mentorship.title}</h1>
             <p>{mentorship.description}</p>
-            <p>Difficulty:</p>
-            <DifficultyPips difficulty={mentorship.difficulty} size="L" />
             <p>Technologies Used:</p>
             {/* TECH TOOL LISTING */}
             <TechListing technologies={mentorship.technologies} />
             {/* MENTORSHIP LEAD LISTING */}
-            <p>Mentorship Owner:</p>
+            <p>Mentor:</p>
             <TeamListing teamMembers={mentorship.mentorshipLead} renderName />
             {/* TEAM LISTING*/}
-            <p>Team:</p>
+            <p>Mentee:</p>
             <div className="mb3">
               {' '}
               <TeamListing teamMembers={mentorship.agents} renderName />{' '}

@@ -10,11 +10,8 @@ class MentorshipStatus extends Status {
       case 'Hiatus':
         this.color = constants.colors.hiatusColor
         break
-      case 'Backlog':
-        this.color = constants.colors.backlogColor
-        break
       default:
-        this.color = constants.colors.backlogColor
+        this.color = constants.colors.haitusColor
     }
   }
 }
