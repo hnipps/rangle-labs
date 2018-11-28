@@ -32,10 +32,6 @@ const mentorshipSchema = new Schema({
       ref: 'Agent',
     },
   ],
-  githubUrl: {
-    type: String,
-    required: false,
-  },
 })
 
 module.exports = mongoose.model('Mentorship', mentorshipSchema)

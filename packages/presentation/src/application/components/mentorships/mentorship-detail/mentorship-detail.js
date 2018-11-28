@@ -38,18 +38,6 @@ class MentorshipDetail extends Component {
 
     if (!this.state.mentorship) return <h2 className="helvetica center tc moon-gray">Loading...</h2>
 
-    let githubUrl
-    if (mentorship.githubUrl) {
-      // GitHub-Mark-64px
-      githubUrl = (
-        <div className="mb3">
-          <a href={mentorship.githubUrl}>
-            <img className="h2" src="../assets/github/GitHub-Mark-64px.png" alt="GitHub" />
-          </a>
-        </div>
-      )
-    }
-
     return (
       <ContentContainer>
         <CenterContentWrapper>
@@ -58,7 +46,6 @@ class MentorshipDetail extends Component {
               <div className="dtc v-mid mid-gray mb0">
                 <MentorshipStatus status={mentorship.status} size="L" />
               </div>
-              {githubUrl}
             </CardHeader>
             <h1>{mentorship.title}</h1>
             <p>{mentorship.description}</p>

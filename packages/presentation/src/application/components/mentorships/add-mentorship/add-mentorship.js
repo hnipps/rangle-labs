@@ -24,7 +24,6 @@ class AddMentorship extends Component {
       technologies: [],
       mentorshipLead: [],
       agents: [],
-      githubUrl: '',
     },
   }
 
@@ -203,17 +202,6 @@ class AddMentorship extends Component {
             })}
           </select>
         </div>
-
-        <FormInput
-          id="githubUrl"
-          name="githubUrl"
-          aria-describedby="githubUrl-desc"
-          placeholder="Does this mentorship have a GitHub repository?"
-          value={mentorship.githubUrl}
-          onChange={this.onInput}
-          label="GitHub URL"
-        />
-
         <AddTechnologies
           technologies={this.props.technologies}
           activeTechnologies={mentorship.technologies}
