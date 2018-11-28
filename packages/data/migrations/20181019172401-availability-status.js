@@ -1,4 +1,5 @@
 'use strict'
+var shell = require('shelljs')
 
 var dbm
 var type
@@ -17,17 +18,12 @@ exports.setup = function(options, seedLink) {
 // up modifies all agents by changing the currentFreeAgent field to the availability field. No information
 // is added/lost.
 exports.up = function(db, cb) {
-  db.agents.updateMany({}, { $rename: { currentFreeAgent: 'available' } })
+  shell.exec('mongo rangle-labs ./migrations/mongo-scripts/availabilityUp.js')
   cb()
 }
 
 exports.down = function(db, cb) {
-  db.agents.updateMany(
-    {},
-    {
-      $rename: { available: 'currentFreeAgent' },
-    },
-  )
+  shell.exec('mongo rangle-labs ./migrations/mongo-scripts/availabilityDown.js')
   cb()
 }
 
