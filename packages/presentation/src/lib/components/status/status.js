@@ -5,7 +5,7 @@ class Status extends Component {
   color
 
   determineColor = () => {
-    this.color = constants.colors.backlogColor
+    this.color = constants.colors.haitusColor
   }
 
   render() {

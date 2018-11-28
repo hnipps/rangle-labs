@@ -12,7 +12,7 @@ import Button from '../../../../lib/components/button/button.js'
 import CenterContentWrapper from '../../../../lib/components/form/center-content-wrapper/center-content-wrapper.js'
 
 class AddMentorship extends Component {
-  statusList = ['Active', 'Hiatus', 'Backlog']
+  statusList = ['Active', 'Hiatus']
 
   _radioInputs = [false, false, false, false, false]
 
