@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
 class DetailCardImage extends Component {
   render() {
@@ -8,8 +8,8 @@ class DetailCardImage extends Component {
         alt={this.props.alt}
         src={this.props.src}
       />
-    );
+    )
   }
 }
 
-export default DetailCardImage;
+export default DetailCardImage

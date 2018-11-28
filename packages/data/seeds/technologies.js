@@ -1,41 +1,41 @@
-const business = require('business');
-const Tech = business.models.technology;
+const business = require('business')
+const Tech = business.models.technology
 
-const technologies = [];
+const technologies = []
 
 // TECH
 const react = new Tech({
-    name: 'React',
-});
+  name: 'React',
+})
 
 const redux = new Tech({
-    name: 'Redux',
-});
+  name: 'Redux',
+})
 
 const node = new Tech({
-    name: 'Node',
-});
+  name: 'Node',
+})
 
 const angular = new Tech({
-    name: 'Angular',
-});
+  name: 'Angular',
+})
 
 const vue = new Tech({
-    name: 'Vue',
-});
+  name: 'Vue',
+})
 
 const vuex = new Tech({
-    name: 'Vuex',
-});
+  name: 'Vuex',
+})
 
 const express = new Tech({
-    name: 'Express',
-});
+  name: 'Express',
+})
 
 const docker = new Tech({
-    name: 'Docker',
-});
+  name: 'Docker',
+})
 
-technologies.push(react, redux, node, angular, vue, vuex, express, docker);
+technologies.push(react, redux, node, angular, vue, vuex, express, docker)
 
-module.exports = technologies;
+module.exports = technologies

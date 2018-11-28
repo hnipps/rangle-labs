@@ -1,107 +1,104 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
-import axios from "axios";
+import axios from 'axios'
 
-import TechnologyTag from "../technology-tag/technology-tag";
-import { doesArrayContainItem } from "../../../helpers";
+import TechnologyTag from '../technology-tag/technology-tag'
+import { doesArrayContainItem } from '../../../helpers'
 
 class TechnologySidebar extends Component {
   state = {
     isBeingEdited: false,
-    newTechnology: "",
-    hideLowerPriorityTech: true
-  };
+    newTechnology: '',
+    hideLowerPriorityTech: true,
+  }
 
   determineIfTagIsActiveFilter = tagId => {
-    return doesArrayContainItem(this.props.techFilters, tagId);
-  };
+    return doesArrayContainItem(this.props.techFilters, tagId)
+  }
 
   determineIfTagIsDisabled = techId => {
-    return !doesArrayContainItem(this.props.activeTechnologies, techId);
-  };
+    return !doesArrayContainItem(this.props.activeTechnologies, techId)
+  }
 
   editTechnologies = () => {
     this.setState(prevState => ({
       ...prevState,
-      isBeingEdited: true
-    }));
-  };
+      isBeingEdited: true,
+    }))
+  }
 
   acceptChanges = () => {
     this.setState(prevState => ({
       ...prevState,
-      isBeingEdited: false
-    }));
-  };
+      isBeingEdited: false,
+    }))
+  }
 
   onInput = event => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const name = event.target.name
+    const value = event.target.value
 
     this.setState(prevState => ({
       ...prevState,
-      [name]: value
-    }));
-  };
+      [name]: value,
+    }))
+  }
 
   addTechnology = event => {
-    const newTechnologyName = event.target.value;
+    const newTechnologyName = event.target.value
     this.setState(prevState => ({
       ...prevState,
-      newTechnology: ""
-    }));
-    this.addNewTechnology({ name: newTechnologyName });
-  };
+      newTechnology: '',
+    }))
+    this.addNewTechnology({ name: newTechnologyName })
+  }
 
   keyUpAddTechnology = event => {
     if (event.keyCode === 13) {
-      this.addTechnology(event);
+      this.addTechnology(event)
     }
-  };
+  }
 
   addNewTechnology = async technology => {
     try {
-      const res = await axios.post("/technologies", technology);
+      const res = await axios.post('/technologies', technology)
 
       if (res) {
-        this.props.technologies.push(res.data.payload);
-        this.props.history.push(this.props.parent);
+        this.props.technologies.push(res.data.payload)
+        this.props.history.push(this.props.parent)
       }
     } catch (err) {
-      console.error("There was an error adding a new technology:", err);
+      console.error('There was an error adding a new technology:', err)
     }
-  };
+  }
 
   deleteTechnology = async technologyId => {
     try {
-      const res = await axios.delete(`/technologies/${technologyId}`);
+      const res = await axios.delete(`/technologies/${technologyId}`)
       if (res) {
         const indexToRemove = this.props.technologies.findIndex(tech => {
-          return tech._id === technologyId;
-        });
-        this.props.technologies.splice(indexToRemove, 1);
-        this.props.history.push(this.props.parent);
+          return tech._id === technologyId
+        })
+        this.props.technologies.splice(indexToRemove, 1)
+        this.props.history.push(this.props.parent)
       }
     } catch (err) {
-      console.error("There was an error deleting a new technology:", err);
+      console.error('There was an error deleting a new technology:', err)
     }
-  };
+  }
 
   renderTechnologyTags = technologies => {
-    this.sortTechnologies(technologies);
-    let techToDisplay;
+    this.sortTechnologies(technologies)
+    let techToDisplay
     if (this.state.hideLowerPriorityTech) {
-      techToDisplay = technologies.slice(0, 5);
+      techToDisplay = technologies.slice(0, 5)
     } else {
-      techToDisplay = technologies;
+      techToDisplay = technologies
     }
     return techToDisplay.map(technology => {
-      let agentCount;
+      let agentCount
       if (this.props.countAgentsWithTech) {
-        agentCount = this.props.countAgentsWithTech(
-          technology._id,
-          this.props.agents
-        );
+        agentCount = this.props.countAgentsWithTech(technology._id, this.props.agents)
       }
 
       return (
@@ -115,77 +112,77 @@ class TechnologySidebar extends Component {
           deleteTechnology={this.deleteTechnology}
           agentCount={agentCount}
         />
-      );
-    });
-  };
+      )
+    })
+  }
 
   sortTechnologies = technologies => {
     // This array is in reverse-order, with the most importatn technologies listed last
-    const priorityTech = ["Redux", "Node", "Docker", "React", "Angular"];
+    const priorityTech = ['Redux', 'Node', 'Docker', 'React', 'Angular']
     const techPriorityMap = technologies.map((tech, index) => {
       const priorityIndexA =
         priorityTech.findIndex(priorityTech => {
-          return priorityTech === tech.name;
-        }) + 1;
+          return priorityTech === tech.name
+        }) + 1
 
-      const originalIndexA = index;
+      const originalIndexA = index
 
       if (priorityIndexA > 0) {
         return {
           name: tech.name,
-          priority: priorityIndexA * -10
-        };
+          priority: priorityIndexA * -10,
+        }
       } else {
         return {
           name: tech.name,
-          priority: originalIndexA
-        };
+          priority: originalIndexA,
+        }
       }
-    });
+    })
 
     technologies.sort((a, b) => {
       const techWithPriorityA = techPriorityMap.find(tech => {
-        return tech.name === a.name;
-      });
+        return tech.name === a.name
+      })
       const techWithPriorityB = techPriorityMap.find(tech => {
-        return tech.name === b.name;
-      });
-      const result = techWithPriorityA.priority - techWithPriorityB.priority;
-      return result;
-    });
-  };
+        return tech.name === b.name
+      })
+      const result = techWithPriorityA.priority - techWithPriorityB.priority
+      return result
+    })
+  }
 
   expandTechList = event => {
     this.setState(prevState => ({
       ...prevState,
-      hideLowerPriorityTech: false
-    }));
-  };
+      hideLowerPriorityTech: false,
+    }))
+  }
 
   contractTechList = event => {
     this.setState(prevState => ({
       ...prevState,
-      hideLowerPriorityTech: true
-    }));
-  };
+      hideLowerPriorityTech: true,
+    }))
+  }
 
   render() {
-    const { technologies } = this.props;
+    const { technologies } = this.props
 
-    let editButton;
-    let doneButton;
-    let addTechnologyInput;
+    let editButton
+    let doneButton
+    let addTechnologyInput
     if (this.state.isBeingEdited) {
-      editButton = undefined;
+      editButton = undefined
       doneButton = (
         <a
           className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-dark-red unselectable"
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
           onClick={this.acceptChanges}
         >
           Done
         </a>
-      );
+      )
       addTechnologyInput = (
         <div className="ml2">
           <input
@@ -197,40 +194,36 @@ class TechnologySidebar extends Component {
             onKeyUp={this.keyUpAddTechnology}
           />
         </div>
-      );
+      )
     } else {
       editButton = (
         <a
           className="f7 no-underline br-pill ph2 pv1 mb2 ml2 dib white bg-black unselectable"
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
           onClick={this.editTechnologies}
         >
           Edit
         </a>
-      );
-      doneButton = undefined;
+      )
+      doneButton = undefined
     }
 
-    let expandCloseButtonText;
-    let onClickMethod;
+    let expandCloseButtonText
+    let onClickMethod
     if (this.state.hideLowerPriorityTech) {
-      expandCloseButtonText = "more";
-      onClickMethod = this.expandTechList;
+      expandCloseButtonText = 'more'
+      onClickMethod = this.expandTechList
     } else {
-      expandCloseButtonText = "less";
-      onClickMethod = this.contractTechList;
+      expandCloseButtonText = 'less'
+      onClickMethod = this.contractTechList
     }
     const expandTechButton = (
       <li className="dib mr1 mb1">
-        <button
-          type="button"
-          className="bg-light-gray bn mid-gray f6"
-          onClick={onClickMethod}
-        >
+        <button type="button" className="bg-light-gray bn mid-gray f6" onClick={onClickMethod}>
           {expandCloseButtonText}
         </button>
       </li>
-    );
+    )
 
     return (
       <aside className="helvetica db w-100 mb3">
@@ -245,8 +238,8 @@ class TechnologySidebar extends Component {
         </ul>
         {addTechnologyInput}
       </aside>
-    );
+    )
   }
 }
 
-export default TechnologySidebar;
+export default TechnologySidebar

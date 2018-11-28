@@ -1,74 +1,65 @@
-import React, { Component } from "react";
-import axios from "axios";
-import MentorshipStatus from "../../../../lib/components/status/mentorship-status/mentorship-status";
-import DifficultyPips from "../../../../lib/components/difficulty-pips/difficulty-pips";
-import TeamListing from "../../../../lib/components/team-listing/team-listing";
-import TechListing from "../../../../lib/components/tech-listing/tech-listing";
-import "./mentorship-detail.scss";
-import ContentContainer from "../../../../lib/components/content-container/content-container";
-import CenterContentWrapper from "../../../../lib/components/form/center-content-wrapper/center-content-wrapper";
-import DetailCard from "../../../../lib/components/detail-card/detail-card";
-import LinkButton from "../../../../lib/components/link-button/link-button";
-import Button from "../../../../lib/components/button/button";
-import CardHeader from "../../../../lib/components/card/card-header/card-header";
-import ConfirmationButton from "../../../../lib/components/confirmation-button/confirmation-button";
+import React, { Component } from 'react'
+import axios from 'axios'
+import MentorshipStatus from '../../../../lib/components/status/mentorship-status/mentorship-status'
+import DifficultyPips from '../../../../lib/components/difficulty-pips/difficulty-pips'
+import TeamListing from '../../../../lib/components/team-listing/team-listing'
+import TechListing from '../../../../lib/components/tech-listing/tech-listing'
+import './mentorship-detail.scss'
+import ContentContainer from '../../../../lib/components/content-container/content-container'
+import CenterContentWrapper from '../../../../lib/components/form/center-content-wrapper/center-content-wrapper'
+import DetailCard from '../../../../lib/components/detail-card/detail-card'
+import LinkButton from '../../../../lib/components/link-button/link-button'
+import Button from '../../../../lib/components/button/button'
+import CardHeader from '../../../../lib/components/card/card-header/card-header'
+import ConfirmationButton from '../../../../lib/components/confirmation-button/confirmation-button'
 
 class MentorshipDetail extends Component {
   state = {
-    mentorship: null
-  };
+    mentorship: null,
+  }
 
   getMentorship = async mentorship_id => {
-    const res = await axios.get(`/mentorships/${mentorship_id}`);
-    return res.data;
-  };
+    const res = await axios.get(`/mentorships/${mentorship_id}`)
+    return res.data
+  }
 
   async componentDidMount() {
-    const { mentorship_id } = this.props.match.params;
-    const mentorship = await this.getMentorship(mentorship_id);
-    this.setState({ mentorship });
+    const { mentorship_id } = this.props.match.params
+    const mentorship = await this.getMentorship(mentorship_id)
+    this.setState({ mentorship })
   }
 
   deleteMentorship = async id => {
-    await axios.delete(`/mentorships/${id}`);
-    this.props.history.push("/mentorships");
-  };
+    await axios.delete(`/mentorships/${id}`)
+    this.props.history.push('/mentorships')
+  }
 
   render() {
-    const { mentorship } = this.state;
+    const { mentorship } = this.state
 
-    if (!this.state.mentorship)
-      return <h2 className="helvetica center tc moon-gray">Loading...</h2>;
+    if (!this.state.mentorship) return <h2 className="helvetica center tc moon-gray">Loading...</h2>
 
-    let trelloBoardLink;
+    let trelloBoardLink
     if (mentorship.trelloBoardUrl) {
       trelloBoardLink = (
         <div className="mb3">
           <a href={mentorship.trelloBoardUrl}>
-            <img
-              className="h2"
-              src="../assets/trello/trello-mark-blue.png"
-              alt="Trello"
-            />
+            <img className="h2" src="../assets/trello/trello-mark-blue.png" alt="Trello" />
           </a>
         </div>
-      );
+      )
     }
 
-    let githubUrl;
+    let githubUrl
     if (mentorship.githubUrl) {
       // GitHub-Mark-64px
       githubUrl = (
         <div className="mb3">
           <a href={mentorship.githubUrl}>
-            <img
-              className="h2"
-              src="../assets/github/GitHub-Mark-64px.png"
-              alt="GitHub"
-            />
+            <img className="h2" src="../assets/github/GitHub-Mark-64px.png" alt="GitHub" />
           </a>
         </div>
-      );
+      )
     }
 
     return (
@@ -91,18 +82,21 @@ class MentorshipDetail extends Component {
             <TechListing technologies={mentorship.technologies} />
             {/* MENTORSHIP LEAD LISTING */}
             <p>Mentorship Owner:</p>
-            <TeamListing teamMembers={mentorship.mentorshipLead} renderName/>
+            <TeamListing teamMembers={mentorship.mentorshipLead} renderName />
             {/* TEAM LISTING*/}
             <p>Team:</p>
-            <div className="mb3">   <TeamListing teamMembers={mentorship.agents} renderName/> </div>
-         
+            <div className="mb3">
+              {' '}
+              <TeamListing teamMembers={mentorship.agents} renderName />{' '}
+            </div>
+
             <LinkButton to={`/edit-mentorship/${mentorship._id}`} color="green">
               {`Edit Details for ${mentorship.title}`}
             </LinkButton>
             <ConfirmationButton
               onClick={event => {
-                event.preventDefault();
-                this.deleteMentorship(mentorship._id);
+                event.preventDefault()
+                this.deleteMentorship(mentorship._id)
               }}
             >
               <Button className="delete-mentorship-button" color="dark-red">
@@ -112,8 +106,8 @@ class MentorshipDetail extends Component {
           </DetailCard>
         </CenterContentWrapper>
       </ContentContainer>
-    );
+    )
   }
 }
 
-export default MentorshipDetail;
+export default MentorshipDetail

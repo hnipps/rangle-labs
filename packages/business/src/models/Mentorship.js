@@ -1,49 +1,49 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const mentorshipSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: false
+    required: false,
   },
   difficulty: {
     type: Number,
-    required: false
+    required: false,
   },
   status: {
     type: String,
-    required: false
+    required: false,
   },
   technologies: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Technology"
-    }
+      ref: 'Technology',
+    },
   ],
   mentorshipLead: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Agent"
-    }
+      ref: 'Agent',
+    },
   ],
   agents: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Agent"
-    }
+      ref: 'Agent',
+    },
   ],
   trelloBoardUrl: {
     type: String,
-    required: false
+    required: false,
   },
   githubUrl: {
     type: String,
-    required: false
-  }
-});
+    required: false,
+  },
+})
 
-module.exports = mongoose.model("Mentorship", mentorshipSchema);
+module.exports = mongoose.model('Mentorship', mentorshipSchema)

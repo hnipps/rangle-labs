@@ -1,34 +1,34 @@
-import React, { Component } from "react";
-import ConfirmationButton from "../../../../lib/components/confirmation-button/confirmation-button";
+import React, { Component } from 'react'
+import ConfirmationButton from '../../../../lib/components/confirmation-button/confirmation-button'
 
 class TechnologyTag extends Component {
   handleTagClick = () => {
-    if (this.props.isDisabled || this.props.isBeingEdited) return;
-    this.props.handleTechFilter(this.props.technology._id);
-  };
+    if (this.props.isDisabled || this.props.isBeingEdited) return
+    this.props.handleTechFilter(this.props.technology._id)
+  }
 
   deleteTechnology = event => {
-    event.preventDefault();
-    const technologyId = event.target.value;
-    this.props.deleteTechnology(technologyId);
-  };
+    event.preventDefault()
+    const technologyId = event.target.value
+    this.props.deleteTechnology(technologyId)
+  }
 
   render() {
-    const activeClass = this.props.isActiveFilter ? "bg-dark-red white" : "";
-    let disabledClass;
-    let cursor;
+    const activeClass = this.props.isActiveFilter ? 'bg-dark-red white' : ''
+    let disabledClass
+    let cursor
     if (this.props.isDisabled) {
-      disabledClass = "bg-light-gray";
-      cursor = "not-allowed";
+      disabledClass = 'bg-light-gray'
+      cursor = 'not-allowed'
     } else {
-      disabledClass = "";
-      cursor = "pointer";
+      disabledClass = ''
+      cursor = 'pointer'
     }
     const tagStyle = {
-      cursor
-    };
+      cursor,
+    }
 
-    let removeButton;
+    let removeButton
     if (this.props.isBeingEdited) {
       removeButton = (
         <ConfirmationButton onClick={this.deleteTechnology}>
@@ -39,12 +39,12 @@ class TechnologyTag extends Component {
             x
           </button>
         </ConfirmationButton>
-      );
+      )
     }
 
-    let agentCountIcon;
+    let agentCountIcon
     if (this.props.agentCount >= 0) {
-      agentCountIcon = ` | ${this.props.agentCount}`;
+      agentCountIcon = ` | ${this.props.agentCount}`
     }
 
     return (
@@ -62,8 +62,8 @@ class TechnologyTag extends Component {
           {removeButton}
         </div>
       </li>
-    );
+    )
   }
 }
 
-export default TechnologyTag;
+export default TechnologyTag
