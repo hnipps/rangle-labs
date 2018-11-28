@@ -24,7 +24,6 @@ class AddMentorship extends Component {
       technologies: [],
       mentorshipLead: [],
       agents: [],
-      trelloBoardUrl: '',
       githubUrl: '',
     },
   }
@@ -204,16 +203,6 @@ class AddMentorship extends Component {
             })}
           </select>
         </div>
-
-        <FormInput
-          id="trelloBoardUrl"
-          name="trelloBoardUrl"
-          aria-describedby="trelloBoardUrl-desc"
-          placeholder="Where can you find the Trello board?"
-          value={mentorship.trelloBoardUrl}
-          onChange={this.onInput}
-          label="Trello Board URL"
-        />
 
         <FormInput
           id="githubUrl"

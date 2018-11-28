@@ -38,17 +38,6 @@ class MentorshipDetail extends Component {
 
     if (!this.state.mentorship) return <h2 className="helvetica center tc moon-gray">Loading...</h2>
 
-    let trelloBoardLink
-    if (mentorship.trelloBoardUrl) {
-      trelloBoardLink = (
-        <div className="mb3">
-          <a href={mentorship.trelloBoardUrl}>
-            <img className="h2" src="../assets/trello/trello-mark-blue.png" alt="Trello" />
-          </a>
-        </div>
-      )
-    }
-
     let githubUrl
     if (mentorship.githubUrl) {
       // GitHub-Mark-64px
@@ -69,7 +58,6 @@ class MentorshipDetail extends Component {
               <div className="dtc v-mid mid-gray mb0">
                 <MentorshipStatus status={mentorship.status} size="L" />
               </div>
-              {trelloBoardLink}
               {githubUrl}
             </CardHeader>
             <h1>{mentorship.title}</h1>

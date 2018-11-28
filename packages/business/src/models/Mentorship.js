@@ -32,10 +32,6 @@ const mentorshipSchema = new Schema({
       ref: 'Agent',
     },
   ],
-  trelloBoardUrl: {
-    type: String,
-    required: false,
-  },
   githubUrl: {
     type: String,
     required: false,
