@@ -20,7 +20,6 @@ class AddMentorship extends Component {
     mentorship: {
       title: '',
       description: '',
-      difficulty: 0,
       status: this.statusList[2],
       technologies: [],
       mentorshipLead: [],
@@ -188,31 +187,6 @@ class AddMentorship extends Component {
           value={mentorship.description}
           onChange={this.onInput}
         />
-        <FormLabel htmlFor="difficulty">How difficult is this mentorship?</FormLabel>
-        <fieldset id="mentorship_difficulty" className="bn pl0 flex justify-center mb2">
-          {this._radioInputs.map((item, i) => {
-            const radioValue = i + 1
-            return (
-              <div key={`difficulty_${i}`} className="flex items-center mb2 ph2">
-                <input
-                  name="difficulty"
-                  className="mr2"
-                  type="radio"
-                  id={radioValue}
-                  ref={input => (this._radioInputs[i] = input)}
-                  checked={
-                    Number(this.state.mentorship.difficulty) === Number(this._radioInputs[i].value)
-                  }
-                  value={radioValue}
-                  onChange={this.onInput}
-                />
-                <label htmlFor={radioValue} className="lh-copy">
-                  {radioValue}
-                </label>
-              </div>
-            )
-          })}
-        </fieldset>
         <div className="measure mb3 center">
           <FormLabel htmlFor="status">What's the status of this mentorship?</FormLabel>
           <select

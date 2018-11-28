@@ -35,7 +35,6 @@ router.post('/', async (req, res) => {
   const mentorship = new Mentorship({
     title: req.body.title,
     description: req.body.description,
-    difficulty: req.body.difficulty,
     status: req.body.status,
     technologies: req.body.technologies,
     mentorshipLead: req.body.mentorshipLead,

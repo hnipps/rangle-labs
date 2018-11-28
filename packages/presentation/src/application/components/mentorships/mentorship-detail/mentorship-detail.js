@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import MentorshipStatus from '../../../../lib/components/status/mentorship-status/mentorship-status'
-import DifficultyPips from '../../../../lib/components/difficulty-pips/difficulty-pips'
 import TeamListing from '../../../../lib/components/team-listing/team-listing'
 import TechListing from '../../../../lib/components/tech-listing/tech-listing'
 import './mentorship-detail.scss'
@@ -75,8 +74,6 @@ class MentorshipDetail extends Component {
             </CardHeader>
             <h1>{mentorship.title}</h1>
             <p>{mentorship.description}</p>
-            <p>Difficulty:</p>
-            <DifficultyPips difficulty={mentorship.difficulty} size="L" />
             <p>Technologies Used:</p>
             {/* TECH TOOL LISTING */}
             <TechListing technologies={mentorship.technologies} />

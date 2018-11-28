@@ -9,7 +9,6 @@ const mentorships = []
 const mentorship1 = new Mentorship({
   title: 'Game Progression',
   description: 'Building a website that tracks a users progressions through a game.',
-  difficulty: 3,
   status: 'Hiatus',
   technologies: [technologies[3], technologies[4]],
   mentorshipLead: agents[3],

@@ -10,10 +10,6 @@ const mentorshipSchema = new Schema({
     type: String,
     required: false,
   },
-  difficulty: {
-    type: Number,
-    required: false,
-  },
   status: {
     type: String,
     required: false,
