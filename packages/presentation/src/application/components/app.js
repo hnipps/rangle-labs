@@ -175,7 +175,7 @@ class App extends Component {
     })
   }
 
-  toggleActiveAgentFilter = () => {
+  toggleAvailableMentors = () => {
     this.setState(prevState => {
       const newState = {
         ...prevState,
@@ -281,7 +281,7 @@ class App extends Component {
                   techFilters={this.state.filters.agents.techTags}
                   handleTechFilter={techId => this.handleTechFilter(techId, 'agents')}
                   handleSortBy={sortBy => this.handleSortBy(sortBy)}
-                  toggleActiveAgentFilter={this.toggleActiveAgentFilter}
+                  toggleAvailableMentors={this.toggleAvailableMentors}
                   resetTechFilters={() => this.resetTechFilters('agents')}
                   countAgentsWithTech={this.countAgentsWithTech}
                 />

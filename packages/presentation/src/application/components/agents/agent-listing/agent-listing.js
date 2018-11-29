@@ -90,8 +90,8 @@ class AgentListing extends Component {
             <LinkButton to="/add-agent" color="dark-red">
               Add Agent
             </LinkButton>
-            <Button onClick={this.props.toggleActiveAgentFilter} color="green">
-              Toggle Active Agents
+            <Button onClick={this.props.toggleAvailableMentors} color="green">
+              Toggle Available Mentors
             </Button>
             <CSVLink
               data={this.exportAgents(this.props.agents)}
