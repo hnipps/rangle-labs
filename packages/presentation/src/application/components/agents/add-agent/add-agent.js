@@ -188,7 +188,7 @@ class AddAgent extends Component {
             onChange={this.onInput}
           />
           <label htmlFor="available" className="f5 b mb2 lh-copy">
-            {`Is ${agentAppellation} currently a free agent?`}
+            {`Is ${agentAppellation} available to mentor?`}
           </label>
         </div>
 
