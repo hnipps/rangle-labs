@@ -38,16 +38,16 @@ function getServedPath(appPackageJson) {
 
 // config after eject: we're in ./config/
 module.exports = {
-  dotenv: resolveApp('.env'),
-  appBuild: resolveApp('build'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
-  appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src'),
-  yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp('src/setupTests.js'),
-  appNodeModules: resolveApp('node_modules'),
-  publicUrl: getPublicUrl(resolveApp('package.json')),
-  servedPath: getServedPath(resolveApp('package.json')),
+  dotenv: resolveApp('packages/presentation/.env'),
+  appBuild: resolveApp('packages/presentation/build'),
+  appPublic: resolveApp('packages/presentation/public'),
+  appHtml: resolveApp('packages/presentation/public/index.html'),
+  appIndexJs: resolveApp('packages/presentation/src/index.js'),
+  appPackageJson: resolveApp('packages/presentation/package.json'),
+  appSrc: resolveApp('packages/presentation/src'),
+  yarnLockFile: resolveApp('packages/presentation/yarn.lock'),
+  testsSetup: resolveApp('packages/presentation/src/setupTests.js'),
+  appNodeModules: resolveApp('packages/presentation/node_modules'),
+  publicUrl: getPublicUrl(resolveApp('packages/presentation/package.json')),
+  servedPath: getServedPath(resolveApp('packages/presentation/package.json')),
 }
