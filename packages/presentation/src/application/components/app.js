@@ -38,10 +38,21 @@ class App extends Component {
         user: {
           loggedIn: false,
         },
+        currentUser: {},
       }
     }
   }
 
+  // get current user information
+  getUser = async () => {
+    try {
+      const res = await axios.get('/users/current')
+      const currentUser = res.data
+      this.setState({ currentUser })
+    } catch (e) {
+      console.error('Something went wrong with getting the current user', e)
+    }
+  }
   // get mentorships from database
   getMentorships = async () => {
     try {
@@ -77,6 +88,7 @@ class App extends Component {
 
   async componentDidMount() {
     this.getTechnologies()
+    this.getUser()
   }
 
   // determine which agents should be displayed based on filters

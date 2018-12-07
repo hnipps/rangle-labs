@@ -48,7 +48,18 @@ const findOrCreateAgentByUser = (user, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const docs = await User.find()
+
     res.status(200).send(docs)
+  } catch (err) {
+    console.error('An error occurred:', err)
+    next(err)
+  }
+})
+
+router.get('/current', async (req, res, next) => {
+  try {
+    const currentUser = req.user
+    res.status(200).send(currentUser)
   } catch (err) {
     console.error('An error occurred:', err)
     next(err)
