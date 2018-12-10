@@ -6,10 +6,6 @@ const permissionSchema = new Schema({
     type: String,
     required: true,
   },
-  allowedAccounts: {
-    type: Array,
-    required: true,
-  },
 })
 
 module.exports = mongoose.model('Permission', permissionSchema)

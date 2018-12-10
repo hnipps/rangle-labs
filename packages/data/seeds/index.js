@@ -6,11 +6,13 @@ const User = models.user
 const Agent = models.agent
 const Mentorship = models.mentorship
 const Technology = models.technology
+const Permission = models.permission
 
 const users = require('./users')
 const agents = require('./agents')
 const mentorships = require('./mentorships')
 const technologies = require('./technologies')
+const permissions = require('./permissions')
 
 const mongoose = require('mongoose')
 let uri
@@ -29,6 +31,7 @@ const truncateDatabase = async () => {
     Agent.deleteMany(),
     Mentorship.deleteMany(),
     Technology.deleteMany(),
+    Permission.deleteMany(),
   ])
 }
 
@@ -67,6 +70,13 @@ const makeSeeds = async () => {
     }),
   )
   console.log('TECHNOLOGIES SAVED')
+
+  await Promise.all(
+    permissions.map(permission => {
+      return permission.save()
+    }),
+  )
+  console.log('PERMISSIONS SAVED')
 
   // close the connection
   mongoose.connection.close()
