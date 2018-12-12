@@ -3,18 +3,22 @@ const Router = express.Router
 const router = Router()
 const Mentorship = require('../models/Mentorship')
 
-router.get('/', async (req, res, next) => {
-  try {
-    const docs = await Mentorship.find()
-      .populate('agents')
-      .populate('technologies')
-      .populate('mentorshipLead')
-    res.status(200).json({ docs })
-  } catch (err) {
-    console.error('An error occurred:', err)
-    next(err)
-  }
-})
+router.get(
+  '/',
+  () => thing,
+  async (req, res, next) => {
+    try {
+      const docs = await Mentorship.find()
+        .populate('agents')
+        .populate('technologies')
+        .populate('mentorshipLead')
+      res.status(200).json({ docs })
+    } catch (err) {
+      console.error('An error occurred:', err)
+      next(err)
+    }
+  },
+)
 
 router.get('/:mentorship_id', async (req, res, next) => {
   try {

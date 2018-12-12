@@ -6,6 +6,10 @@ const permissionSchema = new Schema({
     type: String,
     required: true,
   },
+  access: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 module.exports = mongoose.model('Permission', permissionSchema)

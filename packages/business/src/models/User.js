@@ -15,7 +15,7 @@ const userSchema = new Schema({
     required: false,
   },
   emails: {
-    type: Object,
+    type: Array,
     required: false,
   },
   permissions: [

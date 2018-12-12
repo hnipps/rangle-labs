@@ -66,6 +66,25 @@ router.get('/current', async (req, res, next) => {
   }
 })
 
+router.post('/permissions/:permission_id/adduser/:emails', async (req, res) => {
+  const { permission_id, emails } = req.params
+
+  User.findOneAndUpdate(
+    {
+      emails: emails,
+    },
+    { $push: { permissions: permission_id } },
+    { upsert: true, new: true },
+  )
+    .then(doc => {
+      res.status(200).send({ message: 'success', payload: doc })
+    })
+    .catch(err => {
+      console.error('An error occurred while adding a permission to a user.', err)
+      res.status(500).send({ message: err.message })
+    })
+})
+
 // GET /auth/google
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in Google authentication will involve
