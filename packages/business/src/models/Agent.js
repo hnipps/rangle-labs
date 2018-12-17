@@ -10,7 +10,7 @@ const agentSchema = new Schema({
     type: String,
     required: true,
   },
-  role: {
+  position: {
     type: String,
     required: false,
   },

@@ -11,7 +11,7 @@ class AddAgent extends Component {
     agent: {
       firstName: '',
       lastName: '',
-      role: '',
+      position: '',
       image: '',
       currentTechnologies: [],
       aspirationalTechnologies: [],
@@ -148,13 +148,13 @@ class AddAgent extends Component {
           label="Last Name"
         />
         <FormInput
-          id="role"
-          name="role"
-          aria-describedby="role-desc"
+          id="position"
+          name="position"
+          aria-describedby="position-desc"
           placeholder="What do they do?"
-          value={agent.role}
+          value={agent.position}
           onChange={this.onInput}
-          label="Role"
+          label="position"
         />
         <FormInput
           id="image"

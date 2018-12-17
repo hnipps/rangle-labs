@@ -66,6 +66,7 @@ passport.use(
           googleId: profile.id,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
+          role: 'user',
         },
         { upsert: true, new: true },
         (error, user) => {

@@ -2,6 +2,7 @@ const express = require('express')
 const Router = express.Router
 const router = Router()
 const Mentorship = require('../models/Mentorship')
+const permissions = require('../permissions')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -31,7 +32,7 @@ router.get('/:mentorship_id', async (req, res, next) => {
 })
 
 // Add a new mentorship
-router.post('/', async (req, res) => {
+router.post('/', permissions('canAddMentorship'), async (req, res) => {
   const mentorship = new Mentorship({
     title: req.body.title,
     description: req.body.description,
