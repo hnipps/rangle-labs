@@ -19,20 +19,13 @@ const Roles = { user: USER, admin: ADMIN }
 function permissions(...requiredPermissions) {
   const isAllowed = roleToCheck =>
     !requiredPermissions.filter(requiredPermission => {
-      const foundRole = Roles[roleToCheck]
-      const foundPermission = foundRole[requiredPermission]
-      if (foundPermission) {
-        return false
-      }
-      return true
+      return !hasPermission(roleToCheck, requiredPermission)
     }).length
 
   // returns permission middleware
   return (req, res, next) => {
-    console.log(req.user)
     User.findOne({ googleId: req.user.googleId }, 'role').then(
       doc => {
-        console.log(doc)
         if (isAllowed(doc.role)) next()
         // role is allowed, so continue on the next middleware
         else {
@@ -47,4 +40,14 @@ function permissions(...requiredPermissions) {
   }
 }
 
-module.exports = permissions
+function hasPermission(roleToCheck, requiredPermission) {
+  const foundRole = Roles[roleToCheck]
+  const foundPermission = foundRole[requiredPermission]
+  if (foundPermission) {
+    return true
+  }
+  return false
+}
+
+module.exports.permissions = permissions
+module.exports.hasPermission = hasPermission

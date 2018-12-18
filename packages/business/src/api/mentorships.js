@@ -2,19 +2,45 @@ const express = require('express')
 const Router = express.Router
 const router = Router()
 const Mentorship = require('../models/Mentorship')
-const permissions = require('../permissions')
+const User = require('../models/User')
+const Agent = require('../models/Agent')
+
+const permission = require('../permissions')
+const permissions = permission.permissions
+const hasPermission = permission.hasPermission
 
 router.get('/', async (req, res, next) => {
-  try {
-    const docs = await Mentorship.find()
-      .populate('agents')
-      .populate('technologies')
-      .populate('mentorshipLead')
-    res.status(200).json({ docs })
-  } catch (err) {
-    console.error('An error occurred:', err)
-    next(err)
-  }
+  User.findOne({ googleId: req.user.googleId }, 'role _id').then(async userDoc => {
+    if (hasPermission(userDoc.role, 'canViewAllMentorships')) {
+      try {
+        console.log('Getting all mentorships')
+        const docs = await Mentorship.find()
+          .populate('agents')
+          .populate('technologies')
+          .populate('mentorshipLead')
+        res.status(200).json({ docs })
+      } catch (err) {
+        console.error('An error occurred:', err)
+        next(err)
+      }
+    } else {
+      Agent.findOne({ userId: userDoc._id }, '_id').then(async agentDoc => {
+        try {
+          console.log('Getting associated mentorships')
+          const docs = await Mentorship.find({
+            $or: [{ agents: { $in: [agentDoc._id] } }, { mentorshipLead: { $in: [agentDoc._id] } }],
+          })
+            .populate('agents')
+            .populate('technologies')
+            .populate('mentorshipLead')
+          res.status(200).json({ docs })
+        } catch (err) {
+          console.error('An error occurred:', err)
+          next(err)
+        }
+      })
+    }
+  })
 })
 
 router.get('/:mentorship_id', async (req, res, next) => {

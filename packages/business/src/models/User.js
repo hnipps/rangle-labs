@@ -11,9 +11,9 @@ const userSchema = new Schema({
     required: true,
   },
   role: {
+    default: 'user',
     type: String,
     required: true,
-    default: 'user',
   },
   googleId: {
     type: String,
