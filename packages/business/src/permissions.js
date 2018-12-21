@@ -49,5 +49,4 @@ function hasPermission(roleToCheck, requiredPermission) {
   return false
 }
 
-module.exports.permissions = permissions
-module.exports.hasPermission = hasPermission
+module.exports = { permissions, hasPermission }

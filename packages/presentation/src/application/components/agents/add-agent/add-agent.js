@@ -154,7 +154,7 @@ class AddAgent extends Component {
           placeholder="What do they do?"
           value={agent.position}
           onChange={this.onInput}
-          label="position"
+          label="Position"
         />
         <FormInput
           id="image"
