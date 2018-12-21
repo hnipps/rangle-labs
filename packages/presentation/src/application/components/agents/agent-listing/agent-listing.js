@@ -48,7 +48,7 @@ class AgentListing extends Component {
   exportHeader = [
     { label: 'Name', key: 'name' },
     { label: 'Are they available for mentorship?', key: 'available' },
-    { label: 'Role', key: 'role' },
+    { label: 'Position', key: 'position' },
     { label: 'Current Tech', key: 'currentTechnologies' },
     { label: 'Aspirational Tech', key: 'aspirationalTechnologies' },
   ]

@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
   const agent = new Agent({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    role: req.body.role,
+    position: req.body.position,
     image: req.body.image,
     currentTechnologies: req.body.currentTechnologies,
     aspirationalTechnologies: req.body.aspirationalTechnologies,

@@ -10,9 +10,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  admin: {
-    type: Boolean,
-    required: false,
+  role: {
+    default: 'user',
+    type: String,
+    required: true,
   },
   googleId: {
     type: String,

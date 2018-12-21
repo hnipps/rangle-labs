@@ -2,18 +2,55 @@ const express = require('express')
 const Router = express.Router
 const router = Router()
 const Mentorship = require('../models/Mentorship')
+const User = require('../models/User')
+const Agent = require('../models/Agent')
+
+const { permissions, hasPermission } = require('../permissions')
 
 router.get('/', async (req, res, next) => {
+  let userDoc
   try {
-    const docs = await Mentorship.find()
-      .populate('agents')
-      .populate('technologies')
-      .populate('mentorshipLead')
-    res.status(200).json({ docs })
+    userDoc = await User.findOne({ googleId: req.user.googleId }, 'role _id')
   } catch (err) {
     console.error('An error occurred:', err)
     next(err)
   }
+
+  let mentorshipDocs
+
+  if (hasPermission(userDoc.role, 'canViewAllMentorships')) {
+    try {
+      mentorshipDocs = await Mentorship.find()
+        .populate('agents')
+        .populate('technologies')
+        .populate('mentorshipLead')
+    } catch (err) {
+      console.error('An error occurred:', err)
+      next(err)
+    }
+  } else {
+    let agentDoc
+    try {
+      agentDoc = await Agent.findOne({ userId: userDoc._id }, '_id')
+    } catch (err) {
+      console.error('An error occurred:', err)
+      next(err)
+    }
+
+    try {
+      mentorshipDocs = await Mentorship.find({
+        $or: [{ agents: { $in: [agentDoc._id] } }, { mentorshipLead: { $in: [agentDoc._id] } }],
+      })
+        .populate('agents')
+        .populate('technologies')
+        .populate('mentorshipLead')
+    } catch (err) {
+      console.error('An error occurred:', err)
+      next(err)
+    }
+  }
+
+  res.status(200).json({ docs: mentorshipDocs })
 })
 
 router.get('/:mentorship_id', async (req, res, next) => {
@@ -31,7 +68,7 @@ router.get('/:mentorship_id', async (req, res, next) => {
 })
 
 // Add a new mentorship
-router.post('/', async (req, res) => {
+router.post('/', permissions('canAddMentorship'), async (req, res) => {
   const mentorship = new Mentorship({
     title: req.body.title,
     description: req.body.description,
@@ -66,7 +103,6 @@ router.patch('/:mentorship_id', async (req, res, next) => {
 
 // Delete a mentorship
 router.delete('/:mentorship_id', async (req, res, next) => {
-  console.log('DELETING A MENTORSHIP')
   try {
     const { mentorship_id } = req.params
     const doc = await Mentorship.findByIdAndRemove(mentorship_id)

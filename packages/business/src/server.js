@@ -67,7 +67,7 @@ passport.use(
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
         },
-        { upsert: true, new: true },
+        { upsert: true, new: true, setDefaultsOnInsert: true },
         (error, user) => {
           return done(error, user)
         },

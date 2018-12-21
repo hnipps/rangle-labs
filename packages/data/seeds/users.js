@@ -6,19 +6,19 @@ const users = []
 const diana = new User({
   firstName: 'Diana',
   lastName: 'Barry',
-  admin: true,
+  role: 'user',
 })
 
 const gilbert = new User({
   firstName: 'Gilbert',
   lastName: 'Blythe',
-  admin: false,
+  role: 'user',
 })
 
 const ruby = new User({
   firstName: 'Ruby',
   lastName: 'Gillis',
-  admin: false,
+  role: 'user',
 })
 
 users.push(diana, gilbert, ruby)
