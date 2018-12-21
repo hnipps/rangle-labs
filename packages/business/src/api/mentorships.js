@@ -50,8 +50,7 @@ router.get('/', async (req, res, next) => {
     }
   }
 
-  const docs = mentorshipDocs
-  res.status(200).json({ docs })
+  res.status(200).json({ docs: mentorshipDocs })
 })
 
 router.get('/:mentorship_id', async (req, res, next) => {
@@ -104,7 +103,6 @@ router.patch('/:mentorship_id', async (req, res, next) => {
 
 // Delete a mentorship
 router.delete('/:mentorship_id', async (req, res, next) => {
-  console.log('DELETING A MENTORSHIP')
   try {
     const { mentorship_id } = req.params
     const doc = await Mentorship.findByIdAndRemove(mentorship_id)

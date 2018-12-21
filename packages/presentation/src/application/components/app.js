@@ -47,7 +47,6 @@ class App extends Component {
     try {
       const res = await axios.get('/mentorships')
       const mentorships = res.data.docs
-      console.log(mentorships)
       this.setState({ mentorships })
     } catch (e) {
       console.error('Something went wrong with getting the mentorships', e)
