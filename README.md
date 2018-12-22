@@ -63,6 +63,10 @@ This will start your project and open it in a browser tab.
 
 4. `./packages/data/node_modules/.bin/db-migrate down` (`--count NUM` for `NUM` down migrations) for more specific rollbacks
 
+## Production
+
+Currently, migrations are not configured to run for the production server. Talk to an admin to get the server information. Deployment should be done off the production branch, after rebasing on master.
+
 ## Acknowledgements
 
 This project used https://github.com/swbloom/react-express-boilerplate as a starting point.

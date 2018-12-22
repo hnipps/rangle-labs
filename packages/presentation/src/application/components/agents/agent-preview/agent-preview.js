@@ -71,7 +71,7 @@ class AgentPreview extends Component {
           <CardTitle to={`/agents/${agent._id}`}>
             {`${agent.firstName} ${agent.lastName}`}
           </CardTitle>
-          <p>{agent.role}</p>
+          <p>{agent.position}</p>
         </CardContent>
       </Card>
     )
